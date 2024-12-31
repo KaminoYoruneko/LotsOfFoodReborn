@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "lots_of_food_reborn:tomatoe" }
+	], 
+	
+	"result": {
+		"item": "lots_of_food_reborn:tomate_seeds",
+		"count": 2
+	}
+}

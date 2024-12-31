@@ -1,0 +1,6 @@
+{
+	"parent": "block/crop",
+	"textures": {
+		"crop": "lots_of_food_reborn:blocks/algue_stage1"
+	}
+}

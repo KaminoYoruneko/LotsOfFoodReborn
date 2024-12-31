@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"BA",
+		"A "
+	],
+	"key": {
+		"A": { "item": "lots_of_food_reborn:algue" },
+		"B": { "item": "minecraft:bowl" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:algue_soup"
+	}
+}

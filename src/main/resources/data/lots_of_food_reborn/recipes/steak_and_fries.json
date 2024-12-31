@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PBP"
+	],
+	"key": {
+		"P": { "item": "minecraft:baked_potato" },
+		"B": { "item": "minecraft:cooked_beef" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:steak_and_fries",
+		"count": 2
+	}
+}

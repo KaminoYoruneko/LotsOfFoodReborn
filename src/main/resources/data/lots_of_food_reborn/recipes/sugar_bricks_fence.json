@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		"SSS"
+	],
+	"key": {
+		"S": { "item": "lots_of_food_reborn:sugar_bricks" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:sugar_bricks_fence",
+		"count": 6
+	}
+}

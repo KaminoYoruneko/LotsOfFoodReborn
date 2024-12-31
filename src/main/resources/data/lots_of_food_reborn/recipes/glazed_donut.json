@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		"CEC",
+		"WWW"
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": { "item": "minecraft:snowball" },
+		"E": { "item": "minecraft:egg" },
+		"W": { "item": "minecraft:wheat" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:glazed_donut",
+		"count": 2
+	}
+}

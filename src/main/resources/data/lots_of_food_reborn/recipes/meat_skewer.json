@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"MBP",
+		"SSS",
+		"SSS"
+	],
+	"key": {
+		"M": { "item": "minecraft:cooked_mutton" },
+		"B": { "item": "minecraft:cooked_beef" },
+		"P": { "item": "minecraft:cooked_porkchop" },
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:meat_skewer",
+		"count": 6
+	}
+}

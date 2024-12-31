@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PR",
+		"EC"
+	],
+	"key": {
+		"P": { "item": "lots_of_food_reborn:pasta" },
+		"R": { "item": "minecraft:porkchop" },
+		"E": { "item": "minecraft:egg" },
+		"C": { "item": "lots_of_food_reborn:cheese" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:carbonara"
+	}
+}

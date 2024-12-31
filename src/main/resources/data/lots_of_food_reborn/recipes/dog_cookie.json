@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"WEB"
+	],
+	"key": {
+		"W": { "item": "minecraft:wheat" },
+		"E": { "item": "minecraft:egg" },
+		"B": { "item": "minecraft:beef" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:dog_cookie"
+	}
+}

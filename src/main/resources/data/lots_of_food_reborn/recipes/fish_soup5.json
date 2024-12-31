@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"F",
+		"B"
+	],
+	"key": {
+		"F": { "item": "lots_of_food_reborn:cooked_trout" },
+		"B": { "item": "minecraft:bowl" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:fish_soup"
+	}
+}

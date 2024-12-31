@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"F",
+		"A"
+	],
+	"key": {
+		"F": { 
+			"item": "minecraft:fish",
+			"data": 0
+		},
+		"A": { "item": "lots_of_food_reborn:algue" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:sushi",
+		"count": 2
+	}
+}

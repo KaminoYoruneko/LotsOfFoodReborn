@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C",
+		"G"
+	],
+	"key": {
+		"C": { "item": "minecraft:cactus" },
+		"G": { "item": "lots_of_food_reborn:glass" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:cacti_juice"
+	}
+}

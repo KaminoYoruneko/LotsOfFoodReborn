@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "lots_of_food_reborn:raw_squid" },
+		{ "item": "minecraft:egg" },
+		{ "item": "minecraft:wheat" },
+		{ "item": "lots_of_food_reborn:algue" },
+		{ "item": "lots_of_food_reborn:bass" }
+	], 
+	
+	"result": {
+		"item": "lots_of_food_reborn:takoyaki",
+		"count": 2
+	}
+}

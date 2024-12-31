@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CSC"
+	],
+	"key": {
+		"C": { 
+			"item": "minecraft:cocoa_beans"
+		 },
+		"S": { "item": "minecraft:sugar" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:chocolate",
+		"count": 2
+	}
+}

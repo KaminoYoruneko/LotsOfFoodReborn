@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"WW",
+		"WW",
+		"WW"
+	],
+	"key": {
+		"W": {
+			"item": "minecraft:white_wool"
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:cheff_hat"
+	}
+}

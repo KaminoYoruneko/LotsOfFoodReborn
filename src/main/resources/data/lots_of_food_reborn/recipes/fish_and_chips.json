@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" W ",
+		"PFP",
+		" W "
+	],
+	"key": {
+		"W": { "item": "minecraft:wheat" },
+		"P": { "item": "minecraft:baked_potato" },
+		"F": { 
+			"item": "minecraft:cooked_fish",
+			"data": 0 
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:fish_and_chips",
+		"count": 3
+	}
+}

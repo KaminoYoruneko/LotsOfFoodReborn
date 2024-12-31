@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C",
+		"P",
+		"C"
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:chili" },
+		"P": { "item": "minecraft:porkchop" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:chorizo",
+		"count": 2
+	}
+}

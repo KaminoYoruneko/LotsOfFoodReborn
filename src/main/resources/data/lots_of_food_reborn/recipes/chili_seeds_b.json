@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C"
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:chili" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:chili_seeds",
+		"count": 2
+	}
+}

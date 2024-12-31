@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"P",
+		"B"
+	],
+	"key": {
+		"P": { "item": "minecraft:pumpkin" },
+		"B": { "item": "minecraft:bowl" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:pumpkin_soup"
+	}
+}

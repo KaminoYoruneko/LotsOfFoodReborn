@@ -1,0 +1,17 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"A",
+		"G"
+	],
+	"key": {
+		"A": {
+			"type": "forge:ore_dict",
+			"ore": "foodGrape"
+		},
+		"G": { "item": "lots_of_food_reborn:glass" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:grape_juice"
+	}
+}

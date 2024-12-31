@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		" S ",
+		"PWP",
+		"PPP"
+	],
+	"key": {
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		},
+		"W": { 
+			"type": "forge:ore_dict",
+			"ore": "wool" 
+		},
+		"P": {
+			"type": "forge:ore_dict",
+			"ore": "plankWood"
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:picnic_basket"
+	}
+}

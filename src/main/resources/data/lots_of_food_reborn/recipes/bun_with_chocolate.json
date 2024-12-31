@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"WCW",
+		"WWW",
+		"WCW"
+	],
+	"key": {
+		"W": { "item": "minecraft:wheat" },
+		"C": { 
+			"item": "minecraft:dye",
+			"data": 3
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:bun_with_chocolate",
+		"count": 5
+	}
+}

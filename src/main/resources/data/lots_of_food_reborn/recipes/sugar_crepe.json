@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		" C "
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": { "item": "lots_of_food_reborn:crepe" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:sugar_crepe"
+	}
+}

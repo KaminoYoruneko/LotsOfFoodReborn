@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CCC",
+		"CCC"
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:caramel_block" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:caramel_fence",
+		"count": 6
+	}
+}
