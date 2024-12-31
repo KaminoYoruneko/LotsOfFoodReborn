@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" S ",
+		"SCS",
+		" G "
+	],
+	"key": {
+		"S": { "item": "minecraft:snowball" },
+		"C": { "item": "lotsoffoodrev:caramel_block" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:caramel_ice_cream"
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B",
+		"F",
+		"B"
+	],
+	"key": {
+		"B": { "item": "lotsoffoodrev:box_bread" },
+		"F": { 
+			"item": "minecraft:cooked_fish",
+			"data": 0 
+		}
+	},
+	"result": {
+		"item": "lotsoffoodrev:fish_sandwich"
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SCS",
+		" M "
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": { 
+			"item": "minecraft:dye",
+			"data": 3
+		},
+		"M": { "item": "minecraft:milk_bucket"}
+	},
+	"result": {
+		"item": "lotsoffoodrev:white_chocolate",
+		"count": 2
+	}
+}

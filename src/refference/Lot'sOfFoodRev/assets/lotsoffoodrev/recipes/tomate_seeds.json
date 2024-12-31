@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "lotsoffoodrev:tomatoe" }
+	], 
+	
+	"result": {
+		"item": "lotsoffoodrev:tomate_seeds",
+		"count": 2
+	}
+}

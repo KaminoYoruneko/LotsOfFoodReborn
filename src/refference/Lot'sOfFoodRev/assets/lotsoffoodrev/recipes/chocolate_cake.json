@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		"ECE",
+		"WWW"
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": { "item": "lotsoffoodrev:chocolate" },
+		"E": { "item": "minecraft:egg" },
+		"W": { "item": "minecraft:wheat" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:chocolate_cake"
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"T",
+		"G"
+	],
+	"key": {
+		"T": { "item": "lotsoffoodrev:tomatoe" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:tomate_juice"
+	}
+}

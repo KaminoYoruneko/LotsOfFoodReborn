@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PR",
+		"EC"
+	],
+	"key": {
+		"P": { "item": "lotsoffoodrev:pasta" },
+		"R": { "item": "minecraft:porkchop" },
+		"E": { "item": "minecraft:egg" },
+		"C": { "item": "lotsoffoodrev:cheese" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:carbonara"
+	}
+}

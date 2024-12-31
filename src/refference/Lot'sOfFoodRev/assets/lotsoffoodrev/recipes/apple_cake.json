@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CCC",
+		"AAA",
+		"WWW"
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:caramel" },
+		"A": { "item": "minecraft:apple" },
+		"W": { "item": "minecraft:wheat" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:apple_cake"
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "lotsoffoodrev:blocks/sugar_bricks"
+	}
+}

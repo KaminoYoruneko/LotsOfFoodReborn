@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CCC",
+		"CMC",
+		"CGC"
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:caramel" },
+		"M": { "item": "minecraft:milk_bucket" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:caramel_milkshake"
+	}
+}

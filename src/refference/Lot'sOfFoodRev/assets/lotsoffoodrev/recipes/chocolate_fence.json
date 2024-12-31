@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CCC",
+		"CCC"
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:chocolate_block" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:chocolate_fence",
+		"count": 6
+	}
+}

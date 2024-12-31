@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SWS",
+		"SPS",
+		"SGS"
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"W": { "item": "minecraft:wheat" },
+		"P": { "item": "minecraft:potato" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:vodka"
+	}
+}

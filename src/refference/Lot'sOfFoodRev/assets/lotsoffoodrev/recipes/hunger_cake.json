@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" E ",
+		"RFS",
+		"WWW"
+	],
+	"key": {
+		"E": { "item": "minecraft:spider_eye" },
+		"R": { "item": "minecraft:redstone" },
+		"F": { "item": "minecraft:rotten_flesh" },
+		"S": { "item": "minecraft:sugar" },
+		"W": { "item": "minecraft:wheat" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:hunger_cake"
+	}
+}

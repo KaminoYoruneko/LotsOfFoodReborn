@@ -1,0 +1,9 @@
+{
+	"variants": {
+		"age=0": {"model": "lotsoffoodrev:chili_stage0"},
+		"age=1": {"model": "lotsoffoodrev:chili_stage1"},
+		"age=2": {"model": "lotsoffoodrev:chili_stage2"},
+		"age=3": {"model": "lotsoffoodrev:chili_stage3"},
+		"age=4": {"model": "lotsoffoodrev:chili_stage4"}
+	}
+}

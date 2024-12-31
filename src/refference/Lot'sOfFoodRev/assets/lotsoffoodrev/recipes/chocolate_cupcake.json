@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PCP",
+		" P "
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:chocolate_cake" },
+		"P": { "item": "minecraft:paper" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:chocolate_cupcake",
+		"count": 8
+	}
+}

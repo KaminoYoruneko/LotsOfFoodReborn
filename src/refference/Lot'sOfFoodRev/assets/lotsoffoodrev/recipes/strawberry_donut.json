@@ -1,0 +1,21 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"SSS",
+		"CEC",
+		"WWW"
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "foodStrawberry"
+		},
+		"E": { "item": "minecraft:egg" },
+		"W": { "item": "minecraft:wheat" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:strawberry_donut",
+		"count": 2
+	}
+}

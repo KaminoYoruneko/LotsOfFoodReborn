@@ -1,0 +1,6 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "lotsoffoodrev:blocks/vanilla_stage4"
+	}
+}

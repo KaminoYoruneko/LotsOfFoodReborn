@@ -1,0 +1,11 @@
+{
+	"variants": {
+		"bites=0": {"model": "lotsoffoodrev:cheesecake_uneaten"},
+		"bites=1": {"model": "lotsoffoodrev:cheesecake_slice1"},
+		"bites=2": {"model": "lotsoffoodrev:cheesecake_slice2"},
+		"bites=3": {"model": "lotsoffoodrev:cheesecake_slice3"},
+		"bites=4": {"model": "lotsoffoodrev:cheesecake_slice4"},
+		"bites=5": {"model": "lotsoffoodrev:cheesecake_slice5"},
+		"bites=6": {"model": "lotsoffoodrev:cheesecake_slice6"}
+	}
+}

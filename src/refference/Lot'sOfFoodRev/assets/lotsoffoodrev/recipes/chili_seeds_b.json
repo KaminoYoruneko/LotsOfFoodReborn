@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C"
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:chili" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:chili_seeds",
+		"count": 2
+	}
+}

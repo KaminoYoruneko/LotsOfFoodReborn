@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" C ",
+		"CPC",
+		" C "
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:caramel" },
+		"P": { "item": "minecraft:cooked_porkchop" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:caramel_pork"
+	}
+}

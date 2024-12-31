@@ -1,0 +1,33 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"PGA",
+		"MSC",
+		"BBB"
+	],
+	"key": {
+		"P": {
+			"type": "forge:ore_dict",
+			"ore": "foodBanana"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "foodGrape"
+		},
+		"A": { "item": "minecraft:apple" },
+		"M": { "item": "minecraft:melon" },
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "foodStrawberry"
+		},
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "foodCherry"
+		},
+		"B": { "item": "minecraft:bowl" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:fruit_salad",
+		"count": 3
+	}
+}

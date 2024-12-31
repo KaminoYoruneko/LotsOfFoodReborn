@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: Food 1.12.2
+Implementation-Version: 1.0
+Specification-Vendor: examplemodsareus
+Specification-Title: lotsoffoodrev
+Implementation-Timestamp: 2022-10-16T18:01:21-0500
+Specification-Version: 1
+Implementation-Vendor: examplemodsareus
+

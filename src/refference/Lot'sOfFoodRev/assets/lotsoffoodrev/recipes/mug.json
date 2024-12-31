@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B B",
+		" BB"
+	],
+	"key": {
+		"B": { "item": "minecraft:brick" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:mug",
+		"count": 2
+	}
+}

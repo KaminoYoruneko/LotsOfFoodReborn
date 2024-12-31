@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"WEW",
+		"MWM"
+	],
+	"key": {
+		"W": { "item": "minecraft:wheat" },
+		"E": { "item": "minecraft:egg" },
+		"M": { "item": "minecraft:milk_bucket" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:crepe",
+		"count": 4
+	}
+}

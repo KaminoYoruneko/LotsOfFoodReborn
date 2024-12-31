@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CSC"
+	],
+	"key": {
+		"C": { 
+			"item": "minecraft:dye",
+			"data": 3
+		 },
+		"S": { "item": "minecraft:sugar" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:chocolate",
+		"count": 2
+	}
+}

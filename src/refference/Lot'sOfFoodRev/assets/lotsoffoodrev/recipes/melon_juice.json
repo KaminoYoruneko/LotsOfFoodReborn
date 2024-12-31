@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"M",
+		"M",
+		"G"
+	],
+	"key": {
+		"M": { "item": "minecraft:melon" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:melon_juice"
+	}
+}

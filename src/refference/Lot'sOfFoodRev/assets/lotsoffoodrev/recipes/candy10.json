@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PPP",
+		"CD "
+	],
+	"key": {
+		"P": { "item": "minecraft:paper" },
+		"C": { "item": "lotsoffoodrev:chocolate" },
+		"D": { 
+			"item": "minecraft:dye",
+			"data": 10
+		 }
+	},
+	"result": {
+		"item": "lotsoffoodrev:candy",
+		"data": 10,
+		"count": 2
+	}
+}

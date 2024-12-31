@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"F",
+		"A"
+	],
+	"key": {
+		"F": { 
+			"item": "minecraft:fish",
+			"data": 0
+		},
+		"A": { "item": "lotsoffoodrev:algue" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:sushi",
+		"count": 2
+	}
+}

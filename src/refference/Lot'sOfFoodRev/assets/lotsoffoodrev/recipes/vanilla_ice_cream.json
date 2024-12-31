@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" S ",
+		"SVS",
+		" G "
+	],
+	"key": {
+		"S": { "item": "minecraft:snowball" },
+		"V": { "item": "lotsoffoodrev:vanilla" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:vanilla_ice_cream"
+	}
+}

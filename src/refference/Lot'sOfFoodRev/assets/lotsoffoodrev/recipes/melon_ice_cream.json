@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		"MMM",
+		" G "
+	],
+	"key": {
+		"S": { "item": "minecraft:snowball" },
+		"M": { "item": "minecraft:melon" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:melon_ice_cream"
+	}
+}
