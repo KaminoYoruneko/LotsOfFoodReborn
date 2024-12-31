@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"WCW"
+	],
+	"key": {
+		"W": { "item": "minecraft:wheat" },
+		"C": { "item": "lotsoffoodrev:white_chocolate" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:white_cookie",
+		"count": 12
+	}
+}

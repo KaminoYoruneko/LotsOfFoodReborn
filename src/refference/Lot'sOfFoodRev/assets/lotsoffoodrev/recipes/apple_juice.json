@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"A",
+		"G"
+	],
+	"key": {
+		"A": { "item": "minecraft:apple" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:apple_juice"
+	}
+}

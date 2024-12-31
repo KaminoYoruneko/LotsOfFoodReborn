@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SCS",
+		"SCS",
+		"SGS"
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": { "item": "minecraft:reeds" },
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:rum"
+	}
+}

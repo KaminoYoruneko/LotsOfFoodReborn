@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C",
+		"B"
+	],
+	"key": {
+		"C": { "item": "minecraft:cactus" },
+		"B": { "item": "minecraft:bowl" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:cacti_soup"
+	}
+}

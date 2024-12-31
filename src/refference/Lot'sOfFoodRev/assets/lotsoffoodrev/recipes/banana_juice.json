@@ -1,0 +1,17 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"A",
+		"G"
+	],
+	"key": {
+		"A": {
+			"type": "forge:ore_dict",
+			"ore": "foodBanana"
+		},
+		"G": { "item": "lotsoffoodrev:glass" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:banana_juice"
+	}
+}

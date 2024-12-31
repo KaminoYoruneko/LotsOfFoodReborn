@@ -1,0 +1,17 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"SCS"
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "foodCorn"
+		}
+	},
+	"result": {
+		"item": "lotsoffoodrev:marshmallow",
+		"count": 3
+	}
+}

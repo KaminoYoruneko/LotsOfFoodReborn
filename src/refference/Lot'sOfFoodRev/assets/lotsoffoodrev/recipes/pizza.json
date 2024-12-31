@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" C ",
+		"CPC",
+		"WTW"
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:cheese" },
+		"P": { "item": "minecraft:porkchop" },
+		"W": { "item": "minecraft:wheat" },
+		"T": { "item": "lotsoffoodrev:tomatoe" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:pizza",
+		"count": 8
+	}
+}

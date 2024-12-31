@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C",
+		"M"
+	],
+	"key": {
+		"C": { "item": "lotsoffoodrev:caramel" },
+		"M": { "item": "lotsoffoodrev:crepe" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:caramel_crepe"
+	}
+}

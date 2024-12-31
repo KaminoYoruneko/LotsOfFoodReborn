@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B",
+		"S"
+	],
+	"key": {
+		"B": { "item": "minecraft:blaze_powder" },
+		"S": { "item": "minecraft:wheat_seeds" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:chili_seeds"
+	}
+}

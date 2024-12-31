@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "minecraft:bread" }
+	], 
+	
+	"result": {
+		"item": "lotsoffoodrev:box_bread",
+		"count": 2
+	}
+}

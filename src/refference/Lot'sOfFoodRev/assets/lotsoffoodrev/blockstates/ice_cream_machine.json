@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+		"facing=north": {"model": "lotsoffoodrev:ice_cream_machine"},
+		"facing=south": {"model": "lotsoffoodrev:ice_cream_machine", "y":180},
+		"facing=west": {"model": "lotsoffoodrev:ice_cream_machine", "y":270},
+		"facing=east": {"model": "lotsoffoodrev:ice_cream_machine", "y": 90}
+	}
+}

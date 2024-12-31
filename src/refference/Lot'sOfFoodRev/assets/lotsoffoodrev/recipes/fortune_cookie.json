@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"WS",
+		"EP"
+	],
+	"key": {
+		"W": { "item": "minecraft:wheat" },
+		"S": { "item": "minecraft:sugar" },
+		"E": { "item": "minecraft:egg" },
+		"P": { "item": "minecraft:paper" }
+	},
+	"result": {
+		"item": "fortune_cookie",
+		"count": 3
+	}
+}

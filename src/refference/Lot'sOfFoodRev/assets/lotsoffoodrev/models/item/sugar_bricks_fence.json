@@ -1,0 +1,6 @@
+{
+	"parent": "block/fence_inventory",
+	"textures": {
+		"texture": "lotsoffoodrev:blocks/sugar_bricks"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"parent": "block/inner_stairs",
+	"textures": {
+		"bottom": "lotsoffoodrev:blocks/caramel_block",
+		"top": "lotsoffoodrev:blocks/caramel_block",
+		"side": "lotsoffoodrev:blocks/caramel_block"
+	}
+}

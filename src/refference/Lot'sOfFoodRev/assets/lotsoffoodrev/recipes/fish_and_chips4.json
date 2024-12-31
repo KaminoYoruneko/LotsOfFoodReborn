@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" W ",
+		"PFP",
+		" W "
+	],
+	"key": {
+		"W": { "item": "minecraft:wheat" },
+		"P": { "item": "minecraft:baked_potato" },
+		"F": { "item": "lotsoffoodrev:cooked_hake" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:fish_and_chips",
+		"count": 3
+	}
+}

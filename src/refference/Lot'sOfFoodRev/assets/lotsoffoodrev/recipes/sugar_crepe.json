@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		" C "
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"C": { "item": "lotsoffoodrev:crepe" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:sugar_crepe"
+	}
+}

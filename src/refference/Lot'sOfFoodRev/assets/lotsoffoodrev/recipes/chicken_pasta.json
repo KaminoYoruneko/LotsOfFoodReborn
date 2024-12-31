@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C",
+		"P"
+	],
+	"key": {
+		"C": { "item": "minecraft:cooked_chicken" },
+		"P": { "item": "lotsoffoodrev:pasta" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:chicken_pasta"
+	}
+}

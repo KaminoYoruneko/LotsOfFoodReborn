@@ -1,0 +1,6 @@
+{
+	"parent": "block/crop",
+	"textures": {
+		"crop": "lotsoffoodrev:blocks/algue_stage3"
+	}
+}

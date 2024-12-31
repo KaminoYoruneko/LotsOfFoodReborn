@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PSP",
+		" P "
+	],
+	"key": {
+		"S": { "item": "lotsoffoodrev:strawberry_cake" },
+		"P": { "item": "minecraft:paper" }
+	},
+	"result": {
+		"item": "lotsoffoodrev:strawberry_cupcake",
+		"count": 8
+	}
+}

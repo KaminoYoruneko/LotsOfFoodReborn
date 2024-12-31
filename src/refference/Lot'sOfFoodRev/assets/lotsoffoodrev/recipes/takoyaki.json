@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "lotsoffoodrev:raw_squid" },
+		{ "item": "minecraft:egg" },
+		{ "item": "minecraft:wheat" },
+		{ "item": "lotsoffoodrev:algue" },
+		{ 
+			"item": "minecraft:fish",
+			"data": 0
+		}
+	], 
+	
+	"result": {
+		"item": "lotsoffoodrev:takoyaki",
+		"count": 2
+	}
+}
