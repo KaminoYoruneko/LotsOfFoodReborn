@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "minecraft:porkchop" }
+	], 
+	
+	"result": {
+		"item": "lots_of_food_reborn:bacon",
+		"count": 3
+	}
+}

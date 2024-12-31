@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C",
+		"M"
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:cheese" },
+		"M": { "item": "lots_of_food_reborn:crepe" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:cheese_crepe"
+	}
+}

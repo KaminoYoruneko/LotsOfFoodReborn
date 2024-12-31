@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		"CCC",
+		" G "
+	],
+	"key": {
+		"S": { "item": "minecraft:snowball" },
+		"C": { "item": "lots_of_food_reborn:coffee_seeds" },
+		"G": { "item": "lots_of_food_reborn:glass" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:coffee_ice_cream"
+	}
+}

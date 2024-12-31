@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PR",
+		"B "
+	],
+	"key": {
+		"P": { "item": "lots_of_food_reborn:pasta" },
+		"R": { "item": "minecraft:red_mushroom" },
+		"B": { "item": "minecraft:brown_mushroom" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:mushroom_pasta"
+	}
+}

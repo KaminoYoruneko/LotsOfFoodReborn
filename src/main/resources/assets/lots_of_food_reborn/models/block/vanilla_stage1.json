@@ -1,0 +1,6 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "lots_of_food_reborn:blocks/vanilla_stage1"
+	}
+}

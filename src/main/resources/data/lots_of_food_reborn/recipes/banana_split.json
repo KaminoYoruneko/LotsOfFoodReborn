@@ -1,0 +1,25 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"CCC",
+		"HVS",
+		" P "
+	],
+	"key": {
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "foodCherry"
+		},
+		"H": { "item": "lots_of_food_reborn:chocolate_ice_cream" },
+		"V": { "item": "lots_of_food_reborn:vanilla_ice_cream" },
+		"S": { "item": "lots_of_food_reborn:strawberry_ice_cream" },
+		"P": {
+			"type": "forge:ore_dict",
+			"ore": "foodBanana"
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:banana_split",
+		"count": 2
+	}
+}

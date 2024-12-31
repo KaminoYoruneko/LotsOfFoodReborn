@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B",
+		"C",
+		"B"
+	],
+	"key": {
+		"B": { "item": "lots_of_food_reborn:box_bread" },
+		"C": { "item": "lots_of_food_reborn:cooked_bacon" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:bacon_sandwich"
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"SMS",
+		" G "
+	],
+	"key": {
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "foodStrawberry"
+		},
+		"M": { "item": "minecraft:milk_bucket" },
+		"G": { "item": "lots_of_food_reborn:glass" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:strawberry_milkshake"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{ "item": "lots_of_food_reborn:chocolate" },
+		{ "item": "lots_of_food_reborn:chili" }
+	], 
+	
+	"result": { "item": "lots_of_food_reborn:spicy_chocolate" }
+}

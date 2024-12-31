@@ -1,0 +1,8 @@
+{
+	"parent": "block/inner_stairs",
+	"textures": {
+		"bottom": "lots_of_food_reborn:blocks/chocolate_block",
+		"top": "lots_of_food_reborn:blocks/chocolate_block",
+		"side": "lots_of_food_reborn:blocks/chocolate_block"
+	}
+}

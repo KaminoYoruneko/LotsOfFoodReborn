@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"T",
+		"G"
+	],
+	"key": {
+		"T": { "item": "lots_of_food_reborn:tomatoe" },
+		"G": { "item": "lots_of_food_reborn:glass" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:tomate_juice"
+	}
+}

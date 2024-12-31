@@ -1,0 +1,6 @@
+{
+	"parent": "block/fence_post",
+	"textures": {
+		"texture": "lots_of_food_reborn:blocks/sugar_bricks"
+	}
+}

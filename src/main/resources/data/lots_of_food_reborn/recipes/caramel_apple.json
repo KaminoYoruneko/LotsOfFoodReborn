@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		" C ",
+		"CAC",
+		" S "
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:caramel" },
+		"A": { "item": "minecraft:apple" },
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:caramel_apple"
+	}
+}

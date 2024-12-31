@@ -1,0 +1,17 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"M",
+		"S"
+	],
+	"key": {
+		"M": { "item": "lots_of_food_reborn:marshmallow" },
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		}
+	},
+	"result": {
+		"item": "lots_of_food_reborn:marshmallow_stick"
+	}
+}

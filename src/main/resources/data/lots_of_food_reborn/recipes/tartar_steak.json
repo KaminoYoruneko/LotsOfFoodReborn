@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" E ",
+		"WBW",
+		"WWW"
+	],
+	"key": {
+		"E": { "item": "minecraft:egg" },
+		"B": { "item": "minecraft:beef" },
+		"W": { "item": "minecraft:wheat_seeds" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:tartar_steak"
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CCC",
+		"CCC",
+		"CCC"
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:chocolate" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:chocolate_block",
+		"count": 3
+	}
+}

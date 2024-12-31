@@ -1,0 +1,19 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		" S ",
+		"SFS",
+		" G "
+	],
+	"key": {
+		"S": { "item": "minecraft:snowball" },
+		"F": {
+			"type": "forge:ore_dict",
+			"ore": "foodStrawberry"
+		},
+		"G": { "item": "lots_of_food_reborn:glass" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:strawberry_ice_cream"
+	}
+}

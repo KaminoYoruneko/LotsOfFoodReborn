@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SSS",
+		"SPS",
+		"SBS"
+	],
+	"key": {
+		"S": { "item": "minecraft:wheat_seeds" },
+		"P": { "item": "minecraft:cooked_beef" },
+		"B": { "item": "minecraft:bowl" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:pho_soup"
+	}
+}

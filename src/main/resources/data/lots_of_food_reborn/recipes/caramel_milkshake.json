@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CCC",
+		"CMC",
+		"CGC"
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:caramel" },
+		"M": { "item": "minecraft:milk_bucket" },
+		"G": { "item": "lots_of_food_reborn:glass" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:caramel_milkshake"
+	}
+}

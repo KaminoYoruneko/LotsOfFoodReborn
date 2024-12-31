@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"CR",
+		"BB"
+	],
+	"key": {
+		"C": { "item": "lots_of_food_reborn:chili" },
+		"R": { "item": "minecraft:cooked_beef" },
+		"B": { "item": "minecraft:bowl" }
+		
+	},
+	"result": {
+		"item": "lots_of_food_reborn:chili_pasta"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"ESE",
+		"CCC",
+		"WWW"
+	],
+	"key": {
+		"S": { "item": "minecraft:sugar" },
+		"E": { "item": "minecraft:egg" },
+		"C": { "item": "minecraft:carrot" },
+		"W": { "item": "minecraft:wheat" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:carrot_cake"
+	}
+}

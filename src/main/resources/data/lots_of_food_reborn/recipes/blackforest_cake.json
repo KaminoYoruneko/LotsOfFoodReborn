@@ -1,0 +1,20 @@
+{
+	"type": "forge:ore_shaped",
+	"pattern": [
+		"CCC",
+		"EBE",
+		"WWW"
+	],
+	"key": {
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "foodCherry"
+		},
+		"E": { "item": "minecraft:egg" },
+		"B": { "item": "lots_of_food_reborn:chocolate" },
+		"W": { "item": "minecraft:wheat" }
+	},
+	"result": {
+		"item": "lots_of_food_reborn:blackforest_cake"
+	}
+}
