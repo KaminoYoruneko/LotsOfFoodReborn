@@ -1,8 +1,6 @@
 package com.KaminnoYoruneko.lots_of_food_reborn.register;
 
-import com.KaminnoYoruneko.lots_of_food_reborn.blocks.CaramelBlock;
-import com.KaminnoYoruneko.lots_of_food_reborn.blocks.ChocolateBlock;
-import com.KaminnoYoruneko.lots_of_food_reborn.blocks.SugarBricks;
+import com.KaminnoYoruneko.lots_of_food_reborn.blocks.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -26,6 +24,24 @@ public class BlockRegister {
     );
     public static final RegistryObject<Block> sugarBricks = BLOCKS.register("sugar_bricks",
             SugarBricks::new
+    );
+    public static final RegistryObject<Block> chocolateStairs = BLOCKS.register("chocolate_stairs",
+            ChocolateStairs::new
+    );
+    public static final RegistryObject<Block> caramelStairs = BLOCKS.register("caramel_stairs",
+            CaramelStairs::new
+    );
+    public static final RegistryObject<Block> sugarBricksStairs = BLOCKS.register("sugar_bricks_stairs",
+            SugarBricksStairs::new
+    );
+    public static final RegistryObject<Block> chocolateFence = BLOCKS.register("chocolate_fence",
+            ChocolateFence::new
+    );
+    public static final RegistryObject<Block> caramelFence = BLOCKS.register("caramel_fence",
+            CaramelFence::new
+    );
+    public static final RegistryObject<Block> sugarBricksFence = BLOCKS.register("sugar_bricks_fence",
+            SugarBricksFence::new
     );
 /////////////////////////////////////////////////////废弃
 //    public static final RegistryObject<Block> caramelBlock = new CaramelBlock().BlockRegister(BLOCKS,"caramel_block");

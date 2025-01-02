@@ -1,5 +1,13 @@
 {
   "values": [
-    "lots_of_food_reborn:caramel_block"
+    "lots_of_food_reborn:caramel_block",
+    "lots_of_food_reborn:chocolate_block",
+    "lots_of_food_reborn:sugar_bricks",
+    "lots_of_food_reborn:caramel_stairs",
+    "lots_of_food_reborn:chocolate_stairs",
+    "lots_of_food_reborn:sugar_bricks_stairs",
+    "lots_of_food_reborn:caramel_fence",
+    "lots_of_food_reborn:chocolate_fence",
+    "lots_of_food_reborn:sugar_bricks_fence"
   ]
 }
