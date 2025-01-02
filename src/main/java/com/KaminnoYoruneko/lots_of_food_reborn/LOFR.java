@@ -1,6 +1,7 @@
 package com.KaminnoYoruneko.lots_of_food_reborn;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.register.BlockRegister;
+import com.KaminnoYoruneko.lots_of_food_reborn.register.FeatureRegistration;
 import com.KaminnoYoruneko.lots_of_food_reborn.register.ItemRegister;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -59,6 +60,8 @@ public class LOFR
 //        ITEMS.register(modEventBus);
         BlockRegister.BLOCKS.register(modEventBus);
         ItemRegister.ITEMS.register(modEventBus);
+        FeatureRegistration.FEATURES.register(modEventBus);
+        FeatureRegistration.PLACED_FEATURES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 

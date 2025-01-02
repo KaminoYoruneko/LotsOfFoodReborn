@@ -1,4 +1,5 @@
 {
+	"render_type": "cutout",
 	"parent": "block/crop",
 	"textures": {
 		"crop": "lots_of_food_reborn:blocks/algue_stage2"

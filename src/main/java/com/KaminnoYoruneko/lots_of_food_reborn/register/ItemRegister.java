@@ -3,6 +3,8 @@ package com.KaminnoYoruneko.lots_of_food_reborn.register;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.blockitems.*;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.food.Caramel;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.food.Chocolate;
+import com.KaminnoYoruneko.lots_of_food_reborn.items.food.OpenCoconut;
+import com.KaminnoYoruneko.lots_of_food_reborn.items.normal.Coconut;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.other.ArmourCheff;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,12 +21,20 @@ public class ItemRegister {
             ArmourCheff::new
     );
 
+    //普通物品
+    public static final RegistryObject<Item> coconut = ITEMS.register("coconut",
+            Coconut::new
+    );
+
     //食品
     public static final RegistryObject<Item> caramel = ITEMS.register("caramel",
             Caramel::new
     );
     public static final RegistryObject<Item> chocolate = ITEMS.register("chocolate",
             Chocolate::new
+    );
+    public static final RegistryObject<Item> openCoconut = ITEMS.register("open_coconut",
+            OpenCoconut::new
     );
 
     //blockitems
@@ -54,5 +64,11 @@ public class ItemRegister {
     );
     public static final RegistryObject<Item> SugarBricksFenceItem = ITEMS.register("sugar_bricks_fence",
             SugarBricksFenceItem::new
+    );
+    public static final RegistryObject<Item> coconutBlockItem = ITEMS.register("coconut_block",
+            CoconutBlockItem::new
+    );
+    public static final RegistryObject<Item> palmTreeSaplingItem = ITEMS.register("palm_tree_sapling",
+            PalmTreeSaplingItem::new
     );
 }

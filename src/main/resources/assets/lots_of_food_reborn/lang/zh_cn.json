@@ -1,4 +1,6 @@
 {
+  "death.attack.hit_by_coconut": "%1$s没能成为牛顿，因为砸下来的是椰子",
+
   "itemGroup.TAB_FOOD":"更多食物 - 小吃",
   "itemGroup.TAB_BLOCK":"更多食物 - 方块",
   "itemGroup.TAB_MEAT":"更多食物 - 肉类",
