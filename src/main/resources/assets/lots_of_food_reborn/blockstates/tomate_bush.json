@@ -1,10 +1,10 @@
 {
 	"variants": {
-		"age=0": {"model": "lots_of_food_reborn:tomate_stage0"},
-		"age=1": {"model": "lots_of_food_reborn:tomate_stage1"},
-		"age=2": {"model": "lots_of_food_reborn:tomate_stage2"},
-		"age=3": {"model": "lots_of_food_reborn:tomate_stage3"},
-		"age=4": {"model": "lots_of_food_reborn:tomate_stage4"},
-		"age=5": {"model": "lots_of_food_reborn:tomate_stage5"}
+		"age=0": {"model": "lots_of_food_reborn:block/tomate_stage0"},
+		"age=1": {"model": "lots_of_food_reborn:block/tomate_stage1"},
+		"age=2": {"model": "lots_of_food_reborn:block/tomate_stage2"},
+		"age=3": {"model": "lots_of_food_reborn:block/tomate_stage3"},
+		"age=4": {"model": "lots_of_food_reborn:block/tomate_stage4"},
+		"age=5": {"model": "lots_of_food_reborn:block/tomate_stage5"}
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"": {
-			"model": "lots_of_food_reborn:coconut_block"
+			"model": "lots_of_food_reborn:block/coconut_block"
 		}
 	}
 }

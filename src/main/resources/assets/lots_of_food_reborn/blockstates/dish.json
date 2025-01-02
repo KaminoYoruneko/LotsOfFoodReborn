@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"": {
-			"model": "lots_of_food_reborn:dish"
+			"model": "lots_of_food_reborn:block/dish"
 		}
 	}
 }
