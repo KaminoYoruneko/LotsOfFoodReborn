@@ -1,4 +1,5 @@
 {
+	"render_type": "cutout",
 	"parent": "block/cross",
 	"textures": {
 		"cross": "lots_of_food_reborn:blocks/tomate_stage0"

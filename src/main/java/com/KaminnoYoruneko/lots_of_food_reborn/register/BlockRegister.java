@@ -1,12 +1,7 @@
 package com.KaminnoYoruneko.lots_of_food_reborn.register;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.blocks.*;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -42,6 +37,12 @@ public class BlockRegister {
     );
     public static final RegistryObject<Block> sugarBricksFence = BLOCKS.register("sugar_bricks_fence",
             SugarBricksFence::new
+    );
+    public static final RegistryObject<Block> coconutBlock = BLOCKS.register("coconut_block",
+            CoconutBlock::new
+    );
+    public static final RegistryObject<Block> palmTreeSapling = BLOCKS.register("palm_tree_sapling",
+            PalmTreeSapling::new
     );
 /////////////////////////////////////////////////////废弃
 //    public static final RegistryObject<Block> caramelBlock = new CaramelBlock().BlockRegister(BLOCKS,"caramel_block");

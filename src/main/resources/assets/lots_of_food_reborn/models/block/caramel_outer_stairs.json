@@ -1,4 +1,5 @@
 {
+	"render_type": "cutout",
 	"parent": "block/outer_stairs",
 	"textures": {
 		"bottom": "lots_of_food_reborn:blocks/caramel_block",

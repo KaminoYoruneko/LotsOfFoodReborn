@@ -1,4 +1,5 @@
 {
+	"render_type": "cutout",
 	"parent": "block/fence_side",
 	"textures": {
 		"texture": "lots_of_food_reborn:blocks/chocolate_block"

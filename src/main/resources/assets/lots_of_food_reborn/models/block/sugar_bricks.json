@@ -1,4 +1,5 @@
 {
+	"render_type": "cutout",
 	"parent": "block/cube_all",
 	"textures": {
 		"all": "lots_of_food_reborn:blocks/sugar_bricks"

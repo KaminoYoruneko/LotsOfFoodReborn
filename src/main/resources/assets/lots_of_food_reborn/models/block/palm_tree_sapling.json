@@ -1,5 +1,6 @@
 {
-	"parent": "block/cross",
+	"parent": "minecraft:block/cross",
+	"render_type": "cutout",
 	"textures": {
 		"cross": "lots_of_food_reborn:blocks/palm_tree_sapling"
 	}
