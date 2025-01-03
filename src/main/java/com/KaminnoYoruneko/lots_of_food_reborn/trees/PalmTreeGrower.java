@@ -13,4 +13,8 @@ public class PalmTreeGrower extends AbstractTreeGrower {
     protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource p_222910_, boolean p_222911_) {
         return FeatureRegistration.palmTreeConfig.getHolder().get();
     }
+
+    public static Holder<ConfiguredFeature<?, ?>> getConf(){
+        return FeatureRegistration.palmTreeConfig.getHolder().get();
+    }
 }
