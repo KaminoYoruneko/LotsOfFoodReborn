@@ -1,6 +1,7 @@
 package com.KaminnoYoruneko.lots_of_food_reborn.register;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.trees.CustomPalmTreeFeature;
+import com.KaminnoYoruneko.lots_of_food_reborn.trees.PalmTreeGrower;
 import com.KaminnoYoruneko.lots_of_food_reborn.trees.conf.PalmTreeFoliagePlacer;
 import com.KaminnoYoruneko.lots_of_food_reborn.world.gen.WorldGenPalm;
 import net.minecraft.core.Registry;
@@ -38,6 +39,18 @@ public class FeatureRegistration {
             Registry.PLACED_FEATURE_REGISTRY, MODID
     );
     public static final int[] TREE_LEAVES_CONF={4,1,2};/*半径，偏移量，高度*/
+//    public static final PalmTreeFoliagePlacer ptfp=
+//            new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),2);
+//    public static final TreeConfiguration PALM_TREE_CONFIGURATION=
+//        new TreeConfiguration.TreeConfigurationBuilder(
+//            BlockStateProvider.simple(Blocks.JUNGLE_LOG.defaultBlockState())/*树干*/,
+//            new StraightTrunkPlacer(2,5,2)/*树干高度，最小最大基础*/,
+//                            BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState())/*树叶*/,
+//                new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),2),
+////                            new BlobFoliagePlacer(ConstantInt.of(4),ConstantInt.of(0),2),
+//            new TwoLayersFeatureSize(1,0,2)/*检测生成空间是否足够*/
+//        ).build();
+
     public static final RegistryObject<ConfiguredFeature<?,?>> palmTreeConfig=FEATURES.register(
             "palm_tree",
             ()->new ConfiguredFeature<>(
@@ -47,9 +60,10 @@ public class FeatureRegistration {
                             BlockStateProvider.simple(Blocks.JUNGLE_LOG.defaultBlockState())/*树干*/,
                             new StraightTrunkPlacer(2,5,2)/*树干高度，最小最大基础*/,
                             BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState())/*树叶*/,
-                            new PalmTreeFoliagePlacer(ConstantInt.of(4),ConstantInt.of(0),2),
+                            new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),0),
+//NEVER MOVE THIS 0
 //                            new BlobFoliagePlacer(ConstantInt.of(4),ConstantInt.of(0),2),
-                            new TwoLayersFeatureSize(1,0,2)/*检测生成空间是否足够*/
+                            new TwoLayersFeatureSize(1,4,10)/*检测生成空间是否足够*/
                     ).build()
             )
     );//此处树的傅里叶placer参数都不重要了，全部硬编码了，之后再改qwq
@@ -58,7 +72,8 @@ public class FeatureRegistration {
     public static final RegistryObject<PlacedFeature> palmTreeChecked=PLACED_FEATURES.register(
             "palm_tree_checked",
             ()->new PlacedFeature(
-                    palmTreeConfig.getHolder().get(),
+//                    palmTreeConfig.getHolder().get(),
+                    PalmTreeGrower.getConf(),
                     List.of(PlacementUtils.filteredByBlockSurvival(BlockRegister.palmTreeSapling.get()))
             )
     );

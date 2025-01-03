@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(LOFR.MODID)
+@Mod.EventBusSubscriber(modid = "lots_of_food_reborn", bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LOFR
 {
     public static final String MODID = "lots_of_food_reborn";
@@ -49,25 +50,37 @@ public class LOFR
 //                            .tab(CreativeModeTab.TAB_BUILDING_BLOCKS))
 //
 //    );
-
+    public static IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
     public LOFR()
     {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
 
         modEventBus.addListener(this::commonSetup);
 
-//        BLOCKS.register(modEventBus);
-//        ITEMS.register(modEventBus);
         BlockRegister.BLOCKS.register(modEventBus);
         ItemRegister.ITEMS.register(modEventBus);
         FeatureRegistration.FEATURES.register(modEventBus);
         FeatureRegistration.PLACED_FEATURES.register(modEventBus);
+
+//        registerFeatures();
+
 
         MinecraftForge.EVENT_BUS.register(this);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
+//    private void registerFeatures() {
+//        for (int i=0;i<1000;i++){i=i+0;}
+//        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+//        modEventBus.addListener(this::commonSetup);
+//        FeatureRegistration.FEATURES.register(modEventBus);
+//        FeatureRegistration.PLACED_FEATURES.register(modEventBus);
+//        MinecraftForge.EVENT_BUS.register(this);
+//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+//    }
+
+//    @SubscribeEvent
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
@@ -98,6 +111,7 @@ public class LOFR
         {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
+//            registerFeatures();
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
