@@ -48,7 +48,7 @@
                   "enchantment": "minecraft:fortune"
                 }
               ],
-              "name": "minecraft:acacia_sapling"
+              "name": "lots_of_food_reborn:palm_tree_sapling"
             }
           ]
         }
@@ -97,7 +97,7 @@
               "condition": "minecraft:survives_explosion"
             }
           ],
-          "name": "minecraft:acacia_sapling"
+          "name": "lots_of_food_reborn:palm_tree_sapling"
         }
       ],
       "rolls": 1.0
