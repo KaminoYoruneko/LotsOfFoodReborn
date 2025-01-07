@@ -1,18 +1,17 @@
 package com.KaminnoYoruneko.lots_of_food_reborn;
 
+import com.KaminnoYoruneko.lots_of_food_reborn.entities.CoconutEntity;
+import com.KaminnoYoruneko.lots_of_food_reborn.entities.CoconutEntityRenderer;
 import com.KaminnoYoruneko.lots_of_food_reborn.register.BlockRegister;
+import com.KaminnoYoruneko.lots_of_food_reborn.register.EntityRegister;
 import com.KaminnoYoruneko.lots_of_food_reborn.register.FeatureRegistration;
 import com.KaminnoYoruneko.lots_of_food_reborn.register.ItemRegister;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,9 +23,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -59,6 +56,7 @@ public class LOFR
 
         BlockRegister.BLOCKS.register(modEventBus);
         ItemRegister.ITEMS.register(modEventBus);
+        EntityRegister.ITEM_ENTITY.register(modEventBus);
         FeatureRegistration.FEATURES.register(modEventBus);
         FeatureRegistration.PLACED_FEATURES.register(modEventBus);
 
@@ -111,6 +109,8 @@ public class LOFR
         {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
+            EntityRenderers.register(EntityRegister.coconutEntity.get(),
+                    CoconutEntityRenderer::new);
 //            registerFeatures();
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }

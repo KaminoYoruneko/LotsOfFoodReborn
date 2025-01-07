@@ -253,12 +253,15 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
 
             LeavesCoords.forEach(leavePos -> {
                 if (level.isStateAtPosition(leavePos, state -> {
-                    return state.getMaterial().isReplaceable()&&!state.is(Blocks.JUNGLE_WOOD);
+                    return state.getMaterial().isReplaceable()
+                            &&!state.is(Blocks.JUNGLE_WOOD)
+                            &&!state.is(coconutBlock.get());//叶子不能替换木头和椰子
                 })){
                     p_225521_.accept(
                             leavePos, LEAF.setValue(
-                                    LeavesBlock.PERSISTENT,true
-                            )
+//                                    LeavesBlock.PERSISTENT,true
+                                    LeavesBlock.DISTANCE,1
+                            )//虚拟地设置每个叶子与木头距离为1，让生成之后的树不会自动掉叶子
                     );
                 }
             });  // 放置树叶
@@ -266,7 +269,9 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
                 if (level.isStateAtPosition(coconutPos, state -> {
                     return state.getMaterial().isReplaceable()&&!state.is(Blocks.JUNGLE_WOOD);
                 })){
-                    p_225521_.accept(coconutPos, COCONUT);
+                    p_225521_.accept(coconutPos, COCONUT.setValue(
+                            LeavesBlock.DISTANCE,1
+                    ));
                 }
             });  // 放置椰子
         }

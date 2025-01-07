@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -105,4 +106,31 @@ public abstract class MixinTreeFeature {
             return false;
         }
     }
+
+//    @Inject(at=@At(value="RETURN",ordinal = 0),method = "doPlace",cancellable = true)
+//    private void doPlace(
+//            WorldGenLevel p_225258_, RandomSource p_225259_, BlockPos p_225260_, BiConsumer<BlockPos, BlockState> p_225261_, BiConsumer<BlockPos, BlockState> p_225262_, BiConsumer<BlockPos, BlockState> p_225263_, TreeConfiguration treeConf, CallbackInfoReturnable<Boolean> cir) {
+//        int i = treeConf.trunkPlacer.getTreeHeight(p_225259_);
+//        int j = treeConf.foliagePlacer.foliageHeight(p_225259_, i, treeConf);
+//        boolean isPalm=false;
+//        if (j==0){
+//            isPalm=true;
+//        }
+//        BlockPos blockpos = treeConf.rootPlacer.map((p_225286_) -> {
+//            return p_225286_.getTrunkOrigin(p_225260_, p_225259_);
+//        }).orElse(p_225260_);
+//        int k = i - j;
+//        int l = treeConf.foliagePlacer.foliageRadius(p_225259_, k);
+//        int k1 = this.getMaxFreeTreeHeight(p_225258_, i, blockpos, treeConf);
+//        List<FoliagePlacer.FoliageAttachment> list = treeConf.trunkPlacer.placeTrunk(p_225258_, p_225262_, p_225259_, k1, blockpos, treeConf);
+//        for (FoliagePlacer.FoliageAttachment p_225279_ : list) {
+//            if (isPalm) {
+//                System.out.println("VOID-->PALM");
+//                // 如果是棕榈树，使用自定义的 createPalmTreeFoliage 方法
+//                new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),2)
+//                        .createFoliage(p_225258_, p_225263_, p_225259_, treeConf, k1, p_225279_, j, l);
+//            }
+//        }
+//    }
+
 }
