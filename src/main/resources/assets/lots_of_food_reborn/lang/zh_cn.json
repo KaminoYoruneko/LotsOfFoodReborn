@@ -1,5 +1,6 @@
 {
   "death.attack.hit_by_coconut": "%1$s没能成为牛顿，因为砸下来的是椰子",
+  "lots_of_food_reborn.text.fullrecover":"唯有真正的欧皇才能获得的『至尊烤金鱼』\n散发着阵阵欧气……\n食用后回满生命值",
 
   "itemGroup.TAB_NOT_FOOD":"更多食物 - 不能吃的",
   "itemGroup.TAB_BLOCK":"更多食物 - 方块",
@@ -51,7 +52,7 @@
   "item.lots_of_food_reborn.trout":"鳟鱼",
   "item.lots_of_food_reborn.cooked_trout":"熟鳟鱼",
   "item.lots_of_food_reborn.golden_fish":"金鱼",
-  "item.lots_of_food_reborn.cooked_golden_fish":"熟金鱼",
+  "item.lots_of_food_reborn.cooked_golden_fish":"至尊烤金鱼",
   "item.lots_of_food_reborn.caramel_pork":"焦糖猪排",
   "item.lots_of_food_reborn.tartar_steak":"鞑靼牛排",
   "item.lots_of_food_reborn.chorizo":"香肠",
@@ -112,8 +113,8 @@
   "item.lots_of_food_reborn.candy_15":"糖果",
   "item.lots_of_food_reborn.fortune_cookie":"幸运饼干",
   "item.lots_of_food_reborn.marshmallow":"棉花糖",
-  "item.lots_of_food_reborn.marshmallow_stick":"棍子上的棉花糖",
-  "item.lots_of_food_reborn.cooked_marshmallow_stick":"烘烤棍子上的棉花糖",
+  "item.lots_of_food_reborn.marshmallow_stick":"棉花糖棍",
+  "item.lots_of_food_reborn.cooked_marshmallow_stick":"烤棉花糖",
 
   "tile.chocolate_cake":"巧克力蛋糕",
   "tile.apple_cake":"苹果蛋糕",

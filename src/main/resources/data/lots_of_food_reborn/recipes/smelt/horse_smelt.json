@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "lots_of_food_reborn:raw_horse"
+  },
+  "result": "lots_of_food_reborn:cooked_horse"
+}

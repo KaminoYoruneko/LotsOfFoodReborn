@@ -34,7 +34,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class Custom {
-    public Custom() {}
     public static RegistryObject<Item> register_item(String name, CreativeModeTab tab, DeferredRegister<Item> ITEMS){
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
@@ -353,7 +352,6 @@ public class Custom {
                         ).tab(tab)
         ));
     }
-
     public static RegistryObject<Item> register_glass_food(String name, int nutrition, double saturation, DeferredRegister<Item> ITEMS){
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
@@ -406,7 +404,7 @@ public class Custom {
                                 .saturationMod((float) saturation)
                                 .build()
                         )
-                        .stacksTo(64)
+                        .stacksTo(32)
                         .tab(MOD_TAB.TAB_DESSERTS)
         ){
             @Override
