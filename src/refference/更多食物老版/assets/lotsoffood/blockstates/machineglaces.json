@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+		"facing=north": {"model": "pda:machineglaces"},
+		"facing=south": {"model": "pda:machineglaces", "y":180},
+		"facing=west": {"model": "pda:machineglaces", "y":270},
+		"facing=east": {"model": "pda:machineglaces", "y": 90}
+	}
+}

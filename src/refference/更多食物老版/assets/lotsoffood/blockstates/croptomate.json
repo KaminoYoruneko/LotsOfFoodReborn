@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+		"age=0": {"model": "pda:croptomate0"},
+        "age=1": {"model": "pda:croptomate1"},
+        "age=2": {"model": "pda:croptomate2"},
+        "age=3": {"model": "pda:croptomate3"},
+        "age=4": {"model": "pda:croptomate4"},
+        "age=5": {"model": "pda:croptomate5"}
+	}
+}

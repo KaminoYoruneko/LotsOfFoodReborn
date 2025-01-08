@@ -1,0 +1,19 @@
+[
+{
+  "modid": "LotsOfFood",
+  "name": "Lots of Food",
+  "description": "A mod that adds lots of food to Minecraft!",
+  "version": "1.10.2",
+  "url": "http://www.minecraftforum.net/topic/1144076-132-lots-of-food/",
+"authorList": [
+    "pifou92000"
+  ],
+  "credits": "",
+  "logoFile": "/logoAliments.png",
+  "parent":"",
+
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]

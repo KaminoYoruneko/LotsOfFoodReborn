@@ -1,0 +1,10 @@
+{
+	"variants":
+	{
+		"age=0": {"model": "pda:croppiment0"},
+        "age=1": {"model": "pda:croppiment1"},
+        "age=2": {"model": "pda:croppiment2"},
+        "age=3": {"model": "pda:croppiment3"},
+        "age=4": {"model": "pda:croppiment4"}
+	}
+}
