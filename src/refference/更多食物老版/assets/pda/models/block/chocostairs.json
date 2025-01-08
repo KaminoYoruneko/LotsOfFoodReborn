@@ -1,0 +1,9 @@
+{
+    	"parent": "block/stairs",
+    	"textures":
+	{
+        	"bottom": "pda:blocks/chocobloc",
+      		"top": "pda:blocks/chocobloc",
+        	"side": "pda:blocks/chocobloc"
+    	}
+}

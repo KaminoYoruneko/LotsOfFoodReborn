@@ -1,0 +1,16 @@
+{
+	"parent": "item/generated",
+	"textures":
+	{
+		"layer0": "pda:items/panier"
+	},
+	"display":
+	{
+		"thirdperson_righthand":
+		{
+			"rotation": [0, 90, -270],
+			"translation": [0, -2, -2.75],
+			"scale": [0.8, 0.8, 0.8]
+		}
+	}
+}

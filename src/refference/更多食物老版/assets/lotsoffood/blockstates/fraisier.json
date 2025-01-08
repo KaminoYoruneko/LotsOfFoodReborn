@@ -1,0 +1,10 @@
+{
+	"variants":
+	{
+		"age=0": {"model": "pda:fraisier0"},
+        "age=1": {"model": "pda:fraisier1"},
+        "age=2": {"model": "pda:fraisier2"},
+        "age=3": {"model": "pda:fraisier3"},
+        "age=4": {"model": "pda:fraisier4"}
+	}
+}

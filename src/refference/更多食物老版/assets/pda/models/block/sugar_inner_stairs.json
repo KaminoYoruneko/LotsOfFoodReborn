@@ -1,0 +1,9 @@
+{
+		"parent": "block/inner_stairs",
+		"textures":
+		{
+				"bottom": "pda:blocks/bricksucre",
+				"top": "pda:blocks/bricksucre",
+				"side": "pda:blocks/bricksucre"
+		}
+}
