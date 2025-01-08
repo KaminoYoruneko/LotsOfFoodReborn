@@ -2,10 +2,7 @@ package com.KaminnoYoruneko.lots_of_food_reborn;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.entities.CoconutEntity;
 import com.KaminnoYoruneko.lots_of_food_reborn.entities.CoconutEntityRenderer;
-import com.KaminnoYoruneko.lots_of_food_reborn.register.BlockRegister;
-import com.KaminnoYoruneko.lots_of_food_reborn.register.EntityRegister;
-import com.KaminnoYoruneko.lots_of_food_reborn.register.FeatureRegistration;
-import com.KaminnoYoruneko.lots_of_food_reborn.register.ItemRegister;
+import com.KaminnoYoruneko.lots_of_food_reborn.register.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -56,6 +53,7 @@ public class LOFR
 
         BlockRegister.BLOCKS.register(modEventBus);
         ItemRegister.ITEMS.register(modEventBus);
+        DrinkRegister.ITEMS.register(modEventBus);
         EntityRegister.ITEM_ENTITY.register(modEventBus);
         FeatureRegistration.FEATURES.register(modEventBus);
         FeatureRegistration.PLACED_FEATURES.register(modEventBus);

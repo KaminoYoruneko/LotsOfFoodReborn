@@ -6,10 +6,7 @@
 		"G"
 	],
 	"key": {
-		"C": {
-			"type": "forge:ore_dict",
-			"ore": "foodCoconut"
-		},
+		"C": { "item": "lots_of_food_reborn:opencoconut" },
 		"G": { "item": "lots_of_food_reborn:glass" }
 	},
 	"result": {
