@@ -1,7 +1,6 @@
 package com.KaminnoYoruneko.lots_of_food_reborn.handler;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.register.ItemRegister;
-import com.google.common.collect.Lists;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -13,27 +12,27 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.KaminnoYoruneko.lots_of_food_reborn.LOFR.MODID;
-import static net.minecraftforge.versions.forge.ForgeVersion.MOD_ID;
 
 @Mod.EventBusSubscriber
 public class WorldEventHandler {
@@ -163,6 +162,65 @@ public class WorldEventHandler {
                     entity.level.addFreshEntity(item);
                 }
             }
+        }
+    }
+    @SubscribeEvent
+    public static void onBlockHarvest(BlockEvent.BreakEvent event) {
+//        System.out.println("BlockHarvest Launched");
+
+        RandomSource rand = event.getLevel().getRandom();
+        BlockState blockState = event.getState();
+        Block block = blockState.getBlock();
+        AtomicInteger level= new AtomicInteger();
+        event.getPlayer().getHandSlots().forEach(element->{
+            int temp=element.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
+            if (temp>level.get()){
+                level.set(temp);
+            }
+        });
+
+        // 检查是否为树叶块，且是否有匹配的日志类型
+        if (block instanceof net.minecraft.world.level.block.LeavesBlock) {
+//            System.out.println("is LeavesBlock");
+            // 检查是否是白桦树
+            if (blockState.is(Blocks.BIRCH_LEAVES)) {
+//                System.out.println("is BIRCH_LEAVES");
+                addExtraDrops(event, ItemRegister.cherry.get(), 2, level.get(), rand);
+            }
+            // 检查是否是丛林树
+            else if (blockState.is(Blocks.JUNGLE_LEAVES)) {
+//                System.out.println("is JUNGLE_LEAVES");
+                addExtraDrops(event, ItemRegister.banana.get(), 1, level.get(), rand);
+            }
+        }
+        // 检查是否为藤蔓块
+        else if (block instanceof net.minecraft.world.level.block.VineBlock) {
+//            addExtraDrops(event, ItemInit.VANILLA, 1, event.getFortuneLevel(), rand);
+        }
+    }
+
+    private static void addExtraDrops(BlockEvent.BreakEvent event, Item dropItem, int initial, int fortuneLevel, RandomSource rand) {
+        fortuneLevel = Math.max(fortuneLevel, 0);
+        int chance = 20;
+
+        if (fortuneLevel > 0) {
+            chance -= 5 * fortuneLevel;
+            if (chance < 5) {
+                chance = 5;
+            }
+        }
+
+        // 随机掉落物品
+        if (rand.nextInt(chance) == 0 ) {
+//            System.out.println("DROP IT");
+            int quantity = initial + rand.nextInt(fortuneLevel + 1);
+            event.getLevel().addFreshEntity(new ItemEntity(
+                    event.getPlayer().getLevel()
+                    ,event.getPos().getX()
+                    ,event.getPos().getY()
+                    ,event.getPos().getZ()
+                    ,new ItemStack(dropItem, quantity))
+            );
         }
     }
 }
