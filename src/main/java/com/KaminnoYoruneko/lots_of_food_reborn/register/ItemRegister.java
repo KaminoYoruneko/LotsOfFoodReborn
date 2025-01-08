@@ -8,11 +8,25 @@ import com.KaminnoYoruneko.lots_of_food_reborn.items.food.Chocolate;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.food.OpenCoconut;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.normal.Coconut;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.other.ArmourCheff;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.tags.TagManager;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 import static com.KaminnoYoruneko.lots_of_food_reborn.LOFR.MODID;
 import static com.KaminnoYoruneko.lots_of_food_reborn.custom.Custom.*;
@@ -104,6 +118,43 @@ public class ItemRegister {
     public static final RegistryObject<Item> cookedTrout = register_food("cooked_trout", 7, 0.6F, TAB_MEAT, ITEMS);
     public static final RegistryObject<Item> goldenFish = register_food("golden_fish", 20, 2.0F, TAB_MEAT, ITEMS);
 //    public static final RegistryObject<Item> cookedGoldenFish = register_special_fish("cooked_golden_fish", 20, TAB_MEAT, ITEMS);
+    public static final RegistryObject<Item> cookedGoldenFish=ITEMS.register("cooked_golden_fish",
+        ()->new Item(
+                new Item.Properties().food(
+                    new FoodProperties.Builder()
+                        .nutrition(20)
+                        .saturationMod((float) DefaultFoodSat)
+                        .alwaysEat()
+                        .build()
+                ).tab(TAB_MEAT)
+        ){
+            @Override
+            public ItemStack finishUsingItem(ItemStack stack, net.minecraft.world.level.Level world, net.minecraft.world.entity.LivingEntity entity) {
+//                super.finishUsingItem(stack, world, entity);
+
+//                System.out.println("WHERE IS MY GLASS QAQ");
+                // 如果是玩家，则给予 glass 物品
+                if (entity instanceof net.minecraft.world.entity.player.Player player) {
+                    player.heal(player.getMaxHealth());//回复满生命值
+                }
+                return super.finishUsingItem(stack, world, entity);
+            }
+            @Override
+            public Rarity getRarity(ItemStack stack) {
+                return Rarity.EPIC;
+            }
+
+            @Override
+            public boolean isFoil(ItemStack p_41453_) {
+                return true;
+            }
+            @Override
+            public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+                ChatFormatting style=ChatFormatting.GOLD;;
+                tooltip.add(Component.translatable("lots_of_food_reborn.text.fullrecover").withStyle(style));
+            }
+        }
+    );
 
     //209~225
     public static final RegistryObject<Item> caramelPork = register_food("caramel_pork", 12, 1.0F, TAB_MEAT, ITEMS);
@@ -234,77 +285,3 @@ public class ItemRegister {
 
 }
 
-/*
-public static final RegistryObject<Item> baconSandwich = register_food("bacon_sandwich", 12, DefaultFoodSat, TAB_MEALS, ITEMS);
-    public static final RegistryObject<Item> rawHorse = register_food("raw_horse", 3, 0.3F,  TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedHorse = register_food("cooked_horse", 8, 0.8F,  TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> rawSquid = register_food("raw_squid", 2, 0.2F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedSquid = register_food("cooked_squid", 4, 0.4F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> bacon = register_food("bacon", 1, 0.1F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedBacon = register_food("cooked_bacon", 3, 0.3F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> bass = register_food("bass", 4, 0.3F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedBass = register_food("cooked_bass", 8, 0.6F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> hake = register_food("hake", 4, 0.3F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedHake = register_food("cooked_hake", 8, 0.6F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> sole = register_food("sole", 3, 0.3F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedSole = register_food("cooked_sole", 7, 0.6F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> trout = register_food("trout", 3, 0.3F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedTrout = register_food("cooked_trout", 7, 0.6F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> goldenFish = register_food("golden_fish", 20, 2.0F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> cookedGoldenFish = register_food("cooked_golden_fish", 20,DefaultFoodSat, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> caramelPork = register_food("caramel_pork", 12, 1.0F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> tartarSteak = register_food("tartar_steak", 6, DefaultFoodSat, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> chorizo = register_food("chorizo", 6,DefaultFoodSat, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> meatSkewer = register_food("meat_skewer", 5, 0.5F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> purifiedFlesh = register_food("purified_flesh", 4, 0.2F, TAB_MEAT, ITEMS);
-    public static final RegistryObject<Item> strawberry = register_food("strawberry", 3, 0.3F, TAB_FRUITS, ITEMS);
-    public static final RegistryObject<Item> cherry = register_food("cherry", 2, 0.3F, TAB_FRUITS, ITEMS);
-    public static final RegistryObject<Item> grapes = register_food("grapes", 4, 0.3F, TAB_FRUITS, ITEMS);
-    public static final RegistryObject<Item> banana = register_food("banana", 4, 0.4F, TAB_FRUITS, ITEMS);
-//    public static final RegistryObject<Item> openCoconut = register_food("open_coconut", 2, 0.2F, TAB_FRUITS, ITEMS);
-    public static final RegistryObject<Item> tomatoe = register_food("tomatoe", 2, 0.2F, TAB_FRUITS, ITEMS);
-    public static final RegistryObject<Item> chili = register_food("chili", 4, 0.3F, TAB_FRUITS, ITEMS);
-    public static final RegistryObject<Item> corn = register_food("corn", 3, 0.4F, TAB_FRUITS, ITEMS);
-//    public static final RegistryObject<Item> chocolate = register_food("chocolate", 6, 0.4F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> whiteChocolate = register_food("white_chocolate", 6, 0.4F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> spicyChocolate = register_food("spicy_chocolate", 10, 0.6F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> bunWithChocolate = register_food("bun_with_chocolate", 4, 0.4F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> whiteCookie = register_food("white_cookie", 1, 0.1F, TAB_DESSERTS, ITEMS);
-//    public static final RegistryObject<Item> caramel = register_food("caramel", 1, 0.1F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> caramelApple = register_food("caramel_apple", 8, 0.6F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> chocolateIceCream = register_food("chocolate_ice_cream", 8, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> appleIceCream = register_food("apple_ice_cream", 6, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> melonIceCream = register_food("melon_ice_cream", 8, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> caramelIceCream = register_food("caramel_ice_cream", 10, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> cocoIceCream = register_food("coco_ice_cream", 6, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> grapeIceCream = register_food("grape_ice_cream", 6, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> bananaIceCream = register_food("banana_ice_cream", 6, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> strawberryIceCream = register_food("strawberry_ice_cream", 5, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> vanillaIceCream = register_food("vanilla_ice_cream", 5, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> cherryIceCream = register_food("cherry_ice_cream", 6, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> whiteChocolateIceCream = register_food("white_chocolate_ice_cream", 8, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> coffeeIceCream = register_food("coffee_ice_cream", 6, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> bananaSplit = register_food("banana_split", 18, 2.0F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> crepe = register_food("crepe", 2, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> caramelCrepe = register_food("caramel_crepe", 4, 0.5F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> chocolateCrepe = register_food("chocolate_crepe", 10, 0.8F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> cheeseCrepe = register_food("cheese_crepe", 8,DefaultFoodSat, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> sugarCrepe = register_food("sugar_crepe", 3, 0.4F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> iceCreamSandwich = register_food("ice_cream_sandwich", 10, 1.0F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> caramelPudding = register_food("caramel_pudding", 5, 0.5F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> creamCaramel = register_food("cream_caramel", 8, 0.8F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> pie = register_food("pie", 6, 0.6F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> sweetPie = register_food("sweet_pie", 8, 0.8F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> applePie = register_food("apple_pie", 8, 1.0F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> lemonPie = register_food("lemon_pie", 6, 0.6F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> cherryPie = register_food("cherry_pie", 8, 0.8F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> pieSlices = register_food("pie_slices", 2, 0.3F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> mincePie = register_food("mince_pie", 7, 0.7F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> chocolateMilk = register_food("chocolate_milk", 6, 0.6F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> milkShake = register_food("milk_shake", 4, 0.4F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> creamMilkShake = register_food("cream_milk_shake", 6, 0.6F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> cake = register_food("cake", 12, 1.0F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> chocolateCake = register_food("chocolate_cake", 12, 1.0F, TAB_DESSERTS, ITEMS);
-    public static final RegistryObject<Item> cheeseCake = register_food("cheese_cake", 8, 0.8F, TAB_DESSERTS, ITEMS);
-
-*/
