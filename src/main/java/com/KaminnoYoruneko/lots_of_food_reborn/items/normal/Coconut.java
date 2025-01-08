@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 public class Coconut extends Item {
     public Coconut() {
         super(new Item.Properties()
-                .tab(MOD_TAB.TAB_FOOD));
+                .tab(MOD_TAB.TAB_NOT_FOOD));
     }
 
     @Override

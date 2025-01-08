@@ -1,6 +1,7 @@
 package com.KaminnoYoruneko.lots_of_food_reborn.tab;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.register.BlockRegister;
+import com.KaminnoYoruneko.lots_of_food_reborn.register.DrinkRegister;
 import com.KaminnoYoruneko.lots_of_food_reborn.register.ItemRegister;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +14,7 @@ public class MOD_TAB{
             return new ItemStack(BlockRegister.caramelBlock.get());
         }
     };
-    public static final CreativeModeTab TAB_FOOD=new CreativeModeTab("TAB_FOOD"){
+    public static final CreativeModeTab TAB_NOT_FOOD=new CreativeModeTab("TAB_NOT_FOOD"){
 
         @Override
         public ItemStack makeIcon() {
@@ -24,7 +25,7 @@ public class MOD_TAB{
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ItemRegister.caramel.get());
+            return new ItemStack(ItemRegister.rawHorse.get());
         }
     };
     public static final CreativeModeTab TAB_FRUITS=new CreativeModeTab("TAB_FRUITS"){
@@ -38,28 +39,28 @@ public class MOD_TAB{
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ItemRegister.caramel.get());
+            return new ItemStack(ItemRegister.chocolateDonut.get());
         }
     };
     public static final CreativeModeTab TAB_DRINKS=new CreativeModeTab("TAB_DRINKS"){
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ItemRegister.caramel.get());
+            return new ItemStack(DrinkRegister.cactiJuice.get());
         }
     };
     public static final CreativeModeTab TAB_MEALS=new CreativeModeTab("TAB_MEALS"){
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ItemRegister.caramel.get());
+            return new ItemStack(ItemRegister.pasta.get());
         }
     };
     public static final CreativeModeTab TAB_DEBUG=new CreativeModeTab("TAB_DEBUG"){
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ItemRegister.caramel.get());
+            return new ItemStack(ItemRegister.cheff.get());
         }
     };
 }

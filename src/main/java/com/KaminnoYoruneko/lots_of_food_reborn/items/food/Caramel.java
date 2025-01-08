@@ -19,7 +19,7 @@ public class Caramel extends Item /*implements registerable*/ {
                         .fast()
                         .build()
                 )
-                .tab(MOD_TAB.TAB_FOOD));
+                .tab(MOD_TAB.TAB_DESSERTS));
     }
 
 //    @Override

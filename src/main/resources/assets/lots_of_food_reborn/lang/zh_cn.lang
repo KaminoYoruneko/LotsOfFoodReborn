@@ -187,6 +187,8 @@ tile.corn_bush_top.name=玉米丛（顶部）
 tile.grape_bush.name=葡萄丛
 tile.algue_bush.name=藻类植物
 lots_of_food_reborn.tileentity.icecream=饮料和冰激凌机
+##up done
+
 
 tooltip.remove=移除
 tooltip.heal=治疗

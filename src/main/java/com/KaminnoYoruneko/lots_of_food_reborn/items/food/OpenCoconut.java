@@ -9,10 +9,10 @@ public class OpenCoconut extends Item {
         super(new Item.Properties()
                 .food(new FoodProperties.Builder()
                         .nutrition(2)
-                        .saturationMod(1)
+                        .saturationMod(0.25f)
                         .alwaysEat()
                         .build()
                 )
-                .tab(MOD_TAB.TAB_FOOD));
+                .tab(MOD_TAB.TAB_DESSERTS));
     }
 }
