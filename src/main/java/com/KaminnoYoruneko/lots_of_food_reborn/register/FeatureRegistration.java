@@ -4,13 +4,18 @@ import com.KaminnoYoruneko.lots_of_food_reborn.trees.CustomPalmTreeFeature;
 import com.KaminnoYoruneko.lots_of_food_reborn.trees.PalmTreeGrower;
 import com.KaminnoYoruneko.lots_of_food_reborn.trees.conf.PalmTreeFoliagePlacer;
 import com.KaminnoYoruneko.lots_of_food_reborn.world.gen.WorldGenPalm;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
@@ -51,6 +56,18 @@ public class FeatureRegistration {
 //            new TwoLayersFeatureSize(1,0,2)/*检测生成空间是否足够*/
 //        ).build();
 
+//    private class SpecialJungleLeaves extends LeavesBlock{
+//
+//        public SpecialJungleLeaves(Properties p_54422_) {
+//            super(Properties.copy(Blocks.JUNGLE_LEAVES));
+//        }
+//
+//        @Override
+//        public BlockState updateShape(BlockState p_54440_, Direction p_54441_, BlockState p_54442_, LevelAccessor p_54443_, BlockPos p_54444_, BlockPos p_54445_) {
+//            return super.updateShape(p_54440_, p_54441_, p_54442_, p_54443_, p_54444_, p_54445_);
+//        }
+//    }
+
     public static final RegistryObject<ConfiguredFeature<?,?>> palmTreeConfig=FEATURES.register(
             "palm_tree",
             ()->new ConfiguredFeature<>(
@@ -59,8 +76,10 @@ public class FeatureRegistration {
                     new TreeConfiguration.TreeConfigurationBuilder(
                             BlockStateProvider.simple(Blocks.JUNGLE_LOG.defaultBlockState())/*树干*/,
                             new StraightTrunkPlacer(2,5,2)/*树干高度，最小最大基础*/,
-                            BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState())/*树叶*/,
-                            new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),0),
+                            BlockStateProvider.simple(
+                                    Blocks.JUNGLE_LEAVES.defaultBlockState()
+                            )/*树叶*/,
+                            new PalmTreeFoliagePlacer(ConstantInt.of(16),ConstantInt.of(16),0),
 //NEVER MOVE THIS 0
 //                            new BlobFoliagePlacer(ConstantInt.of(4),ConstantInt.of(0),2),
                             new TwoLayersFeatureSize(1,4,10)/*检测生成空间是否足够*/

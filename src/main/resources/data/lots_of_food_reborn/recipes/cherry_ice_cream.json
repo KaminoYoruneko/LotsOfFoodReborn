@@ -1,5 +1,5 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"SCS",
 		"SCS",
@@ -8,8 +8,8 @@
 	"key": {
 		"S": { "item": "minecraft:snowball" },
 		"C": {
-			"type": "forge:ore_dict",
-			"ore": "foodCherry"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/cherry"
 		},
 		"G": { "item": "lots_of_food_reborn:glass" }
 	},

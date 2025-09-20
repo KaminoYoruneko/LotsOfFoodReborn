@@ -1,6 +1,7 @@
 package com.KaminnoYoruneko.lots_of_food_reborn.handler;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.register.ItemRegister;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -13,9 +14,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -26,6 +31,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.event.level.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -198,7 +204,6 @@ public class WorldEventHandler {
 //            addExtraDrops(event, ItemInit.VANILLA, 1, event.getFortuneLevel(), rand);
         }
     }
-
     private static void addExtraDrops(BlockEvent.BreakEvent event, Item dropItem, int initial, int fortuneLevel, RandomSource rand) {
         fortuneLevel = Math.max(fortuneLevel, 0);
         int chance = 20;
@@ -223,6 +228,16 @@ public class WorldEventHandler {
             );
         }
     }
+//    @SubscribeEvent
+//    public void onStructureGenerate( event) {
+//        // 检查生成的结构是否是 "sweet_house"
+//        if (event.getStructure().getRegistryName().toString().equals("lots_of_food_reborn:sweet_house")) {
+//            BlockPos structurePos = event.getStructure().getPos();
+//
+//            // 在生成的坐标处生成女巫
+//            spawnWitchAtLocation(event.getLevel(), structurePos);
+//        }
+//    }
 }
 
 

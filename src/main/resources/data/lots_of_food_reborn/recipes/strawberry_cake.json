@@ -1,5 +1,5 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"SSS",
 		"MVM",
@@ -7,11 +7,14 @@
 	],
 	"key": {
 		"S": {
-			"type": "forge:ore_dict",
-			"ore": "foodStrawberry"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/strawberry"
 		},
 		"M": { "item": "minecraft:milk_bucket" },
-		"V": { "item": "lots_of_food_reborn:vanilla" },
+		"V": {
+			"type": "minecraft:item",
+			"tag": "forge:crops/vanilla"
+		},
 		"W": { "item": "minecraft:wheat" }
 	},
 	"result": {

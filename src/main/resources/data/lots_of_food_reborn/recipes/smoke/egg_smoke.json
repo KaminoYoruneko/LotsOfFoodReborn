@@ -3,7 +3,8 @@
   "cookingtime": 100,
   "experience": 0.35,
   "ingredient": {
-    "item": "minecraft:egg"
+    			"type": "minecraft:item",
+			"tag": "forge:eggs"
   },
   "result": "lots_of_food_reborn:cooked_egg"
 }

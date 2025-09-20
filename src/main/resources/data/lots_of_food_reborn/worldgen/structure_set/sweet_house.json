@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "lots_of_food_reborn:sweet_house",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 337845818,
+    "spacing": 15,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

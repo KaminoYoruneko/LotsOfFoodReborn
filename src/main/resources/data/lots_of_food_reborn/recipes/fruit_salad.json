@@ -1,5 +1,5 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"PGA",
 		"MSC",
@@ -7,22 +7,22 @@
 	],
 	"key": {
 		"P": {
-			"type": "forge:ore_dict",
-			"ore": "foodBanana"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/banana"
 		},
 		"G": {
-			"type": "forge:ore_dict",
-			"ore": "foodGrape"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/grape"
 		},
 		"A": { "item": "minecraft:apple" },
 		"M": { "item": "minecraft:melon" },
 		"S": {
-			"type": "forge:ore_dict",
-			"ore": "foodStrawberry"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/strawberry"
 		},
 		"C": {
-			"type": "forge:ore_dict",
-			"ore": "foodCherry"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/cherry"
 		},
 		"B": { "item": "minecraft:bowl" }
 	},

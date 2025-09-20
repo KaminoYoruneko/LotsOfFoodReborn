@@ -6,7 +6,8 @@
   "refmap": "lots_of_food_reborn.refmap.json",
   "mixins": [
     "MixinTreeFeature",
-    "LootPoolMixin"
+    "LootPoolMixin",
+    "MixinHumanoidArmorLayer"
   ],
   "client": [
 

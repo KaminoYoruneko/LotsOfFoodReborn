@@ -4,31 +4,32 @@ import com.KaminnoYoruneko.lots_of_food_reborn.register.DrinkRegister;
 import com.KaminnoYoruneko.lots_of_food_reborn.register.ItemRegister;
 import com.KaminnoYoruneko.lots_of_food_reborn.tab.MOD_TAB;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraftforge.internal.TextComponentMessageFormatHandler;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -341,6 +342,109 @@ public class Custom {
                         ).tab(tab)
         ));
     }
+    public static RegistryObject<Item> register_fortune_cookie(String name, int nutrition, double saturation, CreativeModeTab tab, DeferredRegister<Item> ITEMS){
+        return ITEMS.register(name,()->new Item(
+                new Item.Properties()
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod((float) saturation)
+                                .build()
+                        ).tab(tab)
+        ){
+            @Override
+            public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
+                if (!level.isClientSide && livingEntity instanceof Player) {
+                    Player player = (Player) livingEntity;
+                    //ITextComponent Message = new TextComponentTranslation("fortune.text.message" + String.valueOf(WorldIn.field_73012_v.nextInt(19)), new Object[0]);
+                    // 创建本地化文本组件
+                    Component message = Component.translatable("fortune.text.message"
+                                    + String.valueOf(level.random.nextInt(19))
+                            ).withStyle(ChatFormatting.LIGHT_PURPLE); // 可选的文字样式
+
+                    // 发送带样式的系统消息给玩家
+                    player.sendSystemMessage(message);
+                }
+                return super.finishUsingItem(itemStack, level, livingEntity);
+            }
+        });
+    }
+    public static RegistryObject<Item> register_candy(String name, DeferredRegister<Item> ITEMS){
+        return ITEMS.register(name,()->new Item(
+                new Item.Properties()
+                        .food(new FoodProperties.Builder()
+                                .nutrition(3)
+                                .saturationMod((float) 0.1F)
+                                .fast()
+                                .alwaysEat()
+                                .build()
+                        ).tab(MOD_TAB.TAB_DESSERTS)
+        ){
+            @Override
+            public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
+                if (!level.isClientSide && entity instanceof Player) {
+                    Player player = (Player) entity;
+                    int effectType = level.random.nextInt(6); // 0-5 对应6种效果
+
+                    // 5秒 = 100 ticks (20 ticks/秒)
+                    int duration = 100;
+
+                    switch (effectType) {
+                        case 0 ->
+                                player.addEffect(new MobEffectInstance(
+                                        MobEffects.MOVEMENT_SPEED,
+                                        duration,
+                                        0));
+                        case 1 ->
+                                player.addEffect(new MobEffectInstance(
+                                        MobEffects.DIG_SPEED,
+                                        duration,
+                                        0));
+                        case 2 ->
+                                player.addEffect(new MobEffectInstance(
+                                        MobEffects.DAMAGE_BOOST,
+                                        duration,
+                                        0));
+                        case 3 ->
+                                player.addEffect(new MobEffectInstance(
+                                        MobEffects.JUMP,
+                                        duration,
+                                        0));
+                        case 4 ->
+                                player.addEffect(new MobEffectInstance(
+                                        MobEffects.REGENERATION,
+                                        duration,
+                                        0));
+                        default ->
+                                player.addEffect(new MobEffectInstance(
+                                        MobEffects.NIGHT_VISION,
+                                        duration,
+                                        0));
+                    }
+                }
+                return super.finishUsingItem(itemStack, level, entity);
+            }
+        });
+    }
+    public static RegistryObject<Item> register_chili(String name,int nutrition, double saturation,CreativeModeTab tab, DeferredRegister<Item> ITEMS){
+        return ITEMS.register(name,()->new Item(
+                new Item.Properties()
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod((float) saturation)
+                                .build()
+                        ).tab(tab)
+        ){
+                    @Override
+                    public ItemStack finishUsingItem(ItemStack p_41409_, Level level, LivingEntity entity) {
+                        if (!level.isClientSide && entity instanceof Player) {
+                            entity.setSecondsOnFire(3); // 服务器端触发着火效果‌:ml-citation{ref="1,2" data="citationList"}
+                        }
+                        return super.finishUsingItem(p_41409_, level, entity);
+                    }
+                }
+
+        );
+    }
     public static RegistryObject<Item> register_hunger_food(String name,int nutrition, double saturation,CreativeModeTab tab, DeferredRegister<Item> ITEMS){
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
@@ -484,14 +588,35 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Block> register_crop_block(String name, int maxAge, RegistryObject<Item> seed, DeferredRegister<Block> BLOCKS){
+    public static RegistryObject<Block> register_algue(String name/*, int maxAge*/, RegistryObject<Item> seed, DeferredRegister<Block> BLOCKS){
         return BLOCKS.register(name,()->new CropBlock(
-                BlockBehaviour.Properties.copy(Blocks.WHEAT)
+//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
+                        BlockBehaviour.Properties.of(Material.WATER_PLANT)
                 ){
-                    public final IntegerProperty AGE=IntegerProperty.create("age",0,maxAge);
+                    public static final int maxAge=3;
+                    public static final IntegerProperty AGE=IntegerProperty.create("age",0,
+                            maxAge
+                    );
+
+                    @Override
+                    protected boolean mayPlaceOn(BlockState bs, BlockGetter getter, BlockPos bp) {
+//                        return super.mayPlaceOn(p_52302_, p_52303_, p_52304_);
+                        BlockState upper=getter.getBlockState(bp.above());
+
+                        if (!upper.is(Blocks.WATER)){
+                            return false;
+                        }
+
+                        return bs.is(Blocks.SAND)
+                                ||bs.is(Blocks.GRAVEL)
+                                ||bs.is(Blocks.DIRT)
+                                ||bs.is(Blocks.FARMLAND);
+                    }
+
                     @Override
                     protected ItemLike getBaseSeedId() {
                         return seed.get();
+//                        return chiliSeeds.get();
                     }
 
                     @Override
@@ -509,6 +634,164 @@ public class Custom {
                         builder.add(AGE);
                     }
                 }
+        );
+    }
+    public static RegistryObject<Block> register_crop_block_age3(String name/*, int maxAge*/, RegistryObject<Item> seed, Block growOnBlock, DeferredRegister<Block> BLOCKS){
+        return BLOCKS.register(name,()->new CropBlock(
+//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
+                BlockBehaviour.Properties.copy(Blocks.POTATOES)
+                ){
+                    public static final int maxAge=3;
+                    public static final IntegerProperty AGE=IntegerProperty.create("age",0,
+                            maxAge
+                    );
+
+                    @Override
+                    protected boolean mayPlaceOn(BlockState p_52302_, BlockGetter p_52303_, BlockPos p_52304_) {
+//                        return super.mayPlaceOn(p_52302_, p_52303_, p_52304_);
+                        return p_52302_.is(growOnBlock)||p_52302_.is(Blocks.FARMLAND);
+                    }
+
+                    @Override
+                    protected ItemLike getBaseSeedId() {
+                        return seed.get();
+//                        return chiliSeeds.get();
+                    }
+
+                    @Override
+                    public IntegerProperty getAgeProperty() {
+                        return AGE;
+                    }
+
+                    @Override
+                    public int getMaxAge() {
+                        return maxAge;
+                    }
+
+                    @Override
+                    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+                        builder.add(AGE);
+                    }
+                }
+        );
+    }
+    public static RegistryObject<Block> register_crop_block_age4(String name/*, int maxAge*/, RegistryObject<Item> seed, Block growOnBlock, DeferredRegister<Block> BLOCKS){
+        return BLOCKS.register(name,()->new CropBlock(
+//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
+                        BlockBehaviour.Properties.copy(Blocks.WHEAT)
+                ){
+                    public static final int maxAge=4;
+                    public static final IntegerProperty AGE=IntegerProperty.create("age",0,
+                            maxAge
+                    );
+
+                    @Override
+                    protected boolean mayPlaceOn(BlockState p_52302_, BlockGetter p_52303_, BlockPos p_52304_) {
+//                        return super.mayPlaceOn(p_52302_, p_52303_, p_52304_);
+                        return p_52302_.is(growOnBlock)||p_52302_.is(Blocks.FARMLAND);
+                    }
+
+                    @Override
+                    protected ItemLike getBaseSeedId() {
+                        return seed.get();
+//                        return chiliSeeds.get();
+                    }
+
+                    @Override
+                    public IntegerProperty getAgeProperty() {
+                        return AGE;
+                    }
+
+                    @Override
+                    public int getMaxAge() {
+                        return maxAge;
+                    }
+
+                    @Override
+                    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+                        builder.add(AGE);
+                    }
+                }
+        );
+    }
+    public static RegistryObject<Block> register_crop_block_age5(String name/*, int maxAge*/, RegistryObject<Item> seed, Block growOnBlock, DeferredRegister<Block> BLOCKS){
+        return BLOCKS.register(name,()->new CropBlock(
+//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
+                        BlockBehaviour.Properties.copy(Blocks.POTATOES)
+                ){
+                    public static final int maxAge=5;
+                    public static final IntegerProperty AGE=IntegerProperty.create("age",0,
+                            maxAge
+                    );
+
+                    @Override
+                    protected boolean mayPlaceOn(BlockState p_52302_, BlockGetter p_52303_, BlockPos p_52304_) {
+//                        return super.mayPlaceOn(p_52302_, p_52303_, p_52304_);
+                        return p_52302_.is(growOnBlock)||p_52302_.is(Blocks.FARMLAND);
+                    }
+
+                    @Override
+                    protected ItemLike getBaseSeedId() {
+                        return seed.get();
+//                        return chiliSeeds.get();
+                    }
+
+                    @Override
+                    public IntegerProperty getAgeProperty() {
+                        return AGE;
+                    }
+
+                    @Override
+                    public int getMaxAge() {
+                        return maxAge;
+                    }
+
+                    @Override
+                    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+                        builder.add(AGE);
+                    }
+                }
+        );
+    }
+    public static RegistryObject<Item> register_seeds(String name,RegistryObject<Block> cropBlock,DeferredRegister<Item> ITEMS){
+        return ITEMS.register(name,()-> new ItemNameBlockItem(
+                cropBlock.get(),
+                new Item.Properties()
+                        .tab(MOD_TAB.TAB_FRUITS)
+            )
+        );
+//        return ITEMS.register(name,()-> new Item(
+//                        new Item.Properties()
+//                                .tab(MOD_TAB.TAB_FRUITS)
+//                )
+//        );
+    }
+    public static RegistryObject<Item> register_seeds_food(String name, int nutrition, double saturation,RegistryObject<Block> cropBlock,DeferredRegister<Item> ITEMS){
+        return ITEMS.register(name,()-> new ItemNameBlockItem(
+                cropBlock.get(),
+                new Item.Properties()
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod((float) saturation)
+                                .build()
+                        )
+                        .tab(MOD_TAB.TAB_FRUITS)
+            )
+        );
+    }
+    public static RegistryObject<Block> register_cake_block(String name, DeferredRegister<Block> BLOCKS){
+        return BLOCKS.register(name,()->new CakeBlock(
+                        BlockBehaviour.Properties.copy(Blocks.CAKE)
+                )
+        );
+    }
+    public static RegistryObject<Item> register_cake_item(String name,RegistryObject<Block> cakeBlock, DeferredRegister<Item> ITEMS){
+        return ITEMS.register(name,()->new BlockItem(
+                        cakeBlock.get(),
+                        new Item.Properties()
+                                .stacksTo(1)
+                                .tab(MOD_TAB.TAB_DESSERTS)
+                )
         );
     }
 }

@@ -7,11 +7,12 @@
 	"key": {
 		"W": { "item": "minecraft:wheat" },
 		"S": { "item": "minecraft:sugar" },
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"P": { "item": "minecraft:paper" }
 	},
 	"result": {
-		"item": "fortune_cookie",
+		"item": "lots_of_food_reborn:fortune_cookie",
 		"count": 3
 	}
 }

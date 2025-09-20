@@ -5,9 +5,9 @@
 		"A"
 	],
 	"key": {
-		"F": { 
-			"item": "minecraft:fish",
-			"data": 0
+		"F": {
+			"type": "minecraft:item",
+			"tag": "forge:meat/fish"
 		},
 		"A": { "item": "lots_of_food_reborn:algue" }
 	},

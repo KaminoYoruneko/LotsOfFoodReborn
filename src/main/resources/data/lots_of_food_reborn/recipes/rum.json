@@ -7,7 +7,7 @@
 	],
 	"key": {
 		"S": { "item": "minecraft:sugar" },
-		"C": { "item": "minecraft:reeds" },
+		"C": { "item": "minecraft:sugar_cane" },
 		"G": { "item": "lots_of_food_reborn:glass" }
 	},
 	"result": {

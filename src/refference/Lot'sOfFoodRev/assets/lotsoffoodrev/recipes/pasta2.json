@@ -9,7 +9,8 @@
 			"type": "forge:ore_dict",
 			"ore": "foodCorn"
 		},
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"B": { "item": "minecraft:bowl" }
 	},
 	"result": {

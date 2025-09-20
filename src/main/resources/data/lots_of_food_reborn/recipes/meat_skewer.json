@@ -1,5 +1,5 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"MBP",
 		"SSS",
@@ -10,8 +10,8 @@
 		"B": { "item": "minecraft:cooked_beef" },
 		"P": { "item": "minecraft:cooked_porkchop" },
 		"S": {
-			"type": "forge:ore_dict",
-			"ore": "stickWood"
+			"type": "minecraft:item",
+			"tag": "forge:stick"
 		}
 	},
 	"result": {

@@ -6,7 +6,8 @@
 		"WWW"
 	],
 	"key": {
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"B": { "item": "minecraft:beef" },
 		"W": { "item": "minecraft:wheat_seeds" }
 	},

@@ -1,13 +1,13 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"A",
 		"G"
 	],
 	"key": {
 		"A": {
-			"type": "forge:ore_dict",
-			"ore": "foodGrape"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/grape"
 		},
 		"G": { "item": "lots_of_food_reborn:glass" }
 	},
