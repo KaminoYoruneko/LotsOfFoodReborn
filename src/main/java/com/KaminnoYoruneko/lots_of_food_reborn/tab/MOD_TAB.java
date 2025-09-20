@@ -18,7 +18,7 @@ public class MOD_TAB{
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ItemRegister.caramel.get());
+            return new ItemStack(ItemRegister.coconut.get());
         }
     };
     public static final CreativeModeTab TAB_MEAT=new CreativeModeTab("TAB_MEAT"){

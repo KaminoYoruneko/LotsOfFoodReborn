@@ -2,7 +2,8 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
 		{ "item": "lotsoffoodrev:raw_squid" },
-		{ "item": "minecraft:egg" },
+		{ 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		{ "item": "minecraft:wheat" },
 		{ "item": "lotsoffoodrev:algue" },
 		{ "item": "lotsoffoodrev:trout" }

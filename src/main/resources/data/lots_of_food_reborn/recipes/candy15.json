@@ -7,14 +7,12 @@
 	"key": {
 		"P": { "item": "minecraft:paper" },
 		"C": { "item": "lots_of_food_reborn:chocolate" },
-		"D": { 
-			"item": "minecraft:dye",
-			"data": 15
-		 }
+		"D": {
+			"item": "minecraft:white_dye"
+		}
 	},
 	"result": {
-		"item": "lots_of_food_reborn:candy",
-		"data": 15,
-		"count": 2
+		"item": "lots_of_food_reborn:white_candy",
+		"count": 3
 	}
 }

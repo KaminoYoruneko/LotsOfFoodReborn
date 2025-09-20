@@ -188,11 +188,63 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
         }
 
         // 树叶的位置
-        LeavesCoords.add(InitialPos.east());
+
+        LeavesCoords.add(InitialPos.north().north());
+        LeavesCoords.add(InitialPos.north().west());
+        LeavesCoords.add(InitialPos.north());
+        LeavesCoords.add(InitialPos.north().east());
+        LeavesCoords.add(InitialPos.west().west());
         LeavesCoords.add(InitialPos.west());
         LeavesCoords.add(InitialPos);
-        LeavesCoords.add(InitialPos.north());
+        LeavesCoords.add(InitialPos.east());
+        LeavesCoords.add(InitialPos.east().east());
+        LeavesCoords.add(InitialPos.south().west());
         LeavesCoords.add(InitialPos.south());
+        LeavesCoords.add(InitialPos.south().east());
+        LeavesCoords.add(InitialPos.south().south());
+        LeavesCoords.add(InitialPos.below().north().north().north());
+        LeavesCoords.add(InitialPos.below().north().north().west().west());
+        LeavesCoords.add(InitialPos.below().north().north().west());
+        LeavesCoords.add(InitialPos.below().north().north());
+        LeavesCoords.add(InitialPos.below().north().north().east());
+        LeavesCoords.add(InitialPos.below().north().north().east().east());
+        LeavesCoords.add(InitialPos.below().north().west().west());
+        LeavesCoords.add(InitialPos.below().north().west());
+        LeavesCoords.add(InitialPos.below().north().east());
+        LeavesCoords.add(InitialPos.below().north().east().east());
+        LeavesCoords.add(InitialPos.below().west().west().west());
+        LeavesCoords.add(InitialPos.below().west().west());
+        LeavesCoords.add(InitialPos.below().east().east());
+        LeavesCoords.add(InitialPos.below().east().east().east());
+        LeavesCoords.add(InitialPos.below().south().west().west());
+        LeavesCoords.add(InitialPos.below().south().west());
+        LeavesCoords.add(InitialPos.below().south().east());
+        LeavesCoords.add(InitialPos.below().south().east().east());
+        LeavesCoords.add(InitialPos.below().south().south().west().west());
+        LeavesCoords.add(InitialPos.below().south().south().west());
+        LeavesCoords.add(InitialPos.below().south().south());
+        LeavesCoords.add(InitialPos.below().south().south().east());
+        LeavesCoords.add(InitialPos.below().south().south().east().east());
+        LeavesCoords.add(InitialPos.below().south().south().south());
+        LeavesCoords.add(InitialPos.below().below().north().north().north());
+        LeavesCoords.add(InitialPos.below().below().north().north().west().west());
+        LeavesCoords.add(InitialPos.below().below().north().north().east().east());
+        LeavesCoords.add(InitialPos.below().below().west().west().west());
+        LeavesCoords.add(InitialPos.below().below().east().east().east());
+        LeavesCoords.add(InitialPos.below().below().south().south().west().west());
+        LeavesCoords.add(InitialPos.below().below().south().south().east().east());
+        LeavesCoords.add(InitialPos.below().below().south().south().south());
+
+        //第一层
+//        LeavesCoords.add(InitialPos.east());
+//        LeavesCoords.add(InitialPos.east().east());
+//        LeavesCoords.add(InitialPos.west());
+//        LeavesCoords.add(InitialPos.west().west());
+//        LeavesCoords.add(InitialPos);
+//        LeavesCoords.add(InitialPos.north());
+//        LeavesCoords.add(InitialPos.north().north());
+//        LeavesCoords.add(InitialPos.south());
+//        LeavesCoords.add(InitialPos.south().south());
 
         // 添加一些额外的树叶位置
 //        for (i = 0; i < 3; ++i) {
@@ -205,27 +257,27 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
 //            LeavesCoords.add(InitialPos.offset(1 + i, -i, -1 - i));
 //            LeavesCoords.add(InitialPos.offset(1 + i, -i, 1 + i));
 //        }
-        for (i = 0; i < 3; ++i) {
-            // 现有的树叶扩展
-            LeavesCoords.add(InitialPos.offset(-2 - i, -i, 0));  // 向左
-            LeavesCoords.add(InitialPos.offset(2 + i, -i, 0));   // 向右
-            LeavesCoords.add(InitialPos.offset(0, -i, -2 - i));  // 向前
-            LeavesCoords.add(InitialPos.offset(0, -i, 2 + i));   // 向后
-            LeavesCoords.add(InitialPos.offset(-1 - i, -i, -1 - i));  // 向左前
-            LeavesCoords.add(InitialPos.offset(-1 - i, -i, 1 + i));   // 向左后
-            LeavesCoords.add(InitialPos.offset(1 + i, -i, -1 - i));   // 向右前
-            LeavesCoords.add(InitialPos.offset(1 + i, -i, 1 + i));    // 向右后
-
-            // 添加额外的延伸格子
-            LeavesCoords.add(InitialPos.offset(-3 - i, -i, 0));  // 向左再延伸
-            LeavesCoords.add(InitialPos.offset(3 + i, -i, 0));   // 向右再延伸
-            LeavesCoords.add(InitialPos.offset(0, -i, -3 - i));  // 向前再延伸
-            LeavesCoords.add(InitialPos.offset(0, -i, 3 + i));   // 向后再延伸
-            LeavesCoords.add(InitialPos.offset(-2 - i, -i, -2 - i));  // 向左前再延伸
-            LeavesCoords.add(InitialPos.offset(-2 - i, -i, 2 + i));   // 向左后再延伸
-            LeavesCoords.add(InitialPos.offset(2 + i, -i, -2 - i));   // 向右前再延伸
-            LeavesCoords.add(InitialPos.offset(2 + i, -i, 2 + i));    // 向右后再延伸
-        }
+//        for (i = 0; i < 3; ++i) {
+//            // 现有的树叶扩展
+//            LeavesCoords.add(InitialPos.offset(-2 - i, -i, 0));  // 向左
+//            LeavesCoords.add(InitialPos.offset(2 + i, -i, 0));   // 向右
+//            LeavesCoords.add(InitialPos.offset(0, -i, -2 - i));  // 向前
+//            LeavesCoords.add(InitialPos.offset(0, -i, 2 + i));   // 向后
+//            LeavesCoords.add(InitialPos.offset(-1 - i, -i, -1 - i));  // 向左前
+//            LeavesCoords.add(InitialPos.offset(-1 - i, -i, 1 + i));   // 向左后
+//            LeavesCoords.add(InitialPos.offset(1 + i, -i, -1 - i));   // 向右前
+//            LeavesCoords.add(InitialPos.offset(1 + i, -i, 1 + i));    // 向右后
+//
+//            // 添加额外的延伸格子
+//            LeavesCoords.add(InitialPos.offset(-3 - i, -i, 0));  // 向左再延伸
+//            LeavesCoords.add(InitialPos.offset(3 + i, -i, 0));   // 向右再延伸
+//            LeavesCoords.add(InitialPos.offset(0, -i, -3 - i));  // 向前再延伸
+//            LeavesCoords.add(InitialPos.offset(0, -i, 3 + i));   // 向后再延伸
+//            LeavesCoords.add(InitialPos.offset(-2 - i, -i, -2 - i));  // 向左前再延伸
+//            LeavesCoords.add(InitialPos.offset(-2 - i, -i, 2 + i));   // 向左后再延伸
+//            LeavesCoords.add(InitialPos.offset(2 + i, -i, -2 - i));   // 向右前再延伸
+//            LeavesCoords.add(InitialPos.offset(2 + i, -i, 2 + i));    // 向右后再延伸
+//        }
 
         // 椰子的位置
         CoconutCoords.add(InitialPos.offset(-1, -1, 0));

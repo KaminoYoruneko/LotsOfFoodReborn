@@ -1,5 +1,6 @@
 package com.KaminnoYoruneko.lots_of_food_reborn.register;
 
+import com.KaminnoYoruneko.lots_of_food_reborn.custom.Custom;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.blockitems.*;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.drink.Glass;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.drink.Mug;
@@ -8,6 +9,8 @@ import com.KaminnoYoruneko.lots_of_food_reborn.items.food.Chocolate;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.food.OpenCoconut;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.normal.Coconut;
 import com.KaminnoYoruneko.lots_of_food_reborn.items.other.ArmourCheff;
+import com.KaminnoYoruneko.lots_of_food_reborn.items.other.PicnicBasket;
+import com.KaminnoYoruneko.lots_of_food_reborn.tab.MOD_TAB;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -15,12 +18,13 @@ import net.minecraft.tags.TagManager;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -30,15 +34,41 @@ import java.util.List;
 
 import static com.KaminnoYoruneko.lots_of_food_reborn.LOFR.MODID;
 import static com.KaminnoYoruneko.lots_of_food_reborn.custom.Custom.*;
+import static com.KaminnoYoruneko.lots_of_food_reborn.register.BlockRegister.*;
 import static com.KaminnoYoruneko.lots_of_food_reborn.tab.MOD_TAB.*;
 
 public class ItemRegister {
     public static final double DefaultFoodSat=0.6;
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-//    public static final RegistryObject<Item> caramelBlockItem =ITEMS.register("caramel_block",CaramelBlockItem::new);
+
+    //野餐篮子
+    public static final RegistryObject<Item> picnicBasket = ITEMS.register(
+            "picnic_basket",
+            PicnicBasket::new
+    );
+
+
+    //    public static final RegistryObject<Item> caramelBlockItem =ITEMS.register("caramel_block",CaramelBlockItem::new);
     //帽子
     public static final RegistryObject<Item> cheff = ITEMS.register("cheff_hat",
-            ArmourCheff::new
+//            ArmourCheff::new
+        ()->{
+            return new Item(
+                new Item.Properties()
+                    .stacksTo(1)
+                    .durability(100)
+                    .tab(MOD_TAB.TAB_DEBUG)
+            ){
+                @Override
+                public boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity) {
+//                    return super.canEquip(stack, armorType, entity);
+                    if (armorType == EquipmentSlot.HEAD){
+                        return true;
+                    }
+                    return false;
+                }
+            };
+        }
     );
 
     //普通物品
@@ -282,6 +312,39 @@ public class ItemRegister {
     public static final RegistryObject<Item> chiliPasta = register_soup_food("chili_pasta", 12, 1.0F, ITEMS);
     public static final RegistryObject<Item> fruitSalad = register_soup_food("fruit_salad", 8, DefaultFoodSat, ITEMS);
     public static final RegistryObject<Item> hungerCake = register_hunger_food("hunger_cake", -12, 0.0F, TAB_MEALS, ITEMS); // 该物品恢复负饥饿，极端特殊食物
+
+    //蛋糕们
+    public static final RegistryObject<Item> chocolateCake = register_cake_item("chocolate_cake",chocolateCakeBlock,ITEMS);
+    public static final RegistryObject<Item> appleCake = register_cake_item("apple_cake",appleCakeBlock,ITEMS);
+    public static final RegistryObject<Item> cheeseCake = register_cake_item("cheesecake",cheeseCakeBlock,ITEMS);
+    public static final RegistryObject<Item> carrotCake = register_cake_item("carrot_cake",carrotCakeBlock,ITEMS);
+    public static final RegistryObject<Item> strawberryCake = register_cake_item("strawberry_cake",strawberryCakeBlock,ITEMS);
+    public static final RegistryObject<Item> blackforestCake = register_cake_item("blackforest_cake",blackforestCakeBlock,ITEMS);
+
+
+
+
+
+    //糖果
+    public static final RegistryObject<Item> WHITE_CANDY = register_candy("white_candy", ITEMS);
+    public static final RegistryObject<Item> ORANGE_CANDY = register_candy("orange_candy", ITEMS);
+    public static final RegistryObject<Item> MAGENTA_CANDY = register_candy("magenta_candy", ITEMS);
+    public static final RegistryObject<Item> LIGHT_BLUE_CANDY = register_candy("light_blue_candy", ITEMS);
+    public static final RegistryObject<Item> YELLOW_CANDY = register_candy("yellow_candy", ITEMS);
+    public static final RegistryObject<Item> LIME_CANDY = register_candy("lime_candy", ITEMS);
+    public static final RegistryObject<Item> PINK_CANDY = register_candy("pink_candy", ITEMS);
+    public static final RegistryObject<Item> GRAY_CANDY = register_candy("gray_candy", ITEMS);
+    public static final RegistryObject<Item> LIGHT_GRAY_CANDY = register_candy("light_gray_candy", ITEMS);
+    public static final RegistryObject<Item> CYAN_CANDY = register_candy("cyan_candy", ITEMS);
+    public static final RegistryObject<Item> PURPLE_CANDY = register_candy("purple_candy", ITEMS);
+    public static final RegistryObject<Item> BLUE_CANDY = register_candy("blue_candy", ITEMS);
+    public static final RegistryObject<Item> BROWN_CANDY = register_candy("brown_candy", ITEMS);
+    public static final RegistryObject<Item> GREEN_CANDY = register_candy("green_candy", ITEMS);
+    public static final RegistryObject<Item> RED_CANDY = register_candy("red_candy", ITEMS);
+    public static final RegistryObject<Item> BLACK_CANDY = register_candy("black_candy", ITEMS);
+
+    //幸运饼干
+    public static final RegistryObject<Item> fortuneCookie = register_fortune_cookie("fortune_cookie", 2, 0.2F, TAB_DESSERTS, ITEMS);
 
 }
 

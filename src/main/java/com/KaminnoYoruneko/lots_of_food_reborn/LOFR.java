@@ -2,12 +2,17 @@ package com.KaminnoYoruneko.lots_of_food_reborn;
 
 import com.KaminnoYoruneko.lots_of_food_reborn.entities.CoconutEntity;
 import com.KaminnoYoruneko.lots_of_food_reborn.entities.CoconutEntityRenderer;
+import com.KaminnoYoruneko.lots_of_food_reborn.menu.PicnicBasketScreen;
+import com.KaminnoYoruneko.lots_of_food_reborn.proxy.CommonProxy;
 import com.KaminnoYoruneko.lots_of_food_reborn.register.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +35,7 @@ public class LOFR
 {
     public static final String MODID = "lots_of_food_reborn";
     private static final Logger LOGGER = LogUtils.getLogger();
+    public static CommonProxy proxy;
 //    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 //    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
@@ -50,14 +56,20 @@ public class LOFR
 
 
         modEventBus.addListener(this::commonSetup);
-
-        BlockRegister.BLOCKS.register(modEventBus);
         ItemRegister.ITEMS.register(modEventBus);
+        BlockRegister.BLOCKS.register(modEventBus);
+
         DrinkRegister.ITEMS.register(modEventBus);
         EntityRegister.ITEM_ENTITY.register(modEventBus);
         FeatureRegistration.FEATURES.register(modEventBus);
         FeatureRegistration.PLACED_FEATURES.register(modEventBus);
+        CropRegister.ITEMS.register(modEventBus);
+        CropRegister.BLOCKS.register(modEventBus);
 
+        MenuRegister.MENUS.register(modEventBus);
+//        CropRegister.commonSetup(modEventBus);
+
+//        proxy.registerModel(ItemRegister.cheff.get(),0);
 //        registerFeatures();
 
 
@@ -65,16 +77,6 @@ public class LOFR
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
-
-//    private void registerFeatures() {
-//        for (int i=0;i<1000;i++){i=i+0;}
-//        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-//        modEventBus.addListener(this::commonSetup);
-//        FeatureRegistration.FEATURES.register(modEventBus);
-//        FeatureRegistration.PLACED_FEATURES.register(modEventBus);
-//        MinecraftForge.EVENT_BUS.register(this);
-//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-//    }
 
 //    @SubscribeEvent
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -109,7 +111,11 @@ public class LOFR
             LOGGER.info("HELLO FROM CLIENT SETUP");
             EntityRenderers.register(EntityRegister.coconutEntity.get(),
                     CoconutEntityRenderer::new);
-//            registerFeatures();
+
+            event.enqueueWork(() ->
+                    MenuScreens.register(MenuRegister.PICNIC_BASKET.get(), PicnicBasketScreen::new)
+            );
+
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }

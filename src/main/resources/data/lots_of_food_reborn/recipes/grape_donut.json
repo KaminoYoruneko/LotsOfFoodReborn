@@ -1,5 +1,5 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"SSS",
 		"CEC",
@@ -8,10 +8,13 @@
 	"key": {
 		"S": { "item": "minecraft:sugar" },
 		"C": {
-			"type": "forge:ore_dict",
-			"ore": "foodGrape"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/grape"
 		},
-		"E": { "item": "minecraft:egg" },
+		"E": {
+			"type": "minecraft:item",
+			"tag": "forge:eggs"
+		},
 		"W": { "item": "minecraft:wheat" }
 	},
 	"result": {

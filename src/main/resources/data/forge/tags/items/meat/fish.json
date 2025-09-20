@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "lots_of_food_reborn:bass",
+    "lots_of_food_reborn:hake",
+    "lots_of_food_reborn:trout",
+    "lots_of_food_reborn:sole",
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:tropical_fish"
+  ]
+}

@@ -7,7 +7,8 @@
 	"key": {
 		"P": { "item": "lots_of_food_reborn:pasta" },
 		"R": { "item": "minecraft:porkchop" },
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"C": { "item": "lots_of_food_reborn:cheese" }
 	},
 	"result": {

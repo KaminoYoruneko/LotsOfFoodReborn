@@ -1,5 +1,5 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		" C ",
 		"CAC",
@@ -9,8 +9,8 @@
 		"C": { "item": "lots_of_food_reborn:caramel" },
 		"A": { "item": "minecraft:apple" },
 		"S": {
-			"type": "forge:ore_dict",
-			"ore": "stickWood"
+			"type": "minecraft:item",
+			"tag": "forge:stick"
 		}
 	},
 	"result": {

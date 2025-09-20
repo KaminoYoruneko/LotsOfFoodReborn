@@ -5,7 +5,10 @@
 		" G "
 	],
 	"key": {
-		"V": { "item": "lots_of_food_reborn:vanilla" },
+		"V": {
+			"type": "minecraft:item",
+			"tag": "forge:crops/vanilla"
+		},
 		"M": { "item": "minecraft:milk_bucket" },
 		"G": { "item": "lots_of_food_reborn:glass" }
 	},

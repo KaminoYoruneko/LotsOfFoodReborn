@@ -6,12 +6,14 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -58,43 +60,56 @@ public abstract class MixinTreeFeature {
  */
 @Overwrite
     private boolean doPlace(
-            WorldGenLevel p_225258_,
-            RandomSource p_225259_,
-            BlockPos p_225260_,
+            WorldGenLevel level,
+            RandomSource rand,
+            BlockPos pos,
             BiConsumer<BlockPos, BlockState> p_225261_,
             BiConsumer<BlockPos, BlockState> p_225262_,
             BiConsumer<BlockPos, BlockState> p_225263_,
             TreeConfiguration treeConf) {
-        int i = treeConf.trunkPlacer.getTreeHeight(p_225259_);
-        int j = treeConf.foliagePlacer.foliageHeight(p_225259_, i, treeConf);
         boolean isPalm=false;
-        if (j==0){
+
+        int i = treeConf.trunkPlacer.getTreeHeight(rand);
+        int j = treeConf.foliagePlacer.foliageHeight(rand, i, treeConf);//高度
+//        if (j==0){
+//            if (treeConf.foliagePlacer instanceof PalmTreeFoliagePlacer){//BlobFoliagePlacer.class
+//                isPalm=true;
+//            }
+//        }
+    //类型被强制转换为BlobFoliagePlacer，此处不可使用instanceof palmxxxx来判断传入的生成器
+
+        int k = i - j;
+        int l = treeConf.foliagePlacer.foliageRadius(rand, k);//半径
+
+        System.out.println("l="+l+", j="+j+", Biome="+level.getBiome(pos));
+
+        if(l==0&&j==0&&level.getBiome(pos).is(Biomes.BEACH)){
             isPalm=true;
         }
-        int k = i - j;
-        int l = treeConf.foliagePlacer.foliageRadius(p_225259_, k);
+
         BlockPos blockpos = treeConf.rootPlacer.map((p_225286_) -> {
-            return p_225286_.getTrunkOrigin(p_225260_, p_225259_);
-        }).orElse(p_225260_);
-        int i1 = Math.min(p_225260_.getY(), blockpos.getY());
-        int j1 = Math.max(p_225260_.getY(), blockpos.getY()) + i + 1;
-        if (i1 >= p_225258_.getMinBuildHeight() + 1 && j1 <= p_225258_.getMaxBuildHeight()) {
+            return p_225286_.getTrunkOrigin(pos, rand);
+        }).orElse(pos);
+        int i1 = Math.min(pos.getY(), blockpos.getY());
+        int j1 = Math.max(pos.getY(), blockpos.getY()) + i + 1;
+        if (i1 >= level.getMinBuildHeight() + 1 && j1 <= level.getMaxBuildHeight()) {
             OptionalInt optionalint = treeConf.minimumSize.minClippedHeight();
-            int k1 = this.getMaxFreeTreeHeight(p_225258_, i, blockpos, treeConf);
+            int k1 = this.getMaxFreeTreeHeight(level, i, blockpos, treeConf);
             if (k1 >= i || !optionalint.isEmpty() && k1 >= optionalint.getAsInt()) {
-                if (treeConf.rootPlacer.isPresent() && !treeConf.rootPlacer.get().placeRoots(p_225258_, p_225261_, p_225259_, p_225260_, blockpos, treeConf)) {
+                if (treeConf.rootPlacer.isPresent() && !treeConf.rootPlacer.get().placeRoots(level, p_225261_, rand, pos, blockpos, treeConf)) {
                     return false;
                 } else {
-                    List<FoliagePlacer.FoliageAttachment> list = treeConf.trunkPlacer.placeTrunk(p_225258_, p_225262_, p_225259_, k1, blockpos, treeConf);
+                    List<FoliagePlacer.FoliageAttachment> list = treeConf.trunkPlacer.placeTrunk(level, p_225262_, rand, k1, blockpos, treeConf);
                     for (FoliagePlacer.FoliageAttachment p_225279_ : list) {
                         System.out.println("MIXIN:"+treeConf.foliagePlacer.toString()+" isPalm? "+isPalm);
                         if (isPalm) {
                             // 如果是棕榈树，使用自定义的 createPalmTreeFoliage 方法
+//                            System.out.println("PALM==>"+pos.toString()+" "+level.getBlockEntity(pos).toString());
                             new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),2)
-                                    .createFoliage(p_225258_, p_225263_, p_225259_, treeConf, k1, p_225279_, j, l);
+                                    .createFoliage(level, p_225263_, rand, treeConf, k1, p_225279_, j, l);
                         } else {
                             // 否则，使用常规的 createFoliage 方法
-                            treeConf.foliagePlacer.createFoliage(p_225258_, p_225263_, p_225259_, treeConf, k1, p_225279_, j, l);
+                            treeConf.foliagePlacer.createFoliage(level, p_225263_, rand, treeConf, k1, p_225279_, j, l);
                         }
                     }
                     return true;
@@ -109,26 +124,26 @@ public abstract class MixinTreeFeature {
 
 //    @Inject(at=@At(value="RETURN",ordinal = 0),method = "doPlace",cancellable = true)
 //    private void doPlace(
-//            WorldGenLevel p_225258_, RandomSource p_225259_, BlockPos p_225260_, BiConsumer<BlockPos, BlockState> p_225261_, BiConsumer<BlockPos, BlockState> p_225262_, BiConsumer<BlockPos, BlockState> p_225263_, TreeConfiguration treeConf, CallbackInfoReturnable<Boolean> cir) {
-//        int i = treeConf.trunkPlacer.getTreeHeight(p_225259_);
-//        int j = treeConf.foliagePlacer.foliageHeight(p_225259_, i, treeConf);
+//            WorldGenLevel level, RandomSource rand, BlockPos pos, BiConsumer<BlockPos, BlockState> p_225261_, BiConsumer<BlockPos, BlockState> p_225262_, BiConsumer<BlockPos, BlockState> p_225263_, TreeConfiguration treeConf, CallbackInfoReturnable<Boolean> cir) {
+//        int i = treeConf.trunkPlacer.getTreeHeight(rand);
+//        int j = treeConf.foliagePlacer.foliageHeight(rand, i, treeConf);
 //        boolean isPalm=false;
 //        if (j==0){
 //            isPalm=true;
 //        }
 //        BlockPos blockpos = treeConf.rootPlacer.map((p_225286_) -> {
-//            return p_225286_.getTrunkOrigin(p_225260_, p_225259_);
-//        }).orElse(p_225260_);
+//            return p_225286_.getTrunkOrigin(pos, rand);
+//        }).orElse(pos);
 //        int k = i - j;
-//        int l = treeConf.foliagePlacer.foliageRadius(p_225259_, k);
-//        int k1 = this.getMaxFreeTreeHeight(p_225258_, i, blockpos, treeConf);
-//        List<FoliagePlacer.FoliageAttachment> list = treeConf.trunkPlacer.placeTrunk(p_225258_, p_225262_, p_225259_, k1, blockpos, treeConf);
+//        int l = treeConf.foliagePlacer.foliageRadius(rand, k);
+//        int k1 = this.getMaxFreeTreeHeight(level, i, blockpos, treeConf);
+//        List<FoliagePlacer.FoliageAttachment> list = treeConf.trunkPlacer.placeTrunk(level, p_225262_, rand, k1, blockpos, treeConf);
 //        for (FoliagePlacer.FoliageAttachment p_225279_ : list) {
 //            if (isPalm) {
 //                System.out.println("VOID-->PALM");
 //                // 如果是棕榈树，使用自定义的 createPalmTreeFoliage 方法
 //                new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),2)
-//                        .createFoliage(p_225258_, p_225263_, p_225259_, treeConf, k1, p_225279_, j, l);
+//                        .createFoliage(level, p_225263_, rand, treeConf, k1, p_225279_, j, l);
 //            }
 //        }
 //    }

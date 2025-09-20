@@ -1,12 +1,15 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"C",
 		"C",
 		"G"
 	],
 	"key": {
-		"C": { "item": "lots_of_food_reborn:opencoconut" },
+		"C": {
+			"type": "minecraft:item",
+			"tag": "forge:fruits/coconut"
+		},
 		"G": { "item": "lots_of_food_reborn:glass" }
 	},
 	"result": {

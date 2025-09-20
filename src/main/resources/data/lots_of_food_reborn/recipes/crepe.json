@@ -6,7 +6,8 @@
 	],
 	"key": {
 		"W": { "item": "minecraft:wheat" },
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"M": { "item": "minecraft:milk_bucket" }
 	},
 	"result": {

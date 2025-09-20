@@ -1,0 +1,15 @@
+{
+  "name": "lots_of_food_reborn:sweet_house/sweet_house",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "lots_of_food_reborn:sweet_house",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -8,7 +8,8 @@
 	"key": {
 		"S": { "item": "minecraft:sugar" },
 		"C": { "item": "lotsoffoodrev:chocolate" },
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"W": { "item": "minecraft:wheat" }
 	},
 	"result": {

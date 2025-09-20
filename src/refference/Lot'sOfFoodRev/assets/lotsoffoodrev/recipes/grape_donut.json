@@ -11,7 +11,8 @@
 			"type": "forge:ore_dict",
 			"ore": "foodGrape"
 		},
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"W": { "item": "minecraft:wheat" }
 	},
 	"result": {

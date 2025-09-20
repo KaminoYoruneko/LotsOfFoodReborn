@@ -161,6 +161,7 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:AppleSkin-248787:3872808")
     runtimeOnly fg.deobf("curse.maven:JEI-238222:5846858")
+
 //    implementation fg.deobf("curse.maven:AppleSkin-248787:3821727")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository

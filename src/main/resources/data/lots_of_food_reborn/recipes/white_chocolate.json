@@ -6,10 +6,7 @@
 	],
 	"key": {
 		"S": { "item": "minecraft:sugar" },
-		"C": { 
-			"item": "minecraft:dye",
-			"data": 3
-		},
+		"C": { "item": "minecraft:cocoa_beans"},
 		"M": { "item": "minecraft:milk_bucket"}
 	},
 	"result": {

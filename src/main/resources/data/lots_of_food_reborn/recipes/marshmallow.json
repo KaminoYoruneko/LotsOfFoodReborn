@@ -1,13 +1,13 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"SCS"
 	],
 	"key": {
 		"S": { "item": "minecraft:sugar" },
 		"C": {
-			"type": "forge:ore_dict",
-			"ore": "foodCorn"
+			"type": "minecraft:item",
+			"tag": "forge:fruits/corn"
 		}
 	},
 	"result": {

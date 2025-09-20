@@ -1,5 +1,5 @@
 {
-	"type": "forge:ore_shaped",
+	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		" S ",
 		"PWP",
@@ -7,16 +7,16 @@
 	],
 	"key": {
 		"S": {
-			"type": "forge:ore_dict",
-			"ore": "stickWood"
+			"type": "minecraft:item",
+			"tag": "forge:stick"
 		},
-		"W": { 
-			"type": "forge:ore_dict",
-			"ore": "wool" 
+		"W": {
+			"type": "minecraft:item",
+			"tag": "forge:wool"
 		},
 		"P": {
-			"type": "forge:ore_dict",
-			"ore": "plankWood"
+			"type": "minecraft:item",
+			"tag": "forge:plank"
 		}
 	},
 	"result": {

@@ -10,7 +10,8 @@
 			"type": "forge:ore_dict",
 			"ore": "foodCherry"
 		},
-		"E": { "item": "minecraft:egg" },
+		"E": { 			"type": "minecraft:item",
+			"tag": "forge:eggs" },
 		"B": { "item": "lotsoffoodrev:chocolate" },
 		"W": { "item": "minecraft:wheat" }
 	},
