@@ -1,13 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.KaminnoYoruneko.lots_of_food_reborn.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "package": "",
+  "compatibilityLevel": "JAVA_21",
   "refmap": "lots_of_food_reborn.refmap.json",
   "mixins": [
-    "MixinTreeFeature",
-    "LootPoolMixin",
-    "MixinHumanoidArmorLayer"
   ],
   "client": [
 

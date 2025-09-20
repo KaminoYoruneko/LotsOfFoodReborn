@@ -1,0 +1,13 @@
+{
+  "itemGroup.lots_of_food_reborn": "Example Mod Tab",
+  "block.lots_of_food_reborn.example_block": "Example Block",
+  "item.lots_of_food_reborn.example_item": "Example Item",
+
+  "lots_of_food_reborn.configuration.title": "Lots of Food Rebirthed Configs",
+  "lots_of_food_reborn.configuration.section.lots_of_food_reborn.common.toml": "Lots of Food Rebirthed Configs",
+  "lots_of_food_reborn.configuration.section.lots_of_food_reborn.common.toml.title": "Lots of Food Rebirthed Configs",
+  "lots_of_food_reborn.configuration.items": "Item List",
+  "lots_of_food_reborn.configuration.logDirtBlock": "Log Dirt Block",
+  "lots_of_food_reborn.configuration.magicNumberIntroduction": "Magic Number Text",
+  "lots_of_food_reborn.configuration.magicNumber": "Magic Number"
+}
