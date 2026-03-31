@@ -53,6 +53,7 @@ public class LOFR
         modEventBus.addListener(this::commonSetup);
         ItemRegister.ITEMS.register(modEventBus);
         BlockRegister.BLOCKS.register(modEventBus);
+        BlockEntityRegister.BLOCK_ENTITIES.register(modEventBus);
 
         DrinkRegister.ITEMS.register(modEventBus);
         EntityRegister.ITEM_ENTITY.register(modEventBus);
@@ -106,6 +107,8 @@ public class LOFR
             LOGGER.info("HELLO FROM CLIENT SETUP");
             EntityRenderers.register(EntityRegister.coconutEntity.get(),
                     CoconutEntityRenderer::new);
+            net.minecraft.client.renderer.blockentity.BlockEntityRenderers.register(BlockEntityRegister.DISH.get(),
+                    com.KaminoYoruneko.lots_of_food_reborn.client.renderer.DishBlockEntityRenderer::new);
 
             event.enqueueWork(() ->
                     MenuScreens.register(MenuRegister.PICNIC_BASKET.get(), PicnicBasketScreen::new)

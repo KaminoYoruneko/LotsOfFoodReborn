@@ -1,8 +1,17 @@
 package com.KaminoYoruneko.lots_of_food_reborn.handler;
 
+import com.KaminoYoruneko.lots_of_food_reborn.Config;
+import com.KaminoYoruneko.lots_of_food_reborn.blocks.crop.CornBush;
+import com.KaminoYoruneko.lots_of_food_reborn.blocks.crop.CornBushTop;
 import com.KaminoYoruneko.lots_of_food_reborn.register.ItemRegister;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Squid;
@@ -12,9 +21,12 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -22,6 +34,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,12 +42,81 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.KaminoYoruneko.lots_of_food_reborn.LOFR.MODID;
 
 @Mod.EventBusSubscriber
 public class WorldEventHandler {
+
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getLevel().isClientSide || !Config.allowRightClickHarvest) return;
+
+        BlockPos pos = event.getPos();
+        BlockState state = event.getLevel().getBlockState(pos);
+        Block block = state.getBlock();
+
+        // 1. 判定是否为作物
+        if (!(block instanceof CropBlock cropBlock)) return;
+
+        // 2. 判定收割范围
+        ResourceLocation registryName = ForgeRegistries.BLOCKS.getKey(block);
+        if (registryName == null) return;
+        boolean inScope = switch (Config.harvestScope) {
+            case MOD_ONLY -> registryName.getNamespace().equals(MODID);
+            case VANILLA_AND_MOD -> registryName.getNamespace().equals(MODID) || registryName.getNamespace().equals("minecraft");
+            case ALL_CROPS -> true;
+        };
+        if (!inScope) return;
+
+        // 3. 兼容性判定：如果是骨粉且未成熟，则不执行收割
+        if (event.getItemStack().is(Items.BONE_MEAL) && !cropBlock.isMaxAge(state)) return;
+
+        // 4. 执行收割逻辑
+        if (cropBlock.isMaxAge(state)) {
+            int resetAge = 0;
+            // 玉米联动逻辑：如果收割的是底端，恢复到 STEM_AGE (3)
+            if (block instanceof CornBush) {
+                resetAge = 3; // STEM_AGE
+                BlockPos abovePos = pos.above();
+                BlockState aboveState = event.getLevel().getBlockState(abovePos);
+                if (aboveState.getBlock() instanceof CornBushTop topBlock && topBlock.isMaxAge(aboveState)) {
+                    performHarvest(event.getLevel(), abovePos, aboveState, topBlock, event.getEntity(), 0);
+                }
+            }
+
+            performHarvest(event.getLevel(), pos, state, cropBlock, event.getEntity(), resetAge);
+
+            event.setCanceled(true);
+            event.setCancellationResult(InteractionResult.SUCCESS);
+        }
+    }
+
+    private static void performHarvest(Level level, BlockPos pos, BlockState state, CropBlock cropBlock, Player player, int resetAge) {
+        // 获取掉落物
+        List<ItemStack> drops = Block.getDrops(state, (ServerLevel) level, pos, null, player, player.getMainHandItem());
+
+        // 重置状态为指定 AGE
+        level.setBlock(pos, state.setValue(cropBlock.getAgeProperty(), resetAge), 3);
+
+        // 产物去向逻辑
+        for (ItemStack drop : drops) {
+            if (Config.harvestDropsToInventory) {
+                if (!player.getInventory().add(drop)) {
+                    Block.popResource(level, pos, drop);
+                }
+            } else {
+                Block.popResource(level, pos, drop);
+            }
+        }
+
+        // 反馈
+        level.playSound(null, pos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
+        player.swing(InteractionHand.MAIN_HAND, true);
+    }
+
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
         System.out.println("LOAD-->"+event.getName());

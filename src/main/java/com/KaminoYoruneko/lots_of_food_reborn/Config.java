@@ -37,12 +37,32 @@ public class Config
             .comment("A list of items to log on common setup.")
             .defineListAllowEmpty(Collections.singletonList("items"), () -> List.of("minecraft:iron_ingot"), Config::validateItemName);
 
+    // --- 右键收割配置 ---
+    private static final ForgeConfigSpec.BooleanValue ALLOW_RIGHT_CLICK_HARVEST = BUILDER
+            .comment("是否开启右键收割功能。")
+            .define("allowRightClickHarvest", true);
+
+    private static final ForgeConfigSpec.BooleanValue HARVEST_DROPS_TO_INVENTORY = BUILDER
+            .comment("收割产物是否直接进入玩家背包（若背包满则掉落在地上）。")
+            .define("harvestDropsToInventory", true);
+
+    private static final ForgeConfigSpec.EnumValue<HarvestScope> HARVEST_SCOPE = BUILDER
+            .comment("右键收割的范围: MOD_ONLY (仅限本模组), VANILLA_AND_MOD (原版+本模组), ALL_CROPS (所有作物)。")
+            .defineEnum("harvestScope", HarvestScope.MOD_ONLY);
+
     static final ForgeConfigSpec SPEC = BUILDER.build();
+
+    public enum HarvestScope {
+        MOD_ONLY, VANILLA_AND_MOD, ALL_CROPS
+    }
 
     public static boolean logDirtBlock;
     public static int magicNumber;
     public static String magicNumberIntroduction;
     public static Set<Item> items;
+    public static boolean allowRightClickHarvest;
+    public static boolean harvestDropsToInventory;
+    public static HarvestScope harvestScope;
 
     private static boolean validateItemName(final Object obj)
     {
@@ -55,6 +75,9 @@ public class Config
         logDirtBlock = LOG_DIRT_BLOCK.get();
         magicNumber = MAGIC_NUMBER.get();
         magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
+        allowRightClickHarvest = ALLOW_RIGHT_CLICK_HARVEST.get();
+        harvestDropsToInventory = HARVEST_DROPS_TO_INVENTORY.get();
+        harvestScope = HARVEST_SCOPE.get();
 
         // convert the list of strings into a set of items
         items = ITEM_STRINGS.get().stream()

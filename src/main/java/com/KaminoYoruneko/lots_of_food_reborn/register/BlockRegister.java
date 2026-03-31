@@ -47,6 +47,10 @@ public class BlockRegister {
             PalmTreeSapling::new
     );
 
+    public static final RegistryObject<Block> dish = BLOCKS.register("dish",
+            DishBlock::new
+    );
+
     //走向规范
     public static final RegistryObject<Block> chocolateCakeBlock = Custom.register_cake_block("chocolate_cake",BLOCKS);
     public static final RegistryObject<Block> appleCakeBlock = Custom.register_cake_block("apple_cake",BLOCKS);

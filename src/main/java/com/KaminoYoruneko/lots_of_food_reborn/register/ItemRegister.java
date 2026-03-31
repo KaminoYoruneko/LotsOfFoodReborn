@@ -121,6 +121,10 @@ public class ItemRegister {
             PalmTreeSaplingItem::new
     );
 
+    public static final RegistryObject<Item> dishItem = ITEMS.register("dish",
+            () -> new net.minecraft.world.item.BlockItem(BlockRegister.dish.get(), new Item.Properties().tab(MOD_TAB.TAB_BLOCK))
+    );
+
     //采用更便捷的方式，以下由AI处理
     ////193~208
     public static final RegistryObject<Item> rawHorse = register_food("raw_horse", 3, 0.3F, TAB_MEAT, ITEMS);
