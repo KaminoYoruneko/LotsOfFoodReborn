@@ -1,25 +1,22 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		" S ",
-		"PWP",
-		"PPP"
-	],
-	"key": {
-		"S": {
-			"type": "minecraft:item",
-			"tag": "forge:stick"
-		},
-		"W": {
-			"type": "minecraft:item",
-			"tag": "forge:wool"
-		},
-		"P": {
-			"type": "minecraft:item",
-			"tag": "forge:plank"
-		}
-	},
-	"result": {
-		"item": "lots_of_food_reborn:picnic_basket"
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "PWP",
+    "PPP"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:stick"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "lots_of_food_reborn:picnic_basket"
+  }
 }

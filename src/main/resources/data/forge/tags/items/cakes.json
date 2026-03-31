@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cake",
+    "lots_of_food_reborn:chocolate_cake",
+    "lots_of_food_reborn:apple_cake",
+    "lots_of_food_reborn:cheesecake",
+    "lots_of_food_reborn:carrot_cake",
+    "lots_of_food_reborn:strawberry_cake",
+    "lots_of_food_reborn:blackforest_cake"
+  ]
+}

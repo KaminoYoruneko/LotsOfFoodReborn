@@ -84,7 +84,7 @@ public class PicnicBasket extends Item {
 
                         @Override
                         public Component getDisplayName() {
-                            return Component.translatable("title.picnic_basket");
+                            return Component.translatable("container.lots_of_food_reborn.picnic_basket");
                         }
                     },
                     buf -> buf.writeItem(stack)

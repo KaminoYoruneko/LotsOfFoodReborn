@@ -9,5 +9,8 @@
   "lots_of_food_reborn.configuration.items": "Item List",
   "lots_of_food_reborn.configuration.logDirtBlock": "Log Dirt Block",
   "lots_of_food_reborn.configuration.magicNumberIntroduction": "Magic Number Text",
-  "lots_of_food_reborn.configuration.magicNumber": "Magic Number"
+  "lots_of_food_reborn.configuration.magicNumber": "Magic Number",
+  "item.lots_of_food_reborn.picnic_basket": "Picnic Basket",
+  "container.lots_of_food_reborn.picnic_basket": "Picnic Basket",
+  "title.picnic_basket": "Picnic Basket"
 }

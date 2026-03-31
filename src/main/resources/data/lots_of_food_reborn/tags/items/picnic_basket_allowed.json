@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:potion",
+    "minecraft:milk_bucket",
+    "minecraft:honey_bottle",
+    "lots_of_food_reborn:glass",
+    "lots_of_food_reborn:mug"
+  ]
+}
