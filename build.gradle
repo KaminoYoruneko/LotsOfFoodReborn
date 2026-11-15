@@ -23,6 +23,13 @@ repositories {
         name = "BlameJared (JEI)"
         url = "https://maven.blamejared.com"
     }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
     mavenCentral()
 }
 
@@ -86,8 +93,11 @@ configurations {
 }
 
 dependencies {
-    // JEI：运行时加载，用于在游戏内查看配方。
+    // 开发环境运行时辅助模组（不发布为依赖）。
     localRuntime "mezz.jei:jei-1.21.1-neoforge:${jei_version}"
+    localRuntime "maven.modrinth:imblocker-original:${imblocker_version}"
+    localRuntime "maven.modrinth:justenoughcharacters:${jec_version}"
+    localRuntime "maven.modrinth:appleskin:${appleskin_version}"
 }
 
 // 展开 neoforge.mods.toml 中的占位符。
