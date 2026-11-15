@@ -229,5 +229,7 @@
   "itemGroup.TAB_DESSERTS": "Lots of Food - Desserts",
   "itemGroup.TAB_DRINKS": "Lots of Food - Drinks",
   "itemGroup.TAB_MEALS": "Lots of Food - Random meals",
-  "itemGroup.TAB_DEBUG": "Lots of Food - DEBUG"
+  "itemGroup.TAB_DEBUG": "Lots of Food - DEBUG",
+  "death.attack.hit_by_coconut": "%1$s was hit by a coconut",
+  "death.attack.hit_by_coconut.player": "%1$s was hit by %2$s's coconut"
 }
