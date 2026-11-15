@@ -178,19 +178,25 @@ public class Custom {
             public ItemStack finishUsingItem(ItemStack stack, net.minecraft.world.level.Level world, net.minecraft.world.entity.LivingEntity entity) {
 //                super.finishUsingItem(stack, world, entity);
 //                System.out.println("WHERE IS MY GLASS QAQ");
-                // 如果是玩家，则给予 glass 物品
+                // 如果是玩家，则给予玻璃杯并施加酒类效果
                 if (entity instanceof net.minecraft.world.entity.player.Player player) {
-                    if (stack.getItem() == DrinkRegister.vodka.get()) {
-                        // 恢复生命值并添加反胃效果
-                        if (!world.isClientSide) {
-                            player.heal(7.0F); // 恢复 7 点生命值
-                            player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 800, 1)); // 给予反胃效果（持续 800 ticks）
-                        }
-                    } else {
-                        // 其他饮品的效果
-                        if (!world.isClientSide) {
-                            player.heal(5.0F); // 恢复 5 点生命值
-                            player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 600, 1)); // 给予反胃效果（持续 600 ticks）
+                    if (!world.isClientSide) {
+                        boolean vodka = stack.getItem() == DrinkRegister.vodka.get();
+                        player.heal(vodka ? 7.0F : 5.0F);
+                        // 反胃统一为 5 秒、等级 I
+                        player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));
+
+                        switch (name) {
+                            case "cider" -> player.addEffect(
+                                    new MobEffectInstance(MobEffects.REGENERATION, 200, 0));
+                            case "wine" -> player.addEffect(
+                                    new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 300, 0));
+                            case "rum" -> player.addEffect(
+                                    new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0));
+                            case "vodka" -> player.addEffect(
+                                    new MobEffectInstance(MobEffects.DAMAGE_BOOST, 400, 0));
+                            default -> {
+                            }
                         }
                     }
                     ItemStack glassStack = new ItemStack(ItemRegister.glass.get(),1);
