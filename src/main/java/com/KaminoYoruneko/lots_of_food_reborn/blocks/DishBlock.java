@@ -1,6 +1,7 @@
 package com.KaminoYoruneko.lots_of_food_reborn.blocks;
 
 import com.KaminoYoruneko.lots_of_food_reborn.blocks.entity.DishBlockEntity;
+import com.KaminoYoruneko.lots_of_food_reborn.register.BlockRegister;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -138,6 +139,13 @@ public class DishBlock extends BaseEntityBlock {
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                 }
             }
+
+            // 玩家正常破坏由战利品表掉落盘子；
+            // 水冲、支撑方块消失等非玩家移除需要在这里补掉盘子本身。
+            if (!level.isClientSide && (!newState.isAir() || !state.canSurvive(level, pos))) {
+                Block.popResource(level, pos, new ItemStack(BlockRegister.dish.get()));
+            }
+
             super.onRemove(state, level, pos, newState, isMoving);
         }
     }
