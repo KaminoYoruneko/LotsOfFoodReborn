@@ -5,6 +5,9 @@
       "item": "minecraft:bowl"
     },
     {
+      "item": "minecraft:bowl"
+    },
+    {
       "item": "minecraft:carrot"
     },
     {
@@ -15,7 +18,7 @@
     }
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "lots_of_food_reborn:vege_soup"
   }
 }

@@ -556,7 +556,7 @@ public class Custom {
                                 .saturationModifier((float) saturation)
                                 .build()
                         )
-                        .stacksTo(1)
+                        .stacksTo(16)
                         
         ){
             @Override

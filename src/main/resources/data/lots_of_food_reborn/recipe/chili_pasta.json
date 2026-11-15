@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "CR",
-    "B "
+    "BB"
   ],
   "key": {
     "C": {
@@ -16,6 +16,7 @@
     }
   },
   "result": {
-    "id": "lots_of_food_reborn:chili_pasta"
+    "id": "lots_of_food_reborn:chili_pasta",
+    "count": 1
   }
 }
