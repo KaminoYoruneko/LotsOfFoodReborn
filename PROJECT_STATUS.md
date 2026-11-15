@@ -9,9 +9,11 @@
 ## 0. 移植进展（2026-11-15）
 
 - 分支 `1.21.1-neoforge` 已从 `origin/1.19.2-new` 创建。
-- 构建环境：ModDevGradle `2.0.107` + NeoForge `21.1.209` + Java 21；`maven.neoforged.net` 已重定向到 `neoforged.forgecdn.net` 镜像。
+- 构建环境：ModDevGradle `2.0.107` + NeoForge `21.1.266` + Java 21；`maven.neoforged.net` 已重定向到 `neoforged.forgecdn.net` 镜像。
+  - 升级到 21.1.266 是因为 JEI 19.70 要求 NeoForge ≥ 21.1.238。
 - `./gradlew compileJava` 通过。
-- 客户端可以启动到主菜单；贴图目录迁移到 `textures/item` / `textures/block` 后不再出现 Missing textures。
+- 客户端可以启动到主菜单/进入世界；贴图目录迁移到 `textures/item` / `textures/block` 后不再出现 Missing textures。
+- JEI `19.70.0.469` 已接入并成功加载（1856 个 ingredients），可在游戏内查看配方。
 - 专用服务器可以启动：`Done`，加载 1472 个配方，无注册表/战利品表解析错误。
 - 已修复：
   - `RegistryObject`/`DeferredRegister`/`BuiltInRegistries` 等 1.21 注册 API。
@@ -19,11 +21,12 @@
   - 1.21 数据驱动世界生成：棕榈树改为 `worldgen/configured_feature` + `worldgen/placed_feature` JSON，自定义 `FoliagePlacerType`。
   - 数据包目录单数化、配方 `result.id`、`forge:` 标签迁移到 `c:`、语言 JSON、贴图目录。
   - 之前“删除世界闪退”的直接原因 `palm_tree_placed` Holder 未绑定已消除。
+  - 厨师帽：物品图标改为独立的 `item/cheff_hat` 平面贴图；头部用 `ChefHatArmorModel`（移植自 1.12 `CheffHat$CheffHatModel` 的两个 box）+ `cheff_hat_layer_1.png` 渲染，已通过游戏内截图验证。
+  - 玉米：调整骨粉顺序为“下层长到 3 → 长出上层 → 优先把下层催到 4 → 再催上层”；骨粉不再触发右键收割。
 - 尚未完成/待游戏内验收：
   - 冰激凌机仍禁用（配方移到 `recipe_disabled`）。
-  - 厨师帽头部渲染仍是旧空实现（物品现在可装备）。
   - 盘子、野餐篮、作物右键收割、钓鱼掉落、棕榈树生成需要在游戏内逐项点验。
-  - quickPlay 自动进世界测试被另一个进程锁住世界文件，未完成。
+  - 玉米的生长顺序已按上述逻辑修改，但仍建议在游戏里用骨粉完整点验一次。
 - 注意：`run/server.properties` 的测试端口临时改为 `25566`（`run/` 不入库）；需要时改回 `25565`。
 
 ---
