@@ -30,7 +30,10 @@ public class Coconut extends Item {
             level.addFreshEntity(coconutEntity);
         }
 
-        itemStack.shrink(1); // 扣除一个物品
+        // 创造模式不消耗手中的椰子
+        if (!player.getAbilities().instabuild) {
+            itemStack.shrink(1);
+        }
         return InteractionResultHolder.sidedSuccess(itemStack,level.isClientSide);
     }
 }

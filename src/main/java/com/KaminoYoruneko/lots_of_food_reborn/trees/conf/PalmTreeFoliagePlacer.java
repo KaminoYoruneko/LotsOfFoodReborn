@@ -78,113 +78,27 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
 
         int i;
 
-        // 根据不同的棕榈树类型进行生成
-        if (PalmType == 0) {
-            // Type 0: 生成简单的棕榈树干
-            for (i = 0; i < PalmHeight; ++i) {
-                LogsCoords.add(InitialPos);
-                InitialPos = InitialPos.above();
-            }
-        } else if (PalmType == 1) {
-            // Type 1: 生成带有分枝的棕榈树
-            for (i = 0; i < PalmHeight; ++i) {
-                LogsCoords.add(InitialPos);
-                if (PalmHeight > 8 && (i == PalmHeight - 7 || i == PalmHeight - 5 || i == PalmHeight - 3)) {
-                    // 根据方向生成分枝
-                    if (Orientation == 0) {
-                        InitialPos = InitialPos.east();
-                    } else if (Orientation == 1) {
-                        InitialPos = InitialPos.west();
-                    } else if (Orientation == 2) {
-                        InitialPos = InitialPos.south();
-                    } else {
-                        InitialPos = InitialPos.north();
-                    }
-                    LogsCoords.add(InitialPos);
-                }
-                InitialPos = InitialPos.above();
-            }
-        } else {
-            // Type 2: 生成带有更复杂结构的棕榈树
+        // 根据不同的棕榈树类型生成树干：
+        // 0 = 笔直，1 = 轻微弯曲（1 次侧移），2 = 剧烈弯曲（3 次侧移，但仍然向上生长）。
+        if (PalmType == 2) {
             PalmHeight = Math.max(PalmHeight, 10);
-            for (int dir = 0; dir < 4; ++dir) {
-                int xVerifDebut, xVerifFin, zVerifDebut, zVerifFin;
-                switch (dir) {
-                    case 0:
-                        xVerifDebut = InitialPos.getX() - 1;
-                        xVerifFin = InitialPos.getX() + 1;
-                        zVerifDebut = InitialPos.getZ() - 6;
-                        zVerifFin = InitialPos.getZ() - 1;
-                        break;
-                    case 1:
-                        xVerifDebut = InitialPos.getX() + 1;
-                        xVerifFin = InitialPos.getX() + 6;
-                        zVerifDebut = InitialPos.getZ() - 1;
-                        zVerifFin = InitialPos.getZ() + 1;
-                        break;
-                    case 2:
-                        xVerifDebut = InitialPos.getX() - 1;
-                        xVerifFin = InitialPos.getX() + 1;
-                        zVerifDebut = InitialPos.getZ() + 1;
-                        zVerifFin = InitialPos.getZ() + 6;
-                        break;
-                    default:
-                        xVerifDebut = InitialPos.getX() - 6;
-                        xVerifFin = InitialPos.getX() - 1;
-                        zVerifDebut = InitialPos.getZ() - 1;
-                        zVerifFin = InitialPos.getZ() + 1;
-                }
+        }
+        for (i = 0; i < PalmHeight; ++i) {
+            LogsCoords.add(InitialPos);
 
-//                boolean added = false;
-//                for (int j = xVerifDebut; j <= xVerifFin && !added; ++j) {
-//                    for (int k = InitialPos.getY() - 2; k <= InitialPos.getY() && !added; ++k) {
-//                        for (int l = zVerifDebut; l <= zVerifFin; ++l) {
-//                            if (level.getBlockState(new BlockPos(j, k, l)).getBlock() == Blocks.SAND) {
-//                                added = true;
-//                                break;
-//                            }
-//                        }
-//                    }
-//                }
-                boolean added = false;
-
-// 遍历 x、y 和 z 范围
-                for (int j = xVerifDebut; j <= xVerifFin && !added; ++j) {
-                    for (int k = InitialPos.getY() - 2; k <= InitialPos.getY() && !added; ++k) {
-                        for (int l = zVerifDebut; l <= zVerifFin && !added; ++l) {
-                            BlockPos checkPos = new BlockPos(j, k, l);
-
-                            // 使用 isStateAtPosition 方法检查当前位置是否是沙子方块
-                            if (level.isStateAtPosition(checkPos, state -> state.getBlock() == Blocks.SAND)) {
-                                added = true;  // 找到沙子方块
-                                break;  // 跳出内层循环
-                            }
-                        }
-                    }
-                }
-
-                //ends
-            }
-
-            // 根据方向生成树干和树叶
-            for (i = 0; i < PalmHeight; ++i) {
+            boolean bendHere = (PalmType == 1 && i == PalmHeight - 3)
+                    || (PalmType == 2 && (i == PalmHeight - 7 || i == PalmHeight - 5 || i == PalmHeight - 3));
+            if (bendHere) {
+                InitialPos = switch (Orientation) {
+                    case 0 -> InitialPos.east();
+                    case 1 -> InitialPos.west();
+                    case 2 -> InitialPos.south();
+                    default -> InitialPos.north();
+                };
                 LogsCoords.add(InitialPos);
-                if (i == PalmHeight - 1) {
-                    InitialPos = InitialPos.above();
-                    LogsCoords.add(InitialPos);
-                }
-                if (i != PalmHeight - 1) {
-                    if (Orientation == 0) {
-                        InitialPos = InitialPos.east();
-                    } else if (Orientation == 1) {
-                        InitialPos = InitialPos.west();
-                    } else if (Orientation == 2) {
-                        InitialPos = InitialPos.south();
-                    } else {
-                        InitialPos = InitialPos.north();
-                    }
-                }
             }
+
+            InitialPos = InitialPos.above();
         }
 
         // 树叶的位置
