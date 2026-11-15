@@ -9,14 +9,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class CropAge5 extends CropBlock {
+public class CropAge5 extends CropBlock implements AgeProvider {
     public static final int maxAge=5;
     public static final IntegerProperty AGE=IntegerProperty.create("age",0,
             maxAge
     );
 
     public CropAge5() {
-        super(Properties.copy(Blocks.POTATOES));
+        super(Properties.ofFullCopy(Blocks.POTATOES));
     }
 
     @Override

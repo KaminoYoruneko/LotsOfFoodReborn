@@ -1,17 +1,10 @@
 package com.KaminoYoruneko.lots_of_food_reborn.register;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import static com.KaminoYoruneko.lots_of_food_reborn.LOFR.MODID;
-
-public class LootRegister {
-    public static final DeferredRegister<LootTable> TABLES = DeferredRegister.create((ResourceLocation) ForgeRegistries.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MODID);
-
-    public static DeferredRegister<LootTable> getTables(String[] args) {
-//        TABLES.register("")
-        return TABLES;
+/**
+ * 旧版这里试图把 LootTable 当作注册表对象注册，这在 1.19/1.21 都不成立。
+ * 战利品表通过数据包加载，实际逻辑在 {@link com.KaminoYoruneko.lots_of_food_reborn.handler.WorldEventHandler}。
+ */
+public final class LootRegister {
+    private LootRegister() {
     }
 }

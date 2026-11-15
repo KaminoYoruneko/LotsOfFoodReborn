@@ -42,10 +42,10 @@
     },
 	"textures":
 	{
-		"particle": "lots_of_food_reborn:blocks/dish_up",
-		"up": "lots_of_food_reborn:blocks/dish_up",
-		"down": "lots_of_food_reborn:blocks/dish_down",
-		"side": "lots_of_food_reborn:blocks/dish_side"
+		"particle": "lots_of_food_reborn:block/dish_up",
+		"up": "lots_of_food_reborn:block/dish_up",
+		"down": "lots_of_food_reborn:block/dish_down",
+		"side": "lots_of_food_reborn:block/dish_side"
 	},
 	"elements":
 	[

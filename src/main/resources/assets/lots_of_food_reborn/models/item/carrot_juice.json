@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "lots_of_food_reborn:items/carrot_juice"
+		"layer0": "lots_of_food_reborn:item/carrot_juice"
 	}
 }

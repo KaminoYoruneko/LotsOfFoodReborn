@@ -1,11 +1,11 @@
 {
 	"render_type": "cutout",
 	"textures": {
-		"particle": "lots_of_food_reborn:blocks/cheesecake_side",
-		"bottom": "lots_of_food_reborn:blocks/cheesecake_bottom",
-		"top": "lots_of_food_reborn:blocks/cheesecake_top",
-		"side": "lots_of_food_reborn:blocks/cheesecake_side",
-		"inside": "lots_of_food_reborn:blocks/cheesecake_inner"
+		"particle": "lots_of_food_reborn:block/cheesecake_side",
+		"bottom": "lots_of_food_reborn:block/cheesecake_bottom",
+		"top": "lots_of_food_reborn:block/cheesecake_top",
+		"side": "lots_of_food_reborn:block/cheesecake_side",
+		"inside": "lots_of_food_reborn:block/cheesecake_inner"
 	},
 	"elements": [{
 		"from": [11, 0, 1],

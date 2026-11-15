@@ -30,14 +30,14 @@
     },
 	"textures":
 	{
-		"particle": "lots_of_food_reborn:blocks/ice_cream_machine_front",
-		"front": "lots_of_food_reborn:blocks/ice_cream_machine_front",
-		"back": "lots_of_food_reborn:blocks/ice_cream_machine_back",
-		"down1": "lots_of_food_reborn:blocks/ice_cream_machine_down1",
-		"down2": "lots_of_food_reborn:blocks/ice_cream_machine_down2",
-		"up": "lots_of_food_reborn:blocks/ice_cream_machine_up",
-		"side": "lots_of_food_reborn:blocks/ice_cream_machine_side",
-		"extra": "lots_of_food_reborn:blocks/ice_cream_machine_extra"
+		"particle": "lots_of_food_reborn:block/ice_cream_machine_front",
+		"front": "lots_of_food_reborn:block/ice_cream_machine_front",
+		"back": "lots_of_food_reborn:block/ice_cream_machine_back",
+		"down1": "lots_of_food_reborn:block/ice_cream_machine_down1",
+		"down2": "lots_of_food_reborn:block/ice_cream_machine_down2",
+		"up": "lots_of_food_reborn:block/ice_cream_machine_up",
+		"side": "lots_of_food_reborn:block/ice_cream_machine_side",
+		"extra": "lots_of_food_reborn:block/ice_cream_machine_extra"
 	},
     "elements":
 	[

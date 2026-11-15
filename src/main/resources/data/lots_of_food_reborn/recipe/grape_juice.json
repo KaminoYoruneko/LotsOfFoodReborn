@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "G"
+  ],
+  "key": {
+    "A": {
+      "tag": "c:fruits/grape"
+    },
+    "G": {
+      "item": "lots_of_food_reborn:glass"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:grape_juice"
+  }
+}

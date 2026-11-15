@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WEW",
+    "MWM"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:wheat"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "M": {
+      "item": "minecraft:milk_bucket"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "lots_of_food_reborn:crepe"
+  }
+}

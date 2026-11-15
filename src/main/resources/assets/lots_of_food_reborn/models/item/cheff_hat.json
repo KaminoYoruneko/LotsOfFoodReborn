@@ -1,7 +1,7 @@
 {
-	"parent": "item/armor/helmet",
+	"parent": "item/generated",
 	"textures": {
-		"2": "lots_of_food_reborn:items/helmet_cheff_hat"
+		"layer0": "lots_of_food_reborn:item/helmet_cheff_hat"
 	},
 	"elements": [
 		{
@@ -10,12 +10,12 @@
 			"to": [12, 6, 12],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
 			"faces": {
-				"north": {"uv": [6, 4, 8, 7], "texture": "#2"},
-				"east": {"uv": [4, 4, 6, 7], "texture": "#2"},
-				"south": {"uv": [2, 4, 4, 7], "texture": "#2"},
-				"west": {"uv": [0, 4, 2, 7], "texture": "#2"},
-				"up": {"uv": [2, 0, 4, 4], "texture": "#2"},
-				"down": {"uv": [4, 0, 6, 4], "texture": "#2"}
+				"north": {"uv": [6, 4, 8, 7], "texture": "#layer0"},
+				"east": {"uv": [4, 4, 6, 7], "texture": "#layer0"},
+				"south": {"uv": [2, 4, 4, 7], "texture": "#layer0"},
+				"west": {"uv": [0, 4, 2, 7], "texture": "#layer0"},
+				"up": {"uv": [2, 0, 4, 4], "texture": "#layer0"},
+				"down": {"uv": [4, 0, 6, 4], "texture": "#layer0"}
 			}
 		},
 		{
@@ -24,12 +24,12 @@
 			"to": [13, 10, 13],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 6, 7]},
 			"faces": {
-				"north": {"uv": [2.5, 13, 5, 15], "texture": "#2"},
-				"east": {"uv": [0, 13, 2.5, 15], "texture": "#2"},
-				"south": {"uv": [7.5, 13, 10, 15], "texture": "#2"},
-				"west": {"uv": [5, 13, 7.5, 15], "texture": "#2"},
-				"up": {"uv": [2.5, 8, 5, 13], "texture": "#2"},
-				"down": {"uv": [5, 8, 7.5, 13], "texture": "#2"}
+				"north": {"uv": [2.5, 13, 5, 15], "texture": "#layer0"},
+				"east": {"uv": [0, 13, 2.5, 15], "texture": "#layer0"},
+				"south": {"uv": [7.5, 13, 10, 15], "texture": "#layer0"},
+				"west": {"uv": [5, 13, 7.5, 15], "texture": "#layer0"},
+				"up": {"uv": [2.5, 8, 5, 13], "texture": "#layer0"},
+				"down": {"uv": [5, 8, 7.5, 13], "texture": "#layer0"}
 			}
 		}
 	],

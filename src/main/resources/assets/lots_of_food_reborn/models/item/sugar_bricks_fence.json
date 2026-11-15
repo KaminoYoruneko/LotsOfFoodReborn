@@ -1,6 +1,6 @@
 {
 	"parent": "block/fence_inventory",
 	"textures": {
-		"texture": "lots_of_food_reborn:blocks/sugar_bricks"
+		"texture": "lots_of_food_reborn:block/sugar_bricks"
 	}
 }

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "lots_of_food_reborn:raw_horse"
+  },
+  "result": {
+    "id": "lots_of_food_reborn:cooked_horse",
+    "count": 1
+  }
+}

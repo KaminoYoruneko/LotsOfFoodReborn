@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "WBW",
+    "WWW"
+  ],
+  "key": {
+    "E": {
+      "tag": "c:eggs"
+    },
+    "B": {
+      "item": "minecraft:beef"
+    },
+    "W": {
+      "item": "minecraft:wheat_seeds"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:tartar_steak"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CPC",
+    "WTW"
+  ],
+  "key": {
+    "C": {
+      "item": "lots_of_food_reborn:cheese"
+    },
+    "P": {
+      "item": "minecraft:porkchop"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    },
+    "T": {
+      "item": "lots_of_food_reborn:tomatoe"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "lots_of_food_reborn:pizza"
+  }
+}

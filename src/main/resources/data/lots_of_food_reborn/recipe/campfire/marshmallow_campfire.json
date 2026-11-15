@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "lots_of_food_reborn:marshmallow_stick"
+  },
+  "result": {
+    "id": "lots_of_food_reborn:cooked_marshmallow_stick",
+    "count": 1
+  }
+}

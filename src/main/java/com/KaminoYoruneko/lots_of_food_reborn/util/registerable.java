@@ -2,14 +2,14 @@ package com.KaminoYoruneko.lots_of_food_reborn.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.*;
+import net.neoforged.neoforge.registries.*;
 //废弃
 public interface registerable {
-    default RegistryObject<Block> BlockRegister(DeferredRegister<Block> reg, String name){
+    default DeferredBlock<Block> BlockRegister(DeferredRegister.Blocks reg, String name){
         return null;
     };
-    default RegistryObject<Item> ItemRegister(DeferredRegister<Item> reg, String name){
+    default DeferredItem<Item> ItemRegister(DeferredRegister.Items reg, String name){
         return null;
     };
 }

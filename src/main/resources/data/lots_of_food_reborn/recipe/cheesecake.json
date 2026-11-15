@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "CCC",
+    "WWW"
+  ],
+  "key": {
+    "E": {
+      "tag": "c:eggs"
+    },
+    "C": {
+      "item": "lots_of_food_reborn:cheese"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:cheesecake"
+  }
+}

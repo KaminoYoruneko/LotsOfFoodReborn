@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraftforge.common.ForgeHooks;
+import net.neoforged.neoforge.common.CommonHooks;
 
 public class CornBush extends CropAge4 {
 
@@ -58,20 +58,20 @@ public class CornBush extends CropAge4 {
         boolean canGrow = state.getValue(CanGrowTop);
 
         // 首先是正常生长本层
-        float growthSpeed = getGrowthSpeed(this, level, pos);
-        if (ForgeHooks.onCropsGrowPre(level, pos, state,
+        float growthSpeed = getGrowthSpeed(state, level, pos);
+        if (CommonHooks.canCropGrow(level, pos, state,
                 random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
             growCropTo(level, pos, state, currentAge + 1);
-            ForgeHooks.onCropsGrowPost(level, pos, state);
+            CommonHooks.fireCropGrowPost(level, pos, state);
         }
 
         // 基础生长逻辑
 //        if (currentAge < MAX_AGE && canGrow) {
-////            float growthSpeed = getGrowthSpeed(this, level, pos);
-//            if (ForgeHooks.onCropsGrowPre(level, pos, state,
+////            float growthSpeed = getGrowthSpeed(state, level, pos);
+//            if (CommonHooks.canCropGrow(level, pos, state,
 //                    random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
 //                growCropTo(level, pos, state, currentAge + 1);
-//                ForgeHooks.onCropsGrowPost(level, pos, state);
+//                CommonHooks.fireCropGrowPost(level, pos, state);
 //            }
 //        }
 
@@ -79,11 +79,11 @@ public class CornBush extends CropAge4 {
         if (currentAge >= STEM_AGE && canGrow) {
             boolean isSuccess = tryGrowUpper(level, pos, state);
 //            if (!isSuccess) {
-////            float growthSpeed = getGrowthSpeed(this, level, pos);
-//            if (ForgeHooks.onCropsGrowPre(level, pos, state,
+////            float growthSpeed = getGrowthSpeed(state, level, pos);
+//            if (CommonHooks.canCropGrow(level, pos, state,
 //                    random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
 //                growCropTo(level, pos, state, currentAge + 1);
-//                ForgeHooks.onCropsGrowPost(level, pos, state);
+//                CommonHooks.fireCropGrowPost(level, pos, state);
 //            }
 //            }
         }
@@ -136,7 +136,7 @@ public class CornBush extends CropAge4 {
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         int currentAge = getAge(state);
         if (currentAge >= MAX_AGE) {
             BlockState topState = level.getBlockState(pos.above());

@@ -3,8 +3,12 @@ package com.KaminoYoruneko.lots_of_food_reborn.handler;
 import com.KaminoYoruneko.lots_of_food_reborn.Config;
 import com.KaminoYoruneko.lots_of_food_reborn.blocks.crop.CornBush;
 import com.KaminoYoruneko.lots_of_food_reborn.blocks.crop.CornBushTop;
+import com.KaminoYoruneko.lots_of_food_reborn.blocks.customBlock.AgeProvider;
 import com.KaminoYoruneko.lots_of_food_reborn.register.ItemRegister;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -22,47 +26,45 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.KaminoYoruneko.lots_of_food_reborn.LOFR.MODID;
 
-@Mod.EventBusSubscriber
+@EventBusSubscriber(modid = MODID)
 public class WorldEventHandler {
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getLevel().isClientSide || !Config.allowRightClickHarvest) return;
+        if (event.getLevel().isClientSide() || !Config.allowRightClickHarvest) return;
 
         BlockPos pos = event.getPos();
         BlockState state = event.getLevel().getBlockState(pos);
         Block block = state.getBlock();
 
-        // 1. 判定是否为作物
         if (!(block instanceof CropBlock cropBlock)) return;
 
-        // 2. 判定收割范围
-        ResourceLocation registryName = ForgeRegistries.BLOCKS.getKey(block);
+        ResourceLocation registryName = BuiltInRegistries.BLOCK.getKey(block);
         if (registryName == null) return;
         boolean inScope = switch (Config.harvestScope) {
             case MOD_ONLY -> registryName.getNamespace().equals(MODID);
@@ -71,15 +73,12 @@ public class WorldEventHandler {
         };
         if (!inScope) return;
 
-        // 3. 兼容性判定：如果是骨粉且未成熟，则不执行收割
         if (event.getItemStack().is(Items.BONE_MEAL) && !cropBlock.isMaxAge(state)) return;
 
-        // 4. 执行收割逻辑
         if (cropBlock.isMaxAge(state)) {
             int resetAge = 0;
-            // 玉米联动逻辑：如果收割的是底端，恢复到 STEM_AGE (3)
             if (block instanceof CornBush) {
-                resetAge = 3; // STEM_AGE
+                resetAge = 3;
                 BlockPos abovePos = pos.above();
                 BlockState aboveState = event.getLevel().getBlockState(abovePos);
                 if (aboveState.getBlock() instanceof CornBushTop topBlock && topBlock.isMaxAge(aboveState)) {
@@ -95,13 +94,13 @@ public class WorldEventHandler {
     }
 
     private static void performHarvest(Level level, BlockPos pos, BlockState state, CropBlock cropBlock, Player player, int resetAge) {
-        // 获取掉落物
         List<ItemStack> drops = Block.getDrops(state, (ServerLevel) level, pos, null, player, player.getMainHandItem());
 
-        // 重置状态为指定 AGE
-        level.setBlock(pos, state.setValue(cropBlock.getAgeProperty(), resetAge), 3);
+        IntegerProperty ageProperty = cropBlock instanceof AgeProvider provider
+                ? provider.getAgeProperty()
+                : CropBlock.AGE;
+        level.setBlock(pos, state.setValue(ageProperty, resetAge), 3);
 
-        // 产物去向逻辑
         for (ItemStack drop : drops) {
             if (Config.harvestDropsToInventory) {
                 if (!player.getInventory().add(drop)) {
@@ -112,173 +111,108 @@ public class WorldEventHandler {
             }
         }
 
-        // 反馈
         level.playSound(null, pos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
         player.swing(InteractionHand.MAIN_HAND, true);
     }
 
     @SubscribeEvent
     public static void onLootTableLoad(LootTableLoadEvent event) {
-        System.out.println("LOAD-->"+event.getName());
-        if (event.getName().equals(new ResourceLocation(MODID, "gameplay/fishing/fish"))){
-            System.out.println("FISH LOADED");
-        }
-        if (event.getName().equals(new ResourceLocation("minecraft", "gameplay/fishing/fish"))) {
+        if (event.getName().equals(ResourceLocation.fromNamespaceAndPath("minecraft", "gameplay/fishing/fish"))) {
             LootTable lootTable = event.getTable();
-            LootPool existingPool = lootTable.getPool("main");  // 获取主掉落池
+            LootPool existingPool = lootTable.getPool("main");
 
             if (existingPool != null) {
-                // 创建新的 LootItem 条目
-                LootPoolEntryContainer hakeEntry = LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(new ResourceLocation(MODID, "hake")))
+                LootPoolEntryContainer hakeEntry = LootItem.lootTableItem(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MODID, "hake")))
                         .setWeight(20)
                         .build();
-                LootPoolEntryContainer troutEntry = LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(new ResourceLocation(MODID, "trout")))
+                LootPoolEntryContainer troutEntry = LootItem.lootTableItem(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MODID, "trout")))
                         .setWeight(20)
                         .build();
-                LootPoolEntryContainer bassEntry = LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(new ResourceLocation(MODID, "bass")))
+                LootPoolEntryContainer bassEntry = LootItem.lootTableItem(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MODID, "bass")))
                         .setWeight(20)
                         .build();
-                LootPoolEntryContainer soleEntry = LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(new ResourceLocation(MODID, "sole")))
+                LootPoolEntryContainer soleEntry = LootItem.lootTableItem(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MODID, "sole")))
                         .setWeight(20)
                         .build();
-                LootPoolEntryContainer goldenFishEntry = LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(new ResourceLocation(MODID, "golden_fish")))
+                LootPoolEntryContainer goldenFishEntry = LootItem.lootTableItem(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(MODID, "golden_fish")))
                         .setWeight(2)
                         .build();
 
-                // 使用 addEntry 方法将新的条目添加到现有的 LootPool
                 try {
-                    Method ae=LootPool.class.getDeclaredMethod("addEntry",LootPoolEntryContainer.class) ;
+                    Method ae = LootPool.class.getDeclaredMethod("addEntry", LootPoolEntryContainer.class);
                     ae.setAccessible(true);
-                    ae.invoke(existingPool,hakeEntry);
-                    ae.invoke(existingPool,troutEntry);
-                    ae.invoke(existingPool,bassEntry);
-                    ae.invoke(existingPool,soleEntry);
-                    ae.invoke(existingPool,goldenFishEntry);
-//                    existingPool.addEntry(hakeEntry);
-//                    existingPool.addEntry(troutEntry);
-//                    existingPool.addEntry(bassEntry);
-//                    existingPool.addEntry(soleEntry);
-//                    existingPool.addEntry(goldenFishEntry);
-                } catch (NoSuchMethodException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                } catch (IllegalAccessException e) {
+                    ae.invoke(existingPool, hakeEntry);
+                    ae.invoke(existingPool, troutEntry);
+                    ae.invoke(existingPool, bassEntry);
+                    ae.invoke(existingPool, soleEntry);
+                    ae.invoke(existingPool, goldenFishEntry);
+                } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
-
             }
-
-//            LootTable lootTable = event.getTable();
-//            LootPool p=event.getTable().getPool("main");
-//            System.out.println(">>YES I FOUND FISHING, main is null? "+(p==null));
-//            // 添加新的掉落池
-//            LootPool pool = LootPool.lootPool()
-//                    .add(LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(
-//                            new ResourceLocation(MODID, "hake")
-//                    )).setWeight(20))
-//                    .add(LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(
-//                            new ResourceLocation(MODID, "trout")
-//                    )).setWeight(20))
-//                    .add(LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(
-//                            new ResourceLocation(MODID, "bass")
-//                    )).setWeight(20))
-//                    .add(LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(
-//                            new ResourceLocation(MODID, "sole")
-//                    )).setWeight(20))
-//                    .add(LootItem.lootTableItem(ForgeRegistries.ITEMS.getValue(
-//                            new ResourceLocation(MODID, "golden_fish")
-//                    )).setWeight(2))
-//                    .build();
-//
-//            lootTable.addPool(pool);
         }
     }
+
     @SubscribeEvent
     public static void onLivingEntityDeath(LivingDeathEvent event) {
-        // Ensure we're not on the client side (field_70170_p.field_72995_K is client-side check)
-        if (!event.getEntity().level.isClientSide) {
+        if (!event.getEntity().level().isClientSide()) {
             LivingEntity entity = event.getEntity();
             final int[] bonus = {0};
-            if (event.getSource().getDirectEntity() instanceof Player){
-                Entity p=event.getSource().getDirectEntity();
-                p.getHandSlots().forEach(itemStack -> {
-                    if (!itemStack.isEmpty()){
-                        int level=itemStack.getEnchantmentLevel(Enchantments.MOB_LOOTING);
-                        bonus[0] =level> bonus[0] ?level: bonus[0];
-                    }
-                });
+            if (event.getSource().getDirectEntity() instanceof Player player) {
+                bonus[0] = enchantLevel(player.level(), player.getMainHandItem(), Enchantments.LOOTING);
+                bonus[0] = Math.max(bonus[0], enchantLevel(player.level(), player.getOffhandItem(), Enchantments.LOOTING));
             }
-            RandomSource random = entity.level.random;
+            RandomSource random = entity.level().random;
 
-            // If the entity is a Zombie
             if (entity instanceof Zombie) {
                 if (random.nextInt(30) == 0) {
-                    // Drop grapes item
-                    //还没写grape qwq
-//                    ItemEntity item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), new ItemStack(ItemRegister.GRAPES, 1+ random.nextInt(2*bonus[0])));
-//                    entity.level.addFreshEntity(item);
+                    // 葡萄掉落尚未实现。
                 }
-            } else /*if (ConfigHandler.allowExtraMeat) */{
+            } else {
                 ItemStack stack;
                 ItemEntity item;
-                // If the entity is a Horse
                 if (entity instanceof Horse horse) {
-                    stack = new ItemStack(ItemRegister.rawHorse.get(), 1 + random.nextInt(3+bonus[0])); // Drop 1-3 raw horse meat
+                    stack = new ItemStack(ItemRegister.rawHorse.get(), 1 + random.nextInt(3 + bonus[0]));
                     if (entity.isOnFire()) {
-                        stack = new ItemStack(ItemRegister.cookedHorse.get(), stack.getCount()); // If the horse is adult, drop cooked horse meat
+                        stack = new ItemStack(ItemRegister.cookedHorse.get(), stack.getCount());
                     }
-
-                    item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
-                    entity.level.addFreshEntity(item);
-                }
-                // If the entity is a Squid
-                else if (entity instanceof Squid squid) {
-                    stack = new ItemStack(ItemRegister.rawSquid.get(), 1 + random.nextInt(2+bonus[0])); // Drop 1-2 raw squid meat
+                    item = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                    entity.level().addFreshEntity(item);
+                } else if (entity instanceof Squid squid) {
+                    stack = new ItemStack(ItemRegister.rawSquid.get(), 1 + random.nextInt(2 + bonus[0]));
                     if (squid.isOnFire()) {
-                        stack = new ItemStack(ItemRegister.cookedSquid.get(), stack.getCount()); // If squid is adult, drop cooked squid meat
+                        stack = new ItemStack(ItemRegister.cookedSquid.get(), stack.getCount());
                     }
-
-                    item = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
-                    entity.level.addFreshEntity(item);
+                    item = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                    entity.level().addFreshEntity(item);
                 }
             }
         }
     }
+
     @SubscribeEvent
     public static void onBlockHarvest(BlockEvent.BreakEvent event) {
-//        System.out.println("BlockHarvest Launched");
-
         RandomSource rand = event.getLevel().getRandom();
         BlockState blockState = event.getState();
         Block block = blockState.getBlock();
-        AtomicInteger level= new AtomicInteger();
-        event.getPlayer().getHandSlots().forEach(element->{
-            int temp=element.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
-            if (temp>level.get()){
-                level.set(temp);
-            }
-        });
 
-        // 检查是否为树叶块，且是否有匹配的日志类型
+        int fortune = enchantLevel(event.getPlayer().level(), event.getPlayer().getMainHandItem(), Enchantments.FORTUNE);
+        fortune = Math.max(fortune, enchantLevel(event.getPlayer().level(), event.getPlayer().getOffhandItem(), Enchantments.FORTUNE));
+
         if (block instanceof net.minecraft.world.level.block.LeavesBlock) {
-//            System.out.println("is LeavesBlock");
-            // 检查是否是白桦树
             if (blockState.is(Blocks.BIRCH_LEAVES)) {
-//                System.out.println("is BIRCH_LEAVES");
-                addExtraDrops(event, ItemRegister.cherry.get(), 2, level.get(), rand);
+                addExtraDrops(event, ItemRegister.cherry.get(), 2, fortune, rand);
+            } else if (blockState.is(Blocks.JUNGLE_LEAVES)) {
+                addExtraDrops(event, ItemRegister.banana.get(), 1, fortune, rand);
             }
-            // 检查是否是丛林树
-            else if (blockState.is(Blocks.JUNGLE_LEAVES)) {
-//                System.out.println("is JUNGLE_LEAVES");
-                addExtraDrops(event, ItemRegister.banana.get(), 1, level.get(), rand);
-            }
-        }
-        // 检查是否为藤蔓块
-        else if (block instanceof net.minecraft.world.level.block.VineBlock) {
-//            addExtraDrops(event, ItemInit.VANILLA, 1, event.getFortuneLevel(), rand);
         }
     }
+
+    private static int enchantLevel(Level level, ItemStack stack, ResourceKey<Enchantment> key) {
+        Holder<Enchantment> holder = level.registryAccess().holderOrThrow(key);
+        return stack.getEnchantmentLevel(holder);
+    }
+
     private static void addExtraDrops(BlockEvent.BreakEvent event, Item dropItem, int initial, int fortuneLevel, RandomSource rand) {
         fortuneLevel = Math.max(fortuneLevel, 0);
         int chance = 20;
@@ -290,76 +224,14 @@ public class WorldEventHandler {
             }
         }
 
-        // 随机掉落物品
-        if (rand.nextInt(chance) == 0 ) {
-//            System.out.println("DROP IT");
+        if (rand.nextInt(chance) == 0) {
             int quantity = initial + rand.nextInt(fortuneLevel + 1);
-            event.getLevel().addFreshEntity(new ItemEntity(
-                    event.getPlayer().getLevel()
-                    ,event.getPos().getX()
-                    ,event.getPos().getY()
-                    ,event.getPos().getZ()
-                    ,new ItemStack(dropItem, quantity))
-            );
+            event.getPlayer().level().addFreshEntity(new ItemEntity(
+                    event.getPlayer().level(),
+                    event.getPos().getX(),
+                    event.getPos().getY(),
+                    event.getPos().getZ(),
+                    new ItemStack(dropItem, quantity)));
         }
     }
-//    @SubscribeEvent
-//    public void onStructureGenerate( event) {
-//        // 检查生成的结构是否是 "sweet_house"
-//        if (event.getStructure().getRegistryName().toString().equals("lots_of_food_reborn:sweet_house")) {
-//            BlockPos structurePos = event.getStructure().getPos();
-//
-//            // 在生成的坐标处生成女巫
-//            spawnWitchAtLocation(event.getLevel(), structurePos);
-//        }
-//    }
 }
-
-
-/*
-{
-  "type": "minecraft:fishing",
-  "pools": [
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "lots_of_food_reborn:hake",
-          "weight": 20
-        },
-        {
-          "type": "minecraft:item",
-          "name": "lots_of_food_reborn:trout",
-          "weight": 20
-        },
-        {
-          "type": "minecraft:item",
-          "name": "lots_of_food_reborn:bass",
-          "weight": 20
-        },
-        {
-          "type": "minecraft:item",
-          "name": "lots_of_food_reborn:sole",
-          "weight": 20
-        },
-        {
-          "type": "minecraft:item",
-          "name": "lots_of_food_reborn:golden_fish",
-          "weight": 2,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "max": 2,
-                "min": 1
-              }
-            }
-          ]
-        }
-      ],
-      "rolls": 1.0
-    }
-  ]
-}
-*/

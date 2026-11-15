@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "M",
+    "G"
+  ],
+  "key": {
+    "C": {
+      "item": "lots_of_food_reborn:white_chocolate"
+    },
+    "M": {
+      "item": "minecraft:milk_bucket"
+    },
+    "G": {
+      "item": "lots_of_food_reborn:glass"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:white_chocolate_milkshake"
+  }
+}

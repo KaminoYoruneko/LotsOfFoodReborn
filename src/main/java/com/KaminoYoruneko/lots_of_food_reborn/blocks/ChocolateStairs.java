@@ -8,7 +8,7 @@ import static com.KaminoYoruneko.lots_of_food_reborn.register.BlockRegister.choc
 public class ChocolateStairs extends StairBlock {
     public ChocolateStairs() {
         super(chocolateBlock.get().defaultBlockState(),
-                BlockBehaviour.Properties.copy(chocolateBlock.get())
+                BlockBehaviour.Properties.ofFullCopy(chocolateBlock.get())
         );
     }
 }

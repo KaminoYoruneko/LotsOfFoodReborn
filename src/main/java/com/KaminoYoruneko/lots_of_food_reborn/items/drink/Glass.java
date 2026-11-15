@@ -6,6 +6,6 @@ import net.minecraft.world.item.Item;
 public class Glass extends Item {
     public Glass() {
         super(new Item.Properties()
-                .tab(MOD_TAB.TAB_DRINKS));
+                );
     }
 }

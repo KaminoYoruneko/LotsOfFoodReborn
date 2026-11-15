@@ -14,14 +14,12 @@ public class CoconutEntityRenderer extends ThrownItemRenderer<CoconutEntity> {
 
 //    @Override
 //    public ResourceLocation getTextureLocation(CoconutEntity p_114482_) {
-//        return new ResourceLocation(MODID, "textures/entity/coconut.png");
+//        return ResourceLocation.fromNamespaceAndPath(MODID, "textures/entity/coconut.png");
 ////        return ItemRegister.coconut.getId();
 //    }
 
     @Override
-    public void render(CoconutEntity p_114485_, float p_114486_, float p_114487_, PoseStack p_114488_, MultiBufferSource p_114489_, int p_114490_) {
-        System.out.println(ItemRegister.coconut.getId());
-        System.out.println("Shit, where is the Texture???");
-        super.render(p_114485_, p_114486_, p_114487_, p_114488_, p_114489_, p_114490_);
+    public void render(CoconutEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 }

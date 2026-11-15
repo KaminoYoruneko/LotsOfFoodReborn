@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SBS",
+    " G "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:snowball"
+    },
+    "B": {
+      "tag": "c:fruits/banana"
+    },
+    "G": {
+      "item": "lots_of_food_reborn:glass"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:banana_ice_cream"
+  }
+}

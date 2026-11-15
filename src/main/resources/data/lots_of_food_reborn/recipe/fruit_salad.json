@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PGA",
+    "MSC",
+    "BBB"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:fruits/banana"
+    },
+    "G": {
+      "tag": "c:fruits/grape"
+    },
+    "A": {
+      "item": "minecraft:apple"
+    },
+    "M": {
+      "item": "minecraft:melon"
+    },
+    "S": {
+      "tag": "c:fruits/strawberry"
+    },
+    "C": {
+      "tag": "c:fruits/cherry"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "lots_of_food_reborn:fruit_salad"
+  }
+}

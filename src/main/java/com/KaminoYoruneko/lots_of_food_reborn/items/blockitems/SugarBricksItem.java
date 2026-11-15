@@ -10,7 +10,7 @@ public class SugarBricksItem extends BlockItem {
     public SugarBricksItem() {
         super(sugarBricks.get(),
                 new Item.Properties()
-                        .tab(MOD_TAB.TAB_BLOCK)
+                        
         );
     }
 }

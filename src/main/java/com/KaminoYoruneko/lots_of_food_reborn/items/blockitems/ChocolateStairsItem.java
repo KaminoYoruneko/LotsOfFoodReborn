@@ -10,7 +10,7 @@ public class ChocolateStairsItem extends BlockItem {
     public ChocolateStairsItem() {
         super(chocolateStairs.get(),
                 new Item.Properties()
-                        .tab(MOD_TAB.TAB_BLOCK)
+                        
         );
     }
 }

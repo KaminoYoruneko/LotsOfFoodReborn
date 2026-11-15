@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "ECE",
+    "WWW"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "C": {
+      "item": "lots_of_food_reborn:chocolate"
+    },
+    "E": {
+      "tag": "c:eggs"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:chocolate_cake"
+  }
+}

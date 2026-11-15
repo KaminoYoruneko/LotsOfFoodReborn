@@ -6,11 +6,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.*;
 
 public class CustomFence extends FenceBlock {
-    public CustomFence(RegistryObject<Block> MaterialBlock) {
-        super(BlockBehaviour.Properties.copy(MaterialBlock.get()));
+    public CustomFence(DeferredBlock<Block> MaterialBlock) {
+        super(BlockBehaviour.Properties.ofFullCopy(MaterialBlock.get()));
         FenceIdentifier.Fences.add(this);
     }
 

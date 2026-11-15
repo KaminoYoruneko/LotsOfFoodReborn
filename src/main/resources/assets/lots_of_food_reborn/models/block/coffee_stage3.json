@@ -2,6 +2,6 @@
 	"render_type": "cutout",
 	"parent": "block/cross",
 	"textures": {
-		"cross": "lots_of_food_reborn:blocks/coffee_stage3"
+		"cross": "lots_of_food_reborn:block/coffee_stage3"
 	}
 }

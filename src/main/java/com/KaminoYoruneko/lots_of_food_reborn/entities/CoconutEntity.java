@@ -1,10 +1,11 @@
 package com.KaminoYoruneko.lots_of_food_reborn.entities;
 import com.KaminoYoruneko.lots_of_food_reborn.register.EntityRegister;
 import com.KaminoYoruneko.lots_of_food_reborn.register.ItemRegister;
+import com.KaminoYoruneko.lots_of_food_reborn.util.ModDamageTypes;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.Animal;
@@ -42,7 +43,7 @@ public class CoconutEntity extends ThrowableProjectile implements ItemSupplier {
         super.onHitEntity(result);
         if (result.getEntity() instanceof Mob||result.getEntity() instanceof Animal||result.getEntity() instanceof Player) {
             result.getEntity().hurt(
-                    new DamageSource("hit_by_coconut"),
+                    level().damageSources().source(ModDamageTypes.HIT_BY_COCONUT, this.getOwner(), this),
                     2.0F
             );
             generateCoconuts(result.getEntity().blockPosition());
@@ -51,7 +52,7 @@ public class CoconutEntity extends ThrowableProjectile implements ItemSupplier {
     }
 
     private void generateCoconuts(BlockPos position) {
-        Level level = this.level;
+        Level level = this.level();
         if (!level.isClientSide) {
             ItemStack opencoconut=new ItemStack(ItemRegister.openCoconut.get(),2);
 //            ItemEntity coconut1=new ItemEntity(
@@ -87,8 +88,7 @@ public class CoconutEntity extends ThrowableProjectile implements ItemSupplier {
     }
 
     @Override
-    protected void defineSynchedData() {
-
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
     }
 
     @Override

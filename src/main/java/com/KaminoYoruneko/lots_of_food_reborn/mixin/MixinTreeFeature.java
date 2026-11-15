@@ -59,7 +59,7 @@ public abstract class MixinTreeFeature {
             BlockPos pos,
             BiConsumer<BlockPos, BlockState> p_225261_,
             BiConsumer<BlockPos, BlockState> p_225262_,
-            BiConsumer<BlockPos, BlockState> p_225263_,
+            FoliagePlacer.FoliageSetter p_225263_,
             TreeConfiguration treeConf) {
         boolean isPalm=false;
 
@@ -75,7 +75,6 @@ public abstract class MixinTreeFeature {
         int k = i - j;
         int l = treeConf.foliagePlacer.foliageRadius(rand, k);//半径
 
-        System.out.println("l="+l+", j="+j+", Biome="+level.getBiome(pos));
 
         if(l==0&&j==0&&level.getBiome(pos).is(Biomes.BEACH)){
             isPalm=true;
@@ -95,10 +94,8 @@ public abstract class MixinTreeFeature {
                 } else {
                     List<FoliagePlacer.FoliageAttachment> list = treeConf.trunkPlacer.placeTrunk(level, p_225262_, rand, k1, blockpos, treeConf);
                     for (FoliagePlacer.FoliageAttachment p_225279_ : list) {
-                        System.out.println("MIXIN:"+treeConf.foliagePlacer.toString()+" isPalm? "+isPalm);
                         if (isPalm) {
                             // 如果是棕榈树，使用自定义的 createPalmTreeFoliage 方法
-//                            System.out.println("PALM==>"+pos.toString()+" "+level.getBlockEntity(pos).toString());
                             new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),2)
                                     .createFoliage(level, p_225263_, rand, treeConf, k1, p_225279_, j, l);
                         } else {
@@ -118,7 +115,7 @@ public abstract class MixinTreeFeature {
 
 //    @Inject(at=@At(value="RETURN",ordinal = 0),method = "doPlace",cancellable = true)
 //    private void doPlace(
-//            WorldGenLevel level, RandomSource rand, BlockPos pos, BiConsumer<BlockPos, BlockState> p_225261_, BiConsumer<BlockPos, BlockState> p_225262_, BiConsumer<BlockPos, BlockState> p_225263_, TreeConfiguration treeConf, CallbackInfoReturnable<Boolean> cir) {
+//            WorldGenLevel level, RandomSource rand, BlockPos pos, BiConsumer<BlockPos, BlockState> p_225261_, BiConsumer<BlockPos, BlockState> p_225262_, FoliagePlacer.FoliageSetter p_225263_, TreeConfiguration treeConf, CallbackInfoReturnable<Boolean> cir) {
 //        int i = treeConf.trunkPlacer.getTreeHeight(rand);
 //        int j = treeConf.foliagePlacer.foliageHeight(rand, i, treeConf);
 //        boolean isPalm=false;
@@ -134,7 +131,6 @@ public abstract class MixinTreeFeature {
 //        List<FoliagePlacer.FoliageAttachment> list = treeConf.trunkPlacer.placeTrunk(level, p_225262_, rand, k1, blockpos, treeConf);
 //        for (FoliagePlacer.FoliageAttachment p_225279_ : list) {
 //            if (isPalm) {
-//                System.out.println("VOID-->PALM");
 //                // 如果是棕榈树，使用自定义的 createPalmTreeFoliage 方法
 //                new PalmTreeFoliagePlacer(ConstantInt.of(3),ConstantInt.of(3),2)
 //                        .createFoliage(level, p_225263_, rand, treeConf, k1, p_225279_, j, l);

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "lots_of_food_reborn:blocks/corn_top_stage3"
+		"layer0": "lots_of_food_reborn:block/corn_top_stage3"
 	}
 }

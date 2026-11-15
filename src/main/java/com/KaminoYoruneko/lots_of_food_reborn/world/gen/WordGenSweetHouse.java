@@ -39,9 +39,9 @@
 //    private Template getHouse(TemplateManager manager, BlockPos origin, ServerWorld world) {
 //        ResourceLocation location;
 //        if (world.getBlockState(origin).getBlock() == Blocks.SAND) {
-//            location = new ResourceLocation("lotsoffoodrev", "sweet_house_sand");
+//            location = ResourceLocation.fromNamespaceAndPath("lotsoffoodrev", "sweet_house_sand");
 //        } else {
-//            location = new ResourceLocation("lotsoffoodrev", "sweet_house");
+//            location = ResourceLocation.fromNamespaceAndPath("lotsoffoodrev", "sweet_house");
 //        }
 //        return manager.get(location);
 //    }

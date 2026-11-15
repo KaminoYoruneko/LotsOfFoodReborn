@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cooked_cod",
+    "minecraft:cooked_salmon",
+    "lots_of_food_reborn:cooked_bass",
+    "lots_of_food_reborn:cooked_hake",
+    "lots_of_food_reborn:cooked_sole",
+    "lots_of_food_reborn:cooked_trout"
+  ]
+}

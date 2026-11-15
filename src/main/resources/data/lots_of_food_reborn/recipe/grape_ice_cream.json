@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SUS",
+    " G "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:snowball"
+    },
+    "U": {
+      "tag": "c:fruits/grape"
+    },
+    "G": {
+      "item": "lots_of_food_reborn:glass"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:grape_ice_cream"
+  }
+}

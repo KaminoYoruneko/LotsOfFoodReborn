@@ -7,11 +7,10 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class CoconutBlock extends LeavesBlock {
     public CoconutBlock() {
-        super(BlockBehaviour.Properties.of(Material.WOOD)
+        super(BlockBehaviour.Properties.of()
                 .strength(1.2f)
                 .explosionResistance(2.0f)
                 .sound(SoundType.WOOD)

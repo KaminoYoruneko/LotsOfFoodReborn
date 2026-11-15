@@ -1,7 +1,8 @@
 package com.KaminoYoruneko.lots_of_food_reborn.trees.conf;
 
 import com.KaminoYoruneko.lots_of_food_reborn.register.BlockRegister;
-import com.mojang.serialization.Codec;
+import com.KaminoYoruneko.lots_of_food_reborn.register.FeatureRegistration;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -13,17 +14,17 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.BiConsumer;
 
 import static com.KaminoYoruneko.lots_of_food_reborn.register.BlockRegister.coconutBlock; // 假设椰子方块已经注册
 
 public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
-    public static final Codec<PalmTreeFoliagePlacer> CODEC = RecordCodecBuilder.create((p_68427_) -> {
+    public static final MapCodec<PalmTreeFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((p_68427_) -> {
         return blobParts(p_68427_).apply(p_68427_, PalmTreeFoliagePlacer::new);
     });
 
@@ -41,14 +42,18 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
         this.leafrad=p_161356_.getMaxValue();
     }
 
+    @Override
+    protected FoliagePlacerType<?> type() {
+        return FeatureRegistration.PALM_FOLIAGE_PLACER.get();
+    }
+
     public BlockPos lastPos;
     @Override
-    protected void createFoliage(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> p_225521_, RandomSource p_225522_, TreeConfiguration p_225523_, int p_225524_, FoliageAttachment p_225525_, int p_225526_, int p_225527_, int p_225528_) {
+    protected void createFoliage(LevelSimulatedReader level, FoliagePlacer.FoliageSetter p_225521_, RandomSource p_225522_, TreeConfiguration p_225523_, int p_225524_, FoliageAttachment p_225525_, int p_225526_, int p_225527_, int p_225528_) {
         // 获取树的顶端位置
         BlockPos topWoodPos = p_225525_.pos().above(p_225524_ - 1); // 树干顶部的位置
         int leafRadius = leafrad; // 树叶的半径
 
-        System.out.println("GenHead");
 
         // 先调用父类的 createFoliage 方法生成基本树叶
 //        super.createFoliage(level, p_225521_, p_225522_, p_225523_, p_225524_, p_225525_, p_225526_, p_225527_, p_225528_);
@@ -76,14 +81,12 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
         // 根据不同的棕榈树类型进行生成
         if (PalmType == 0) {
             // Type 0: 生成简单的棕榈树干
-//            System.out.println("NormalTree");
             for (i = 0; i < PalmHeight; ++i) {
                 LogsCoords.add(InitialPos);
                 InitialPos = InitialPos.above();
             }
         } else if (PalmType == 1) {
             // Type 1: 生成带有分枝的棕榈树
-//            System.out.println("BranchedTree");
             for (i = 0; i < PalmHeight; ++i) {
                 LogsCoords.add(InitialPos);
                 if (PalmHeight > 8 && (i == PalmHeight - 7 || i == PalmHeight - 5 || i == PalmHeight - 3)) {
@@ -103,7 +106,6 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
             }
         } else {
             // Type 2: 生成带有更复杂结构的棕榈树
-//            System.out.println("CrackedTree");
             PalmHeight = Math.max(PalmHeight, 10);
             for (int dir = 0; dir < 4; ++dir) {
                 int xVerifDebut, xVerifFin, zVerifDebut, zVerifFin;
@@ -292,22 +294,22 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
         ) {
             LogsCoords.forEach(logPos -> {
                 if (level.isStateAtPosition(logPos, state -> {
-                    return state.getMaterial().isReplaceable()&&!state.is(Blocks.JUNGLE_WOOD);
+                    return state.canBeReplaced()&&!state.is(Blocks.JUNGLE_WOOD);
                 })){
-                    p_225521_.accept(logPos, LOG);
+                    p_225521_.set(logPos, LOG);
                 }
             });  // 放置树干
 //            if (lastPos!=null){
-//                p_225521_.accept(lastPos, Blocks.JUNGLE_LOG.defaultBlockState());
+//                p_225521_.set(lastPos, Blocks.JUNGLE_LOG.defaultBlockState());
 //            }
 
             LeavesCoords.forEach(leavePos -> {
                 if (level.isStateAtPosition(leavePos, state -> {
-                    return state.getMaterial().isReplaceable()
+                    return state.canBeReplaced()
                             &&!state.is(Blocks.JUNGLE_WOOD)
                             &&!state.is(coconutBlock.get());//叶子不能替换木头和椰子
                 })){
-                    p_225521_.accept(
+                    p_225521_.set(
                             leavePos, LEAF.setValue(
 //                                    LeavesBlock.PERSISTENT,true
                                     LeavesBlock.DISTANCE,1
@@ -317,9 +319,9 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
             });  // 放置树叶
             CoconutCoords.forEach(coconutPos -> {
                 if (level.isStateAtPosition(coconutPos, state -> {
-                    return state.getMaterial().isReplaceable()&&!state.is(Blocks.JUNGLE_WOOD);
+                    return state.canBeReplaced()&&!state.is(Blocks.JUNGLE_WOOD);
                 })){
-                    p_225521_.accept(coconutPos, COCONUT.setValue(
+                    p_225521_.set(coconutPos, COCONUT.setValue(
                             LeavesBlock.DISTANCE,1
                     ));
                 }
@@ -332,7 +334,7 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
 //            BlockState state = level.getBlockState(pos); // 获取当前坐标位置的块状态
 //
 //            // 如果当前状态不是可替换的（如水、泥土等），或当前块是棕榈树幼苗，就不允许放置
-//            if (!state.getMaterial().isReplaceable() || state.getMaterial() == Material.WATER || state.is(BlockRegister.palmTreeSapling.get())) {
+//            if (!state.canBeReplaced() || state.is(Blocks.WATER) || state.is(BlockRegister.palmTreeSapling.get())) {
 //                return false;
 //            }
 //        }
@@ -345,11 +347,11 @@ public class PalmTreeFoliagePlacer extends BlobFoliagePlacer {
         for (BlockPos pos : coords) {
             // 检查该位置是否是可替换的（例如泥土、水等不可替换的方块）
             boolean isReplaceable = level.isStateAtPosition(pos, state -> {
-                        return state.getMaterial().isReplaceable();
+                        return state.canBeReplaced();
                     });
 
             // 检查方块是否是水或棕榈树幼苗（我们需要避免在水或幼苗上放置其他方块）
-            boolean isWater = level.isStateAtPosition(pos, state -> state.getMaterial() == Material.WATER);
+            boolean isWater = level.isStateAtPosition(pos, state -> state.is(Blocks.WATER));
             boolean isPalmSapling = level.isStateAtPosition(pos, state -> state.is(BlockRegister.palmTreeSapling.get()));
 
             // 如果是不可替换的方块，或者是水，或者是棕榈树幼苗，则不能放置

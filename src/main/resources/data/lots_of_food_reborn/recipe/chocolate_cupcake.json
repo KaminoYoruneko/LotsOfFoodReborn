@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PCP",
+    " P "
+  ],
+  "key": {
+    "C": {
+      "item": "lots_of_food_reborn:chocolate_cake"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "lots_of_food_reborn:chocolate_cupcake"
+  }
+}

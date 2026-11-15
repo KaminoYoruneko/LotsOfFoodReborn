@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "cookingtime": 100,
-  "experience": 0.35,
-  "ingredient": {
-    "item": "lots_of_food_reborn:trout"
-  },
-  "result": "lots_of_food_reborn:cooked_trout"
-}

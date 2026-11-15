@@ -1,13 +1,25 @@
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository
+
 pluginManagement {
     repositories {
+        maven { url = "https://maven.aliyun.com/repository/gradle-plugin" }
         gradlePluginPortal()
-        maven {
-            name = 'MinecraftForge'
-            url = 'https://maven.minecraftforge.net/'
-        }
     }
 }
 
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.7.0'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.9.0'
+}
+
+// ModDevGradle 会把 maven.neoforged.net 写死到项目仓库里；
+// 这里在项目评估后统一重定向到 NeoForged 官方 CDN 镜像。
+gradle.projectsEvaluated {
+    gradle.rootProject.allprojects { p ->
+        p.repositories.withType(MavenArtifactRepository).configureEach { repo ->
+            def url = repo.url.toString()
+            if (url.contains('maven.neoforged.net')) {
+                repo.url = url.replace('maven.neoforged.net', 'neoforged.forgecdn.net')
+            }
+        }
+    }
 }

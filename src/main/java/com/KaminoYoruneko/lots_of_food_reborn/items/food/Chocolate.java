@@ -9,10 +9,10 @@ public class Chocolate extends Item {
         super(new Item.Properties()
                 .food(new FoodProperties.Builder()
                         .nutrition(6)
-                        .saturationMod(0.6f)
-                        .alwaysEat()
+                        .saturationModifier(0.6f)
+                        .alwaysEdible()
                         .build()
                 )
-                .tab(MOD_TAB.TAB_DESSERTS));
+                );
     }
 }

@@ -2,8 +2,8 @@
 	"render_type": "cutout",
 	"parent": "block/inner_stairs",
 	"textures": {
-		"bottom": "lots_of_food_reborn:blocks/sugar_bricks",
-		"top": "lots_of_food_reborn:blocks/sugar_bricks",
-		"side": "lots_of_food_reborn:blocks/sugar_bricks"
+		"bottom": "lots_of_food_reborn:block/sugar_bricks",
+		"top": "lots_of_food_reborn:block/sugar_bricks",
+		"side": "lots_of_food_reborn:block/sugar_bricks"
 	}
 }

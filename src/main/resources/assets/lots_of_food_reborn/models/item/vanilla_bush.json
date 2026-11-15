@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "lots_of_food_reborn:blocks/vanilla_stage4"
+		"layer0": "lots_of_food_reborn:block/vanilla_stage4"
 	}
 }

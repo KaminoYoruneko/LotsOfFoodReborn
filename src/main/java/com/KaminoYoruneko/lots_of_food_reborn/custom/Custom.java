@@ -27,31 +27,32 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.*;
+import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class Custom {
-    public static RegistryObject<Item> register_item(String name, CreativeModeTab tab, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_item(String name, MOD_TAB.Tab tab, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(tab, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
-                        .tab(tab)
+                        
         ));
     }
-    public static RegistryObject<Item> register_glass(String name, int nutrition, double saturation, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_glass(String name, int nutrition, double saturation, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DRINKS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
-                                .alwaysEat()
+                                .saturationModifier((float) saturation)
+                                .alwaysEdible()
                                 .build()
                         )
                         .stacksTo(16)
-                        .tab(MOD_TAB.TAB_DRINKS)
+                        
         ){
             @Override
             public SoundEvent getEatingSound() {
@@ -96,17 +97,18 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Item> register_mug(String name, int nutrition, double saturation, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_mug(String name, int nutrition, double saturation, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DRINKS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
-                                .alwaysEat()
+                                .saturationModifier((float) saturation)
+                                .alwaysEdible()
                                 .build()
                         )
                         .stacksTo(16)
-                        .tab(MOD_TAB.TAB_DRINKS)
+                        
         ){
             @Override
             public SoundEvent getEatingSound() {
@@ -150,17 +152,18 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Item> register_wine(String name, int nutrition, double saturation, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_wine(String name, int nutrition, double saturation, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DRINKS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
-                                .alwaysEat()
+                                .saturationModifier((float) saturation)
+                                .alwaysEdible()
                                 .build()
                         )
                         .stacksTo(16)
-                        .tab(MOD_TAB.TAB_DRINKS)
+                        .rarity(name.equals("vodka") ? Rarity.RARE : Rarity.UNCOMMON)
         ){
             @Override
             public SoundEvent getEatingSound() {
@@ -216,29 +219,21 @@ public class Custom {
             }
 
             @Override
-            public Rarity getRarity(ItemStack stack) {
-                if (stack.getItem() == DrinkRegister.vodka.get()){
-                    return Rarity.RARE;
-                }else {
-                    return Rarity.UNCOMMON;
-                }
-            }
-
-            @Override
             public boolean isFoil(ItemStack p_41453_) {
                 return true;
             }
         });
     }
-    public static RegistryObject<Item> register_tea(String name,DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_tea(String name,DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DRINKS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
-                                .alwaysEat()
+                                .alwaysEdible()
                                 .build()
                         )
                         .stacksTo(16)
-                        .tab(MOD_TAB.TAB_DRINKS)
+                        .rarity(Rarity.UNCOMMON)
         ){
             @Override
             public SoundEvent getEatingSound() {
@@ -281,11 +276,6 @@ public class Custom {
             }
 
             @Override
-            public Rarity getRarity(ItemStack p_41461_) {
-                return Rarity.UNCOMMON;
-            }
-
-            @Override
             public boolean isFoil(ItemStack p_41453_) {
                 return false;
             }
@@ -305,7 +295,7 @@ public class Custom {
             }
 
             @Override
-            public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+            public void appendHoverText(ItemStack stack, Item.TooltipContext worldIn, List<Component> tooltip, TooltipFlag flagIn) {
                 MutableComponent mutablecomponent;
                 MobEffectInstance effect = null;
                 ChatFormatting style=ChatFormatting.GOLD;;
@@ -326,30 +316,32 @@ public class Custom {
                 }
                 mutablecomponent = Component.translatable(effect.getDescriptionId());
                 tooltip.add(Component.translatable("potion.withAmplifier", mutablecomponent,
-                        MobEffectUtil.formatDuration(effect, 1.0f)
+                        MobEffectUtil.formatDuration(effect, 1.0f, 20.0f)
                 ).withStyle(style));
             }
 
         });
     }
-    public static RegistryObject<Item> register_food(String name,int nutrition, double saturation,CreativeModeTab tab, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_food(String name,int nutrition, double saturation,MOD_TAB.Tab tab, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(tab, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
+                                .saturationModifier((float) saturation)
                                 .build()
-                        ).tab(tab)
+                        )
         ));
     }
-    public static RegistryObject<Item> register_fortune_cookie(String name, int nutrition, double saturation, CreativeModeTab tab, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_fortune_cookie(String name, int nutrition, double saturation, MOD_TAB.Tab tab, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(tab, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
+                                .saturationModifier((float) saturation)
                                 .build()
-                        ).tab(tab)
+                        )
         ){
             @Override
             public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
@@ -368,16 +360,17 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Item> register_candy(String name, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_candy(String name, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DESSERTS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(3)
-                                .saturationMod((float) 0.1F)
+                                .saturationModifier((float) 0.1F)
                                 .fast()
-                                .alwaysEat()
+                                .alwaysEdible()
                                 .build()
-                        ).tab(MOD_TAB.TAB_DESSERTS)
+                        )
         ){
             @Override
             public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
@@ -425,19 +418,20 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Item> register_chili(String name,int nutrition, double saturation,CreativeModeTab tab, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_chili(String name,int nutrition, double saturation,MOD_TAB.Tab tab, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(tab, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
+                                .saturationModifier((float) saturation)
                                 .build()
-                        ).tab(tab)
+                        )
         ){
                     @Override
                     public ItemStack finishUsingItem(ItemStack p_41409_, Level level, LivingEntity entity) {
                         if (!level.isClientSide && entity instanceof Player) {
-                            entity.setSecondsOnFire(3); // 服务器端触发着火效果‌:ml-citation{ref="1,2" data="citationList"}
+                            entity.igniteForSeconds(3); // 服务器端触发着火效果‌:ml-citation{ref="1,2" data="citationList"}
                         }
                         return super.finishUsingItem(p_41409_, level, entity);
                     }
@@ -445,27 +439,29 @@ public class Custom {
 
         );
     }
-    public static RegistryObject<Item> register_hunger_food(String name,int nutrition, double saturation,CreativeModeTab tab, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_hunger_food(String name,int nutrition, double saturation,MOD_TAB.Tab tab, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(tab, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
-                                .alwaysEat()
+                                .saturationModifier((float) saturation)
+                                .alwaysEdible()
                                 .build()
-                        ).tab(tab)
+                        )
         ));
     }
-    public static RegistryObject<Item> register_glass_food(String name, int nutrition, double saturation, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_glass_food(String name, int nutrition, double saturation, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DRINKS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
+                                .saturationModifier((float) saturation)
                                 .build()
                         )
                         .stacksTo(16)
-                        .tab(MOD_TAB.TAB_DRINKS)
+                        
         ){
             @Override
             public ItemStack finishUsingItem(ItemStack stack, net.minecraft.world.level.Level world, net.minecraft.world.entity.LivingEntity entity) {
@@ -500,16 +496,17 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Item> register_stick_food(String name, int nutrition, double saturation, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_stick_food(String name, int nutrition, double saturation, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DESSERTS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
+                                .saturationModifier((float) saturation)
                                 .build()
                         )
                         .stacksTo(32)
-                        .tab(MOD_TAB.TAB_DESSERTS)
+                        
         ){
             @Override
             public ItemStack finishUsingItem(ItemStack stack, net.minecraft.world.level.Level world, net.minecraft.world.entity.LivingEntity entity) {
@@ -544,16 +541,17 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Item> register_soup_food(String name, int nutrition, double saturation, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_soup_food(String name, int nutrition, double saturation, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.MEALS, name);
         return ITEMS.register(name,()->new Item(
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
+                                .saturationModifier((float) saturation)
                                 .build()
                         )
                         .stacksTo(1)
-                        .tab(MOD_TAB.TAB_MEALS)
+                        
         ){
             @Override
             public ItemStack finishUsingItem(ItemStack stack, net.minecraft.world.level.Level world, net.minecraft.world.entity.LivingEntity entity) {
@@ -588,10 +586,10 @@ public class Custom {
             }
         });
     }
-    public static RegistryObject<Block> register_algue(String name/*, int maxAge*/, RegistryObject<Item> seed, DeferredRegister<Block> BLOCKS){
+    public static DeferredBlock<Block> register_algue(String name/*, int maxAge*/, DeferredItem<Item> seed, DeferredRegister.Blocks BLOCKS){
         return BLOCKS.register(name,()->new CropBlock(
-//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
-                        BlockBehaviour.Properties.of(Material.WATER_PLANT)
+//                BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)
+                        BlockBehaviour.Properties.of()
                 ){
                     public static final int maxAge=3;
                     public static final IntegerProperty AGE=IntegerProperty.create("age",0,
@@ -636,10 +634,10 @@ public class Custom {
                 }
         );
     }
-    public static RegistryObject<Block> register_crop_block_age3(String name/*, int maxAge*/, RegistryObject<Item> seed, Block growOnBlock, DeferredRegister<Block> BLOCKS){
+    public static DeferredBlock<Block> register_crop_block_age3(String name/*, int maxAge*/, DeferredItem<Item> seed, Block growOnBlock, DeferredRegister.Blocks BLOCKS){
         return BLOCKS.register(name,()->new CropBlock(
-//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
-                BlockBehaviour.Properties.copy(Blocks.POTATOES)
+//                BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)
+                BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES)
                 ){
                     public static final int maxAge=3;
                     public static final IntegerProperty AGE=IntegerProperty.create("age",0,
@@ -675,10 +673,10 @@ public class Custom {
                 }
         );
     }
-    public static RegistryObject<Block> register_crop_block_age4(String name/*, int maxAge*/, RegistryObject<Item> seed, Block growOnBlock, DeferredRegister<Block> BLOCKS){
+    public static DeferredBlock<Block> register_crop_block_age4(String name/*, int maxAge*/, DeferredItem<Item> seed, Block growOnBlock, DeferredRegister.Blocks BLOCKS){
         return BLOCKS.register(name,()->new CropBlock(
-//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
-                        BlockBehaviour.Properties.copy(Blocks.WHEAT)
+//                BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)
                 ){
                     public static final int maxAge=4;
                     public static final IntegerProperty AGE=IntegerProperty.create("age",0,
@@ -714,10 +712,10 @@ public class Custom {
                 }
         );
     }
-    public static RegistryObject<Block> register_crop_block_age5(String name/*, int maxAge*/, RegistryObject<Item> seed, Block growOnBlock, DeferredRegister<Block> BLOCKS){
+    public static DeferredBlock<Block> register_crop_block_age5(String name/*, int maxAge*/, DeferredItem<Item> seed, Block growOnBlock, DeferredRegister.Blocks BLOCKS){
         return BLOCKS.register(name,()->new CropBlock(
-//                BlockBehaviour.Properties.copy(Blocks.WHEAT)
-                        BlockBehaviour.Properties.copy(Blocks.POTATOES)
+//                BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.POTATOES)
                 ){
                     public static final int maxAge=5;
                     public static final IntegerProperty AGE=IntegerProperty.create("age",0,
@@ -753,44 +751,47 @@ public class Custom {
                 }
         );
     }
-    public static RegistryObject<Item> register_seeds(String name,RegistryObject<Block> cropBlock,DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_seeds(String name,DeferredBlock<Block> cropBlock,DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.FRUITS, name);
         return ITEMS.register(name,()-> new ItemNameBlockItem(
                 cropBlock.get(),
                 new Item.Properties()
-                        .tab(MOD_TAB.TAB_FRUITS)
+                        
             )
         );
 //        return ITEMS.register(name,()-> new Item(
 //                        new Item.Properties()
-//                                .tab(MOD_TAB.TAB_FRUITS)
+//                                
 //                )
 //        );
     }
-    public static RegistryObject<Item> register_seeds_food(String name, int nutrition, double saturation,RegistryObject<Block> cropBlock,DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_seeds_food(String name, int nutrition, double saturation,DeferredBlock<Block> cropBlock,DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.FRUITS, name);
         return ITEMS.register(name,()-> new ItemNameBlockItem(
                 cropBlock.get(),
                 new Item.Properties()
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
-                                .saturationMod((float) saturation)
+                                .saturationModifier((float) saturation)
                                 .build()
                         )
-                        .tab(MOD_TAB.TAB_FRUITS)
+                        
             )
         );
     }
-    public static RegistryObject<Block> register_cake_block(String name, DeferredRegister<Block> BLOCKS){
+    public static DeferredBlock<Block> register_cake_block(String name, DeferredRegister.Blocks BLOCKS){
         return BLOCKS.register(name,()->new CakeBlock(
-                        BlockBehaviour.Properties.copy(Blocks.CAKE)
+                        BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE)
                 )
         );
     }
-    public static RegistryObject<Item> register_cake_item(String name,RegistryObject<Block> cakeBlock, DeferredRegister<Item> ITEMS){
+    public static DeferredItem<Item> register_cake_item(String name,DeferredBlock<Block> cakeBlock, DeferredRegister.Items ITEMS){
+        MOD_TAB.add(MOD_TAB.Tab.DESSERTS, name);
         return ITEMS.register(name,()->new BlockItem(
                         cakeBlock.get(),
                         new Item.Properties()
                                 .stacksTo(1)
-                                .tab(MOD_TAB.TAB_DESSERTS)
+                                
                 )
         );
     }

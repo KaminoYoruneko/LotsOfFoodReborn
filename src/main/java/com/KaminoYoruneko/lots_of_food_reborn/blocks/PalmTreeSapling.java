@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class PalmTreeSapling extends SaplingBlock {
     public PalmTreeSapling() {
-        super(new PalmTreeGrower(),
-                BlockBehaviour.Properties.copy(Blocks.JUNGLE_SAPLING)
+        super(PalmTreeGrower.GROWER,
+                BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SAPLING)
         );
     }
     @Override

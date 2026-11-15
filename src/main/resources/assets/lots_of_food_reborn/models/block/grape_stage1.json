@@ -2,6 +2,6 @@
 	"render_type": "cutout",
 	"parent": "block/cross",
 	"textures": {
-		"cross": "lots_of_food_reborn:blocks/grape_stage1"
+		"cross": "lots_of_food_reborn:block/grape_stage1"
 	}
 }

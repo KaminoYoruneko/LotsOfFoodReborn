@@ -5,34 +5,34 @@ import com.KaminoYoruneko.lots_of_food_reborn.custom.Custom;
 import com.KaminoYoruneko.lots_of_food_reborn.tab.MOD_TAB;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.*;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.neoforged.neoforge.registries.*;
 
 import static com.KaminoYoruneko.lots_of_food_reborn.LOFR.MODID;
 
 public class CropRegister {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public static RegistryObject<Block> chiliBush;
-    public static RegistryObject<Block> algueBush;
-    public static RegistryObject<Block> tomateBush;
-    public static RegistryObject<Block> coffeeBush;
-    public static RegistryObject<Block> vanillaBush;
-    public static RegistryObject<Block> strawberryBush;
-    public static RegistryObject<Block> grapeBush;
-    public static RegistryObject<Block> cornBush;
-    public static RegistryObject<Block> cornBushTop;
-    public static RegistryObject<Item> chiliSeeds;
-    public static RegistryObject<Item> tomateSeeds;
-    public static RegistryObject<Item> coffeeSeeds;
-    public static RegistryObject<Item> vanilla;
-    public static RegistryObject<Item> algue;
-    public static RegistryObject<Item> strawberry;
-    public static RegistryObject<Item> grapes;
-    public static RegistryObject<Item> corn;
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
+    public static DeferredBlock<Block> chiliBush;
+    public static DeferredBlock<Block> algueBush;
+    public static DeferredBlock<Block> tomateBush;
+    public static DeferredBlock<Block> coffeeBush;
+    public static DeferredBlock<Block> vanillaBush;
+    public static DeferredBlock<Block> strawberryBush;
+    public static DeferredBlock<Block> grapeBush;
+    public static DeferredBlock<Block> cornBush;
+    public static DeferredBlock<Block> cornBushTop;
+    public static DeferredItem<Item> chiliSeeds;
+    public static DeferredItem<Item> tomateSeeds;
+    public static DeferredItem<Item> coffeeSeeds;
+    public static DeferredItem<Item> vanilla;
+    public static DeferredItem<Item> algue;
+    public static DeferredItem<Item> strawberry;
+    public static DeferredItem<Item> grapes;
+    public static DeferredItem<Item> corn;
 
-    public static RegistryObject<Item> chili;
+    public static DeferredItem<Item> chili;
 
 
     static {

@@ -10,16 +10,16 @@ public class Caramel extends Item /*implements registerable*/ {
         super(new Item.Properties()
                 .food(new FoodProperties.Builder()
                         .nutrition(1)
-                        .saturationMod(1)
-                        .alwaysEat()
+                        .saturationModifier(1)
+                        .alwaysEdible()
                         .fast()
                         .build()
                 )
-                .tab(MOD_TAB.TAB_DESSERTS));
+                );
     }
 
 //    @Override
-//    public RegistryObject<Item> ItemRegister(DeferredRegister<Item> reg, String name) {
+//    public DeferredItem<Item> ItemRegister(DeferredRegister.Items reg, String name) {
 //        return reg.register(name,Caramel::new);
 //    }
 }

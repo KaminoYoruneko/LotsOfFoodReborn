@@ -1,20 +1,30 @@
 package com.KaminoYoruneko.lots_of_food_reborn.trees;
 
-import com.KaminoYoruneko.lots_of_food_reborn.register.FeatureRegistration;
-import net.minecraft.core.Holder;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import org.jetbrains.annotations.Nullable;
 
-public class PalmTreeGrower extends AbstractTreeGrower {
-    @Nullable
-    @Override
-    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource p_222910_, boolean p_222911_) {
-        return FeatureRegistration.palmTreeConfig.getHolder().get();
-    }
+import java.util.Optional;
 
-    public static Holder<ConfiguredFeature<?, ?>> getConf(){
-        return FeatureRegistration.palmTreeConfig.getHolder().get();
+import static com.KaminoYoruneko.lots_of_food_reborn.LOFR.MODID;
+
+/**
+ * 1.21 的 TreeGrower 是 final 的，并且通过 ResourceKey 查找 ConfiguredFeature。
+ * 这里保留原来的类名，只作为静态工厂使用。
+ */
+public final class PalmTreeGrower {
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALM_TREE_KEY =
+            ResourceKey.create(Registries.CONFIGURED_FEATURE,
+                    ResourceLocation.fromNamespaceAndPath(MODID, "palm_tree"));
+
+    public static final TreeGrower GROWER = new TreeGrower(
+            "lots_of_food_reborn_palm",
+            Optional.empty(),
+            Optional.of(PALM_TREE_KEY),
+            Optional.empty());
+
+    private PalmTreeGrower() {
     }
 }

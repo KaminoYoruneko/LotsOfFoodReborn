@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "lots_of_food_reborn:items/chicken_pasta"
+		"layer0": "lots_of_food_reborn:item/chicken_pasta"
 	}
 }

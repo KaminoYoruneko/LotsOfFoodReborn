@@ -1,19 +1,18 @@
 package com.KaminoYoruneko.lots_of_food_reborn.items.other;
 
-import com.KaminoYoruneko.lots_of_food_reborn.tab.MOD_TAB;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Equipable;
+import net.minecraft.world.item.Item;
 
-public class ArmourCheff extends ArmorItem {
-//    ARMOUR_CHEFF = EnumHelper.addArmorMaterial("armour_cheff", "lotsoffoodrev:cheff", -1, new int[]{0, 0, 0, 0}
-//        , 0, SoundEvents.field_187728_s, 0.0F);
+public class ArmourCheff extends Item implements Equipable {
     public ArmourCheff() {
-        super(
-                new ArmorCheffMaterial(),
-//                ArmorMaterials.LEATHER,
-                EquipmentSlot.HEAD,new Properties().tab(MOD_TAB.TAB_DEBUG)
-        );
+        super(new Item.Properties()
+                .stacksTo(1)
+                .durability(100));
     }
 
-
+    @Override
+    public EquipmentSlot getEquipmentSlot() {
+        return EquipmentSlot.HEAD;
+    }
 }

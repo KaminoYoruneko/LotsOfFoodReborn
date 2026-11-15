@@ -1,13 +1,15 @@
 package com.KaminoYoruneko.lots_of_food_reborn.blocks;
 
-import com.KaminoYoruneko.lots_of_food_reborn.Config;
 import com.KaminoYoruneko.lots_of_food_reborn.blocks.entity.DishBlockEntity;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -20,21 +22,31 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class DishBlock extends BaseEntityBlock {
+    public static final MapCodec<DishBlock> CODEC = simpleCodec(DishBlock::new);
+
     // 碰撞箱：极薄，高度为 1 像素 (1.0 / 16.0)
     protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 1.0D, 14.0D);
 
+    public DishBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+    }
+
     public DishBlock() {
-        super(BlockBehaviour.Properties.of(Material.DECORATION)
+        this(BlockBehaviour.Properties.of()
                 .strength(0.5f)
                 .noOcclusion());
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -49,7 +61,6 @@ public class DishBlock extends BaseEntityBlock {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        // 只能放在方块上表面
         return level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP);
     }
 
@@ -59,49 +70,59 @@ public class DishBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) {
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof DishBlockEntity dishBe)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        ItemStackHandler handler = dishBe.getItemHandler();
+        ItemStack stackInDish = handler.getStackInSlot(0);
+
+        // 潜行右键：进食逻辑
+        if (player.isShiftKeyDown()) {
+            FoodProperties food = stackInDish.getFoodProperties(player);
+            if (food != null && player.canEat(food.canAlwaysEat())) {
+                ItemStack resultStack = player.eat(level, stackInDish.copy(), food);
+                handler.setStackInSlot(0, resultStack);
+                return ItemInteractionResult.CONSUME;
+            }
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+        // 普通右键：空盘子时放入物品
+        if (stackInDish.isEmpty() && !stack.isEmpty()) {
+            ItemStack toInsert = stack.copyWithCount(1);
+            handler.setStackInSlot(0, toInsert);
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+        if (level.isClientSide) {
+            return InteractionResult.SUCCESS;
+        }
 
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof DishBlockEntity dishBe) {
             ItemStackHandler handler = dishBe.getItemHandler();
             ItemStack stackInDish = handler.getStackInSlot(0);
-            ItemStack handStack = player.getItemInHand(hand);
-
-            // 潜行右键：进食逻辑
-            if (player.isShiftKeyDown()) {
-                if (!stackInDish.isEmpty() && stackInDish.getItem().isEdible()) {
-                    if (player.canEat(stackInDish.getItem().getFoodProperties().canAlwaysEat())) {
-                        // 进食逻辑：调用 finishUsingItem 确保容器返回
-                        ItemStack resultStack = player.eat(level, stackInDish.copy());
-                        handler.setStackInSlot(0, resultStack);
-                        return InteractionResult.CONSUME;
-                    }
+            if (!stackInDish.isEmpty()) {
+                handler.setStackInSlot(0, ItemStack.EMPTY);
+                if (!player.getInventory().add(stackInDish.copy())) {
+                    player.drop(stackInDish.copy(), false);
                 }
-            } else {
-                // 普通右键逻辑
-                if (stackInDish.isEmpty()) {
-                    // 存入物品
-                    if (!handStack.isEmpty()) {
-                        ItemStack toInsert = handStack.copy();
-                        toInsert.setCount(1);
-                        handler.setStackInSlot(0, toInsert);
-                        if (!player.getAbilities().instabuild) {
-                            handStack.shrink(1);
-                        }
-                        return InteractionResult.SUCCESS;
-                    }
-                } else {
-                    // 取出物品（玩家空手且非潜行）
-                    if (handStack.isEmpty()) {
-                        ItemStack toGive = stackInDish.copy();
-                        handler.setStackInSlot(0, ItemStack.EMPTY);
-                        if (!player.getInventory().add(toGive)) {
-                            player.drop(toGive, false);
-                        }
-                        return InteractionResult.SUCCESS;
-                    }
-                }
+                return InteractionResult.SUCCESS;
             }
         }
         return InteractionResult.PASS;

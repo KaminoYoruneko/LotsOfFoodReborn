@@ -11,14 +11,14 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CropAge3 extends CropBlock {
+public class CropAge3 extends CropBlock implements AgeProvider {
     public static final int maxAge=3;
     public static final IntegerProperty AGE=IntegerProperty.create("age",0,
             maxAge
     );
 
     public CropAge3() {
-        super(Properties.copy(Blocks.POTATOES));
+        super(Properties.ofFullCopy(Blocks.POTATOES));
     }
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{

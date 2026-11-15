@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "lots_of_food_reborn:items/light_gray_candy"
+		"layer0": "lots_of_food_reborn:item/light_gray_candy"
 	}
 }

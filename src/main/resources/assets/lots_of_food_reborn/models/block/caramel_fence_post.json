@@ -2,6 +2,6 @@
 	"render_type": "cutout",
 	"parent": "block/fence_post",
 	"textures": {
-		"texture": "lots_of_food_reborn:blocks/caramel_block"
+		"texture": "lots_of_food_reborn:block/caramel_block"
 	}
 }

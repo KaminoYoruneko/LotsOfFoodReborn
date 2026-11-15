@@ -53,8 +53,16 @@ public class CustomPalmTreeFeature extends Feature<TreeConfiguration> {
                 .orElse(position);
 
         // 强行调用 createFoliage
-        config.foliagePlacer.createFoliage(level, (pos, state) -> {
-            level.setBlock(pos, state, 19);
+        config.foliagePlacer.createFoliage(level, new FoliagePlacer.FoliageSetter() {
+            @Override
+            public void set(BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
+                level.setBlock(pos, state, 19);
+            }
+
+            @Override
+            public boolean isSet(BlockPos pos) {
+                return false;
+            }
         }, random, config, trunkHeight, new FoliagePlacer.FoliageAttachment(rootPosition, 0, false), foliageHeight, foliageRadius);
 
         return true; // 返回 true 表示生成成功

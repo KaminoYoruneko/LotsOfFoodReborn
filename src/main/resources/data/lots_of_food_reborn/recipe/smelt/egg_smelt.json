@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "tag": "c:eggs"
+  },
+  "result": {
+    "id": "lots_of_food_reborn:cooked_egg",
+    "count": 1
+  }
+}

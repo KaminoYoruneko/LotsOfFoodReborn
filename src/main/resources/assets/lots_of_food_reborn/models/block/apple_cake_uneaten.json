@@ -1,10 +1,10 @@
 {
 	"render_type": "cutout",
 	"textures": {
-		"particle": "lots_of_food_reborn:blocks/apple_cake_side",
-		"bottom": "lots_of_food_reborn:blocks/apple_cake_bottom",
-		"top": "lots_of_food_reborn:blocks/apple_cake_top",
-		"side": "lots_of_food_reborn:blocks/apple_cake_side"
+		"particle": "lots_of_food_reborn:block/apple_cake_side",
+		"bottom": "lots_of_food_reborn:block/apple_cake_bottom",
+		"top": "lots_of_food_reborn:block/apple_cake_top",
+		"side": "lots_of_food_reborn:block/apple_cake_side"
 	},
 	"elements": [{
 		"from": [1, 0, 1],

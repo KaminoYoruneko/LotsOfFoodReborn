@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "lots_of_food_reborn:items/lime_candy"
+		"layer0": "lots_of_food_reborn:item/lime_candy"
 	}
 }

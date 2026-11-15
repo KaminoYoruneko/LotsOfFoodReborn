@@ -2,6 +2,7 @@ package com.KaminoYoruneko.lots_of_food_reborn.blocks.customBlock;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
@@ -14,11 +15,10 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CropAge3InWater extends CropBlock implements LiquidBlockContainer {
+public class CropAge3InWater extends CropBlock implements LiquidBlockContainer, AgeProvider {
     public static final int maxAge=3;
     public static final IntegerProperty PICKLES = BlockStateProperties.PICKLES;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -27,9 +27,8 @@ public class CropAge3InWater extends CropBlock implements LiquidBlockContainer {
     );
 
     public CropAge3InWater() {
-        super(BlockBehaviour.Properties.of(
-                Material.WATER_PLANT
-            ).noCollission()
+        super(BlockBehaviour.Properties.of()
+                .noCollission()
                 .randomTicks()
                 .instabreak()
                 .sound(SoundType.WET_GRASS)
@@ -83,7 +82,7 @@ public class CropAge3InWater extends CropBlock implements LiquidBlockContainer {
     }
 
     @Override
-    public boolean canPlaceLiquid(BlockGetter p_54766_, BlockPos p_54767_, BlockState p_54768_, Fluid p_54769_) {
+    public boolean canPlaceLiquid(@org.jetbrains.annotations.Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
         return true;
     }
 

@@ -11,12 +11,12 @@ public class CaramelBlockItem extends BlockItem /*implements registerable */{
     public CaramelBlockItem() {
         super(caramelBlock.get(),
                 new Item.Properties()
-                        .tab(MOD_TAB.TAB_BLOCK)
+                        
         );
     }
 
 //    @Override
-//    public RegistryObject<Item> ItemRegister(DeferredRegister<Item> reg, String name) {
+//    public DeferredItem<Item> ItemRegister(DeferredRegister.Items reg, String name) {
 //        return reg.register(name,CaramelBlockItem::new);
 //    }
 }

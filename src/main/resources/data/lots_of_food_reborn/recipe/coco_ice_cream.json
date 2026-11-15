@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SCS",
+    "SCS",
+    " G "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:snowball"
+    },
+    "C": {
+      "tag": "c:fruits/coconut"
+    },
+    "G": {
+      "item": "lots_of_food_reborn:glass"
+    }
+  },
+  "result": {
+    "id": "lots_of_food_reborn:coco_ice_cream"
+  }
+}

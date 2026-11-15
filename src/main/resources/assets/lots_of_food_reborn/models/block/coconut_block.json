@@ -3,10 +3,10 @@
 	"parent": "block/block",
     "textures":
 	{
-        "particle": "lots_of_food_reborn:blocks/coconut_block_side",
-		"side": "lots_of_food_reborn:blocks/coconut_block_side",
-		"topbottom1": "lots_of_food_reborn:blocks/coconut_block_topbottom1",
-		"topbottom2": "lots_of_food_reborn:blocks/coconut_block_topbottom2"
+        "particle": "lots_of_food_reborn:block/coconut_block_side",
+		"side": "lots_of_food_reborn:block/coconut_block_side",
+		"topbottom1": "lots_of_food_reborn:block/coconut_block_topbottom1",
+		"topbottom2": "lots_of_food_reborn:block/coconut_block_topbottom2"
     },
     "elements":
 	[
