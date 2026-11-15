@@ -52,6 +52,7 @@ public class LOFR
         DrinkRegister.ITEMS.register(modEventBus);
         EntityRegister.ITEM_ENTITY.register(modEventBus);
         FeatureRegistration.FOLIAGE_PLACER_TYPES.register(modEventBus);
+        FeatureRegistration.PLANT_FEATURES.register(modEventBus);
         FeatureRegistration.ARMOR_MATERIALS.register(modEventBus);
         CropRegister.ITEMS.register(modEventBus);
         CropRegister.BLOCKS.register(modEventBus);

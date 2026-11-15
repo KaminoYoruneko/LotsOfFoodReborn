@@ -1,12 +1,17 @@
 package com.KaminoYoruneko.lots_of_food_reborn.register;
 
+import com.KaminoYoruneko.lots_of_food_reborn.blocks.customBlock.CropAge3;
+import com.KaminoYoruneko.lots_of_food_reborn.blocks.customBlock.CropAge3InWater;
+import com.KaminoYoruneko.lots_of_food_reborn.blocks.customBlock.CropAge4;
 import com.KaminoYoruneko.lots_of_food_reborn.trees.conf.PalmTreeFoliagePlacer;
+import com.KaminoYoruneko.lots_of_food_reborn.world.gen.WildPlantFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -27,6 +32,23 @@ public class FeatureRegistration {
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<PalmTreeFoliagePlacer>> PALM_FOLIAGE_PLACER =
             FOLIAGE_PLACER_TYPES.register("palm",
                     () -> new FoliagePlacerType<>(PalmTreeFoliagePlacer.CODEC));
+
+    public static final DeferredRegister<Feature<?>> PLANT_FEATURES =
+            DeferredRegister.create(Registries.FEATURE, MODID);
+
+    public static final DeferredHolder<Feature<?>, WildPlantFeature> WILD_COFFEE =
+            PLANT_FEATURES.register("wild_coffee", () -> new WildPlantFeature(
+                    () -> CropRegister.coffeeBush.get(), CropAge4.AGE, 4, 16, false, null, null));
+    public static final DeferredHolder<Feature<?>, WildPlantFeature> WILD_STRAWBERRY =
+            PLANT_FEATURES.register("wild_strawberry", () -> new WildPlantFeature(
+                    () -> CropRegister.strawberryBush.get(), CropAge4.AGE, 4, 16, false, null, null));
+    public static final DeferredHolder<Feature<?>, WildPlantFeature> WILD_CORN =
+            PLANT_FEATURES.register("wild_corn", () -> new WildPlantFeature(
+                    () -> CropRegister.cornBush.get(), CropAge4.AGE, 4, 16, false,
+                    () -> CropRegister.cornBushTop.get(), CropAge3.AGE));
+    public static final DeferredHolder<Feature<?>, WildPlantFeature> WILD_ALGUE =
+            PLANT_FEATURES.register("wild_algue", () -> new WildPlantFeature(
+                    () -> CropRegister.algueBush.get(), CropAge3InWater.AGE, 3, 64, true, null, null));
 
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS =
             DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
