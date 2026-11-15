@@ -1,5 +1,7 @@
 package com.KaminoYoruneko.lots_of_food_reborn;
 
+import com.KaminoYoruneko.lots_of_food_reborn.client.ChefHatArmorModel;
+import com.KaminoYoruneko.lots_of_food_reborn.client.ChefHatClientExtension;
 import com.KaminoYoruneko.lots_of_food_reborn.client.renderer.DishBlockEntityRenderer;
 import com.KaminoYoruneko.lots_of_food_reborn.entities.CoconutEntityRenderer;
 import com.KaminoYoruneko.lots_of_food_reborn.menu.PicnicBasketScreen;
@@ -21,7 +23,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
@@ -48,6 +52,7 @@ public class LOFR
         DrinkRegister.ITEMS.register(modEventBus);
         EntityRegister.ITEM_ENTITY.register(modEventBus);
         FeatureRegistration.FOLIAGE_PLACER_TYPES.register(modEventBus);
+        FeatureRegistration.ARMOR_MATERIALS.register(modEventBus);
         CropRegister.ITEMS.register(modEventBus);
         CropRegister.BLOCKS.register(modEventBus);
 
@@ -97,6 +102,18 @@ public class LOFR
         public static void registerScreens(RegisterMenuScreensEvent event)
         {
             event.register(MenuRegister.PICNIC_BASKET.get(), PicnicBasketScreen::new);
+        }
+
+        @SubscribeEvent
+        public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
+        {
+            event.registerLayerDefinition(ChefHatArmorModel.LAYER, ChefHatArmorModel::createBodyLayer);
+        }
+
+        @SubscribeEvent
+        public static void registerClientExtensions(RegisterClientExtensionsEvent event)
+        {
+            event.registerItem(new ChefHatClientExtension(), ItemRegister.cheff.get());
         }
     }
 }

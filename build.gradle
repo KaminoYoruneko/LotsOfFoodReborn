@@ -19,6 +19,10 @@ repositories {
     maven { url = "https://neoforged.forgecdn.net/releases" }
     maven { url = "https://neoforged.forgecdn.net/mojang-meta" }
     maven { url = "https://maven.parchmentmc.org" }
+    maven {
+        name = "BlameJared (JEI)"
+        url = "https://maven.blamejared.com"
+    }
     mavenCentral()
 }
 
@@ -82,7 +86,8 @@ configurations {
 }
 
 dependencies {
-    // 可选的运行时依赖（JEI/AppleSkin）暂不启用，先保证基础功能可运行。
+    // JEI：运行时加载，用于在游戏内查看配方。
+    localRuntime "mezz.jei:jei-1.21.1-neoforge:${jei_version}"
 }
 
 // 展开 neoforge.mods.toml 中的占位符。

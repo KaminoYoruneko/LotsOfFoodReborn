@@ -53,39 +53,25 @@ public class CornBush extends CropAge4 {
 
         int currentAge = getAge(state);
 
-        if ((currentAge == MAX_AGE) && (state.getValue(HaveTop))) return;
+        // 下层成熟后不再继续增加 AGE，只在允许时补齐上层
+        if (currentAge >= MAX_AGE) {
+            if (state.getValue(CanGrowTop)) {
+                tryGrowUpper(level, pos, state);
+            }
+            return;
+        }
 
-        boolean canGrow = state.getValue(CanGrowTop);
-
-        // 首先是正常生长本层
         float growthSpeed = getGrowthSpeed(state, level, pos);
         if (CommonHooks.canCropGrow(level, pos, state,
                 random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
-            growCropTo(level, pos, state, currentAge + 1);
+            int newAge = currentAge + 1;
+            BlockState grown = state.setValue(AGE, newAge);
+            level.setBlock(pos, grown, Block.UPDATE_ALL);
             CommonHooks.fireCropGrowPost(level, pos, state);
-        }
 
-        // 基础生长逻辑
-//        if (currentAge < MAX_AGE && canGrow) {
-////            float growthSpeed = getGrowthSpeed(state, level, pos);
-//            if (CommonHooks.canCropGrow(level, pos, state,
-//                    random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
-//                growCropTo(level, pos, state, currentAge + 1);
-//                CommonHooks.fireCropGrowPost(level, pos, state);
-//            }
-//        }
-
-        // 茎秆成熟后尝试生成上层
-        if (currentAge >= STEM_AGE && canGrow) {
-            boolean isSuccess = tryGrowUpper(level, pos, state);
-//            if (!isSuccess) {
-////            float growthSpeed = getGrowthSpeed(state, level, pos);
-//            if (CommonHooks.canCropGrow(level, pos, state,
-//                    random.nextInt((int) (25.0F / growthSpeed) + 1) == 0)) {
-//                growCropTo(level, pos, state, currentAge + 1);
-//                CommonHooks.fireCropGrowPost(level, pos, state);
-//            }
-//            }
+            if (newAge >= STEM_AGE && grown.getValue(CanGrowTop)) {
+                tryGrowUpper(level, pos, grown);
+            }
         }
     }
 
@@ -95,57 +81,52 @@ public class CornBush extends CropAge4 {
         BlockPos topPos = pos.above();
         BlockState topState = level.getBlockState(topPos);
 
-        // 阶段一：茎干生长期
+        // 1. 下层还没长到能支撑上层的阶段：只催熟下层
         if (currentAge < STEM_AGE) {
-            selfGrowByBonemeal(state,level,pos);
+            level.setBlock(pos, state.setValue(AGE, currentAge + 1), Block.UPDATE_ALL);
             return;
         }
 
-        // 阶段二：顶端生成期
-        if (currentAge == STEM_AGE && topState.isAir()) {
-            level.setBlock(topPos, CropRegister.cornBushTop.get().defaultBlockState(), 2);
+        // 2. 下层已经能支撑上层：先长出上层，再考虑下层玉米
+        if (currentAge < MAX_AGE) {
+            if (topState.isAir()) {
+                tryGrowUpper(level, pos, state);
+            } else {
+                // 上层已经存在，优先让下层结出玉米
+                level.setBlock(pos, state.setValue(AGE, MAX_AGE), Block.UPDATE_ALL);
+            }
             return;
         }
 
-        // 阶段三：果实催熟期 (智能转发)
+        // 3. 下层已成熟：催熟上层
         if (topState.getBlock() instanceof CornBushTop topBlock) {
             int topAge = topState.getValue(topBlock.getAgeProperty());
-
-            // 子逻辑：“一键成熟”
-            if (currentAge == getMaxAge() - 1 && topAge == topBlock.getMaxAge() - 1) {
-                level.setBlock(pos, state.setValue(AGE, getMaxAge()), 2);
-                level.setBlock(topPos, topState.setValue(topBlock.getAgeProperty(), topBlock.getMaxAge()), 2);
-            } 
-            // 子逻辑：常规催熟
-            else if (topAge < topBlock.getMaxAge()) {
-                topBlock.performBonemeal(level, random, topPos, topState);
-                selfGrowByBonemeal(state,level,pos);
-            }else if(topAge == topBlock.getMaxAge()){
-                selfGrowByBonemeal(state,level,pos);
+            if (topAge < topBlock.getMaxAge()) {
+                level.setBlock(topPos,
+                        topState.setValue(topBlock.getAgeProperty(), topAge + 1),
+                        Block.UPDATE_ALL);
             }
+            return;
         }
-    }
 
-    private void selfGrowByBonemeal(BlockState state,ServerLevel level,BlockPos pos){
-        int i = this.getAge(state) + this.getBonemealAgeIncrease(level);
-        int j = this.getMaxAge();
-        if (i > j) {
-            i = j;
+        // 下层成熟但上层缺失：补种上层
+        if (topState.isAir()) {
+            tryGrowUpper(level, pos, state);
         }
-        level.setBlock(pos, this.getStateForAge(i), 2);
     }
 
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         int currentAge = getAge(state);
-        if (currentAge >= MAX_AGE) {
-            BlockState topState = level.getBlockState(pos.above());
-            if (topState.getBlock() instanceof CornBushTop topBlock) {
-                return !topBlock.isMaxAge(topState);
-            }
-            return false;
+        if (currentAge < MAX_AGE) {
+            return true;
         }
-        return true;
+
+        BlockState topState = level.getBlockState(pos.above());
+        if (topState.getBlock() instanceof CornBushTop topBlock) {
+            return !topBlock.isMaxAge(topState);
+        }
+        return topState.isAir();
     }
 
     @Override
@@ -160,7 +141,9 @@ public class CornBush extends CropAge4 {
             if (upperState.canSurvive(level, abovePos)) {
                 boolean isSuccess = level.setBlock(abovePos, upperState, Block.UPDATE_ALL);
                 if (isSuccess) {
-                    level.setBlock(pos, state.setValue(HaveTop, true), Block.UPDATE_ALL);
+                    level.setBlock(pos,
+                            state.setValue(HaveTop, true).setValue(CanGrowTop, false),
+                            Block.UPDATE_ALL);
                 }
                 return isSuccess;
             }

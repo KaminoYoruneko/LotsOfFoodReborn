@@ -1,64 +1,6 @@
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "lots_of_food_reborn:item/helmet_cheff_hat"
-	},
-	"elements": [
-		{
-			"name": "hatUp",
-			"from": [4, 0, 4],
-			"to": [12, 6, 12],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
-			"faces": {
-				"north": {"uv": [6, 4, 8, 7], "texture": "#layer0"},
-				"east": {"uv": [4, 4, 6, 7], "texture": "#layer0"},
-				"south": {"uv": [2, 4, 4, 7], "texture": "#layer0"},
-				"west": {"uv": [0, 4, 2, 7], "texture": "#layer0"},
-				"up": {"uv": [2, 0, 4, 4], "texture": "#layer0"},
-				"down": {"uv": [4, 0, 6, 4], "texture": "#layer0"}
-			}
-		},
-		{
-			"name": "hatDown",
-			"from": [3, 6, 3],
-			"to": [13, 10, 13],
-			"rotation": {"angle": 0, "axis": "y", "origin": [7, 6, 7]},
-			"faces": {
-				"north": {"uv": [2.5, 13, 5, 15], "texture": "#layer0"},
-				"east": {"uv": [0, 13, 2.5, 15], "texture": "#layer0"},
-				"south": {"uv": [7.5, 13, 10, 15], "texture": "#layer0"},
-				"west": {"uv": [5, 13, 7.5, 15], "texture": "#layer0"},
-				"up": {"uv": [2.5, 8, 5, 13], "texture": "#layer0"},
-				"down": {"uv": [5, 8, 7.5, 13], "texture": "#layer0"}
-			}
-		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"translation": [0, 6, 0]
-		},
-		"thirdperson_lefthand": {
-			"translation": [0, 6, 0]
-		},
-		"firstperson_righthand": {
-			"translation": [0, 6, 0]
-		},
-		"firstperson_lefthand": {
-			"translation": [0, 6, 0]
-		},
-		"ground": {
-			"translation": [0, 2, 0],
-			"scale": [0.5, 0.5, 0.5]
-		},
-		"gui": {
-			"translation": [0, 3, 0]
-		},
-		"head": {
-			"translation": [0, 19, 0],
-			"scale": [1.4, 1.6, 1.4]
-		},
-		"fixed": {
-			"translation": [0, 3, 0]
-		}
-	}
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "lots_of_food_reborn:item/cheff_hat"
+  }
 }

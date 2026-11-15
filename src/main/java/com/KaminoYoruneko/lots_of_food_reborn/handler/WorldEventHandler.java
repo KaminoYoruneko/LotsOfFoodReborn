@@ -73,7 +73,9 @@ public class WorldEventHandler {
         };
         if (!inScope) return;
 
-        if (event.getItemStack().is(Items.BONE_MEAL) && !cropBlock.isMaxAge(state)) return;
+        // 手持骨粉时交给原版骨粉逻辑，绝不触发右键收割；
+        // 否则对成熟玉米右键骨粉会直接收割，和“先催熟下层、再长上层”冲突。
+        if (event.getItemStack().is(Items.BONE_MEAL)) return;
 
         if (cropBlock.isMaxAge(state)) {
             int resetAge = 0;
